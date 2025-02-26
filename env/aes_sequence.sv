@@ -9,7 +9,6 @@ virtual class aes_base_sequence extends uvm_sequence #(aes_transaction);
 class aes_sequence extends aes_base_sequence;
         `uvm_object_utils(aes_sequence)
         aes_transaction req;
-        req = aes_transaction::type_id::create("req");
         function new(string name = "aes_sequence");
             super.new(name);
         endfunction
