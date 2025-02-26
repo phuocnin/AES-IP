@@ -7,8 +7,7 @@ package aes_pkg;
     `include "aes_transaction.sv"
     `include "aes_monitor.sv"
     `include "aes_driver.sv"
-        `include "aes_sequence.sv"
-
+    `include "aes_sequencer.sv"
     `include "aes_scoreboard.sv"
     `include "aes_env.sv"
 endpackage
