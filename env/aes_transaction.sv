@@ -6,8 +6,8 @@ class aes_transaction extends uvm_sequence_item;
     rand bit [127:0] key;
     logic [127:0] data_output;
 
-    function new(string aes_transaction) = "aes_transaction";
-      super.new(aes_transaction);
+    function new(string name = "aes_transaction");
+      super.new(name);
     endfunction
     
 endclass : aes_transaction
