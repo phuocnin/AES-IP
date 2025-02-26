@@ -1,9 +1,11 @@
+`include "aes_transaction.sv"
+`include "aes_pkg.sv"
 virtual class aes_base_sequence extends uvm_sequence #(aes_transaction);
    
     function new(string name = "aes_base_sequence");
         super.new(name);
     endfunction
-    endclass : aes_base_sequence
+endclass : aes_base_sequence
 
 
 class aes_sequence extends aes_base_sequence;
