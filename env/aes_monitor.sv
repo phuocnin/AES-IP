@@ -56,7 +56,6 @@ class aes_monitor extends uvm_monitor;
             @(posedge vif.finished);
                 trans.data_output = vif.data_output;
                 analysis_port.write(trans);  
-            
         end
     endtask
 

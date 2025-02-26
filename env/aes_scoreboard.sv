@@ -57,9 +57,11 @@ class aes_scoreboard extends uvm_scoreboard;
         super.report_phase(phase);
         `uvm_info(get_type_name(),$sformatf("***** ERROR_NUM = %0d *****", error_cnt), UVM_LOW)
         if(error_cnt != 0) 
-            simulation_top.test_fail();
+            //simulation_top.test_fail();
+            `uvm_error(get_type_name(), "Test failed")
         else 
-            simulation_top.test_pass();
+            //simulation_top.test_pass();
+            `uvm_info(get_type_name(), "Test passed")
     endfunction: report_phase
     
         
