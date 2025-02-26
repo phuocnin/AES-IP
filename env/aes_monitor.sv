@@ -22,7 +22,7 @@ class aes_monitor extends uvm_monitor;
        aes_transaction trans;
        fork
             detect_reset();
-            colect_data();
+            colect_send_data();
             check_finish_signal();
        join
     endtask
