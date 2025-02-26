@@ -4,10 +4,13 @@ class aes_monitor extends uvm_monitor;
  
     virtual aes_if vif;  // Interface kết nối với DUT
     uvm_analysis_port#aes_transaction analysis_port;  // Analysis port để gửi transaction
- 
+    uvm_analysis_port#logic rst_port;  // Analysis port để gửi reset signal
+    bit count = 0;  // count the number of clock cycles before finished is activated
+    logic rst;
     function new(string name = "aes_monitor", uvm_component parent = null);
        super.new(name, parent);
        analysis_port = new("analysis_port", this);
+        rst_port = new("rst_port", this);
     endfunction
 
     function void build_phase(uvm_phase phase);
@@ -18,19 +21,58 @@ class aes_monitor extends uvm_monitor;
     task run_phase(uvm_phase phase);
        aes_transaction trans;
        fork
+            detect_reset();
             colect_data();
-
+            check_finish_signal();
        join
     endtask
 
-    task colect_data();
+    task detect_reset();
         forever begin
             @(posedge vif.clk);
-            if(vif.finished == 1) begin
+            if(vif.rst == 0) begin
+                `uvm_info("AES_MON", "Reset signal is asserted", UVM_LOW);
+                this.rst = 0;
+                rst_port.write(this.rst);
+            end
+            else begin
+                this.rst = 1;
+                rst_port.write(this.rst);
+            end
+        end
+    endtask
+
+    task colect_send_data();
+        forever begin
+            //@(posedge vif.clk);
+            if(this.count == 0) begin
+                `uvm_info("AES_MON", "Collecting data", UVM_LOW);
                 trans = aes_transaction::type_id::create("trans");
+                trans.data_input = vif.data_input;
+                trans.key = vif.key;
+            end
+            @(posedge vif.clk);
+            wait@(posedge vif.finished) begin
                 trans.data_output = vif.data_output;
-                trans.key  = vif.key;
                 analysis_port.write(trans);  
+            end
+        end
+    endtask
+
+    task check_finish_signal();
+        forever begin
+            @(posedge vif.clk);
+            if(vif.finished == 1 && vif.rst == 1) begin
+                if(this.count != 10) begin
+                    `uvm_error("AES_MON", "tín hiệu finished tích cực ở xung clock thứ ", UVM_LOW);
+                end 
+                else begin
+                    this.count = 0;
+                    `uvm_info("AES_MON", "Finished signal is asserted", UVM_LOW);
+                end
+            end
+            else begin
+                this.count++;
             end
         end
     endtask
