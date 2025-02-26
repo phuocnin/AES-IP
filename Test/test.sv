@@ -1,10 +1,11 @@
 `include "aes_sequence.sv"
 class aes_base_test extends uvm_test;
+    import uvm_pkg::*;
     `uvm_component_utils(aes_base_test)
     virtual aes_if vif;
     aes_sequence aes_seq;
     aes_env aes_env;
-    aes_transaction
+    
     function new(string name = "aes_base_test", uvm_component parent = null);
         super.new(name, parent);
     endfunction
