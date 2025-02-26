@@ -5,4 +5,4 @@ interface aes_if;
     logic [127:0] key;
     logic [127:0] data_output;
     logic finished;
-endinterface
+endinterface: aes_if
