@@ -7,6 +7,7 @@ class aes_monitor extends uvm_monitor;
     uvm_analysis_port#(logic) rst_port;  // Analysis port để gửi reset signal
     bit count = 0;  // count the number of clock cycles before finished is activated
     logic rst;
+    aes_transaction trans;
     function new(string aes_monitor = "aes_monitor", uvm_component parent = null);
        super.new(aes_monitor, parent);
        analysis_port = new("analysis_port", this);
@@ -19,7 +20,7 @@ class aes_monitor extends uvm_monitor;
     endfunction
  
     task run_phase(uvm_phase phase);
-       aes_transaction trans;
+       
        fork
             detect_reset();
             colect_send_data();
