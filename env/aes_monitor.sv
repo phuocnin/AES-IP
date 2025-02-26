@@ -3,12 +3,12 @@ class aes_monitor extends uvm_monitor;
     `uvm_component_utils(aes_monitor)
  
     virtual aes_if vif;  // Interface kết nối với DUT
-    uvm_analysis_port#aes_transaction analysis_port;  // Analysis port để gửi transaction
-    uvm_analysis_port#logic rst_port;  // Analysis port để gửi reset signal
+    uvm_analysis_port#(aes_transaction) analysis_port;  // Analysis port để gửi transaction
+    uvm_analysis_port#(logic) rst_port;  // Analysis port để gửi reset signal
     bit count = 0;  // count the number of clock cycles before finished is activated
     logic rst;
-    function new(string name = "aes_monitor", uvm_component parent = null);
-       super.new(name, parent);
+    function new(string aes_monitor = "aes_monitor", uvm_component parent = null);
+       super.new(aes_monitor, parent);
        analysis_port = new("analysis_port", this);
         rst_port = new("rst_port", this);
     endfunction
