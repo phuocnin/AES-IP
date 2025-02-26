@@ -1,5 +1,6 @@
 `include "design.sv"
 `include "aes_if.sv"
+`include "aes_pkg.sv"
 module aes_tb;
     import uvm_pkg::*;
     `include "uvm_macros.svh"

@@ -3,7 +3,7 @@ class aes_env extends uvm_env;
     aes_driver driver;
     aes_monitor monitor;
     aes_scoreboard scoreboard;
-    uvm_sequencer#(ubus_transfer) sequencer;
+    uvm_sequencer#(aes_transaction) sequencer;
     aes_if vif;
     function new(string name = "aes_env", uvm_component parent = null);
         super.new(name, parent);
@@ -14,7 +14,7 @@ class aes_env extends uvm_env;
         driver = aes_driver::type_id::create("driver", this);
         monitor = aes_monitor::type_id::create("monitor", this);
         scoreboard = aes_scoreboard::type_id::create("scoreboard", this);
-        sequencer = uvm_sequencer#(ubus_transfer)::type_id::create("sequencer", this);
+        sequencer = uvm_sequencer#(aes_transaction)::type_id::create("sequencer", this);
 
         if (!uvm_config_db#(virtual aes_if)::get(this, "", "vif", vif))
             `uvm_fatal("NOVIF", {"Virtual interface must be set for: ", get_full_name()})
