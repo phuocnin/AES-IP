@@ -61,7 +61,7 @@ class aes_scoreboard extends uvm_scoreboard;
             `uvm_error(get_type_name(), "Test failed")
         else 
             //simulation_top.test_pass();
-            `uvm_info(get_type_name(), "Test passed")
+            `uvm_info(get_type_name(), "Test passed", UVM_LOW)
     endfunction: report_phase
     
         
