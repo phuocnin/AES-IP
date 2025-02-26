@@ -1,9 +1,7 @@
 virtual class aes_base_sequence extends uvm_sequence #(aes_transaction);
-    `uvm_object_utils(aes_base_sequence)
-
+   
     function new(string name = "aes_base_sequence");
         super.new(name);
-        
     endfunction
     endclass : aes_base_sequence
 
