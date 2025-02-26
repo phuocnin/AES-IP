@@ -23,7 +23,7 @@ class aes_driver extends uvm_driver #(aes_transaction);
     task drive_transaction(aes_transaction aes_trans);
         forever begin
             @(posedge vif.clk);
-            seq_item_port.get_next_item(aes_trans)
+            seq_item_port.get_next_item(aes_trans);
             if(vif.rst == 1) begin
                 vif.data_input <= aes_trans.data_input;
                 vif.key <= aes_trans.key;
