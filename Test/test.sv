@@ -1,7 +1,7 @@
 
 class aes_base_test extends uvm_test;
     `uvm_component_utils(aes_base_test)
-    aes_if vif;
+    aes_if vif();
     aes_sequence aes_seq;
     aes_env aes_env;
     aes_transaction
