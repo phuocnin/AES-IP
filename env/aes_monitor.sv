@@ -52,10 +52,10 @@ class aes_monitor extends uvm_monitor;
                 trans.key = vif.key;
             end
             @(posedge vif.clk);
-            wait@(posedge vif.finished) begin
+            wait@(posedge vif.finished) 
                 trans.data_output = vif.data_output;
                 analysis_port.write(trans);  
-            end
+            
         end
     endtask
 
