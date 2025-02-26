@@ -18,6 +18,8 @@ class aes_scoreboard extends uvm_scoreboard;
     uvm_analysis_imp_rst#(logic) rst_analysis_port;
     logic rst_flag;
     int         error_cnt;
+    bit [127:0] ref_ciphertext;
+
     function new(string name = "aes_scoreboard", uvm_component parent = null);
         super.new(name, parent);
     endfunction
@@ -42,7 +44,6 @@ class aes_scoreboard extends uvm_scoreboard;
 
     function void compare_data(aes_transaction trans);
         `uvm_info("AES_SCOREBOARD", $sformatf("Received transaction: in[%2h], key[%2h], out[%2h] ", trans.data_input,trans.key, trans.data_output), UVM_LOW);
-        bit [127:0] ref_ciphertext;
         aes_encrypt_dpi( trans.data_input,trans.key, ref_ciphertext);
 
         if (ref_ciphertext == trans.data_output) begin
