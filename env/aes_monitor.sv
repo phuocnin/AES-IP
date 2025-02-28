@@ -46,7 +46,7 @@ class aes_monitor extends uvm_monitor;
     task colect_send_data();
         forever begin
             //@(posedge vif.clk);
-            if(this.count == 0) begin
+            if(this.count == 1) begin
                 `uvm_info("AES_MON", "Collecting data", UVM_LOW);
                 trans = aes_transaction::type_id::create("trans");
                 `uvm_info("AES_MON", $sformatf("Received transaction: in[%h], key[%h]",vif.data_input, vif.key), UVM_LOW);
@@ -68,7 +68,7 @@ class aes_monitor extends uvm_monitor;
                     `uvm_error("AES_MON", "Signal finished is active at clock edge ");
                 end 
                 else begin
-                    this.count = 0;
+                    this.count = 1;
                     `uvm_info("AES_MON", "Finished signal is asserted", UVM_LOW);
                 end
             end
