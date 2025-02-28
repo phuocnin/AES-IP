@@ -1,4 +1,4 @@
-`include "sequence.sv"
+`include "aes_sequence.sv"
 class aes_base_test extends uvm_test;
     `uvm_component_utils(aes_base_test)
     virtual aes_if vif;
