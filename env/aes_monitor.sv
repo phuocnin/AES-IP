@@ -74,6 +74,7 @@ class aes_monitor extends uvm_monitor;
             end
             else begin
                 this.count++;
+                `uvm_info("AES_MON", $sformatf("count: %2h",this.count), UVM_LOW);
             end
         end
     endtask
