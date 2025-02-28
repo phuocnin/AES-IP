@@ -1,6 +1,7 @@
 `include "aes_pkg.sv"
+ import uvm_pkg::*;
+
 virtual class aes_base_sequence extends uvm_sequence #(aes_transaction);
-   import uvm_pkg::*;
     function new(string name = "aes_base_sequence");
         super.new(name);
     endfunction
