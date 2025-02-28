@@ -22,9 +22,9 @@ module aes_tb;
         run_test("aes_test");
     end
     initial begin
-        vif.sig_reset <= 1'b1;
-        vif.sig_clock <= 1'b1;
-        #51 vif.sig_reset = 1'b0;
+        vif.rst <= 1'b0;
+        vif.clk <= 1'b1;
+        #51 vif.rst = 1'b1;
       end
     
       //Generate Clock
