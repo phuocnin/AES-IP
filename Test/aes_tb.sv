@@ -18,7 +18,7 @@ module aes_tb;
     );
 
     initial begin
-        uvm_config_db#(aes_vif)::set(null, "*", "vif", aes_vif);
+        uvm_config_db#(aes_vif)::set(null, "*", "vif", vif);
         run_test("aes_test");
     end
     initial begin
