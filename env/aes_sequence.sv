@@ -15,8 +15,10 @@ class aes_sequence extends aes_base_sequence;
         task body();
             `uvm_info("aes_sequence", "Starting aes_sequence", UVM_LOW)
             repeat(10) begin
-                `uvm_info("aes_sequence", $sformatf("req: %2h", req.key), UVM_LOW)
+                `uvm_info("aes_sequence", $sformatf("req: %2h", req.key), UVM_LOW);
                 `uvm_do(req);
+                `uvm_info("aes_sequence", $sformatf("req: %2h", req.key), UVM_LOW);
+
             end
         endtask
 endclass : aes_sequence
