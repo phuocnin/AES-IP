@@ -19,7 +19,7 @@ module aes_tb;
 
     initial begin
         uvm_config_db#(virtual aes_if)::set(null, "*", "vif", vif);
-        run_test("aes_test");
+        run_test("aes_test_basic_cipher");
     end
     initial begin
         vif.rst <= 1'b0;
