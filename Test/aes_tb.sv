@@ -29,5 +29,5 @@ module aes_tb;
     
       //Generate Clock
     always
-        #5 vif.sig_clock = ~vif.sig_clock;
+        #5 vif.clk = ~vif.clk;
 endmodule

@@ -4,6 +4,8 @@ class aes_base_test extends uvm_test;
     virtual aes_if vif;
     aes_sequence aes_seq;
     aes_env aes_env0;
+    uvm_table_printer printer;
+
     
     function new(string name = "aes_base_test", uvm_component parent = null);
         super.new(name, parent);
@@ -14,6 +16,8 @@ class aes_base_test extends uvm_test;
             `uvm_fatal("AES_TEST", "Interface not set in config DB");
         //aes_seq = aes_sequence::type_id::create("aes_seq");
         aes_env0 = aes_env::type_id::create("aes_env0", this);
+        printer = new();
+        printer.knobs.depth = 3;
     endfunction
     function void end_of_elaboration_phase(uvm_phase phase);
         // // Set verbosity for the bus monitor for this demo
