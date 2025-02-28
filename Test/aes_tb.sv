@@ -3,6 +3,7 @@
 `include "aes_pkg.sv"
 module aes_tb;
     import uvm_pkg::*;
+    import aes_pkg::*;
     `include "uvm_macros.svh"
     `include "test.sv"
 
