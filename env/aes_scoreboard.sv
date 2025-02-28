@@ -31,7 +31,7 @@ class aes_scoreboard extends uvm_scoreboard;
             `uvm_fatal("AES_SCOREBOARD", "Reset analysis port not set in config DB");
     endfunction
     
-    function void check_reset(logic rst);
+    function void write_rst(logic rst);
         forever begin
             if (rst) begin
                 rst_flag = 0;
@@ -43,7 +43,7 @@ class aes_scoreboard extends uvm_scoreboard;
         end
     endfunction
 
-    function void compare_data(aes_transaction trans);
+    function void write_frm_Monitor(aes_transaction trans);
         `uvm_info("AES_SCOREBOARD", $sformatf("Received transaction: in[%2h], key[%2h], out[%2h] ", trans.data_input,trans.key, trans.data_output), UVM_LOW);
         aes_encrypt_dpi( trans.data_input,trans.key, ref_ciphertext);
 
