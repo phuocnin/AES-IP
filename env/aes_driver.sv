@@ -34,6 +34,7 @@ class aes_driver extends uvm_driver #(aes_transaction);
             end
             seq_item_port.item_done();
         end
+    end
     endtask
     
     virtual task reset_signal();
