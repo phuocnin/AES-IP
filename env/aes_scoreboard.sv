@@ -14,8 +14,9 @@ output bit[127:0] dataOut);
 class aes_scoreboard extends uvm_scoreboard;
     `uvm_component_utils(aes_scoreboard)
     
-    uvm_analysis_imp_frm_Monitor#(aes_transaction) transaction_analysis_port;
-    uvm_analysis_imp_rst#(logic) rst_analysis_port;
+    uvm_analysis_imp_frm_Monitor#(aes_transaction, aes_scoreboard) transaction_analysis_port;
+    uvm_analysis_imp_rst#(logic, aes_scoreboard) rst_analysis_port;
+
     logic rst_flag;
     int         error_cnt;
     bit [127:0] ref_ciphertext;
