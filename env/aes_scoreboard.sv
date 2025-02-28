@@ -25,10 +25,9 @@ class aes_scoreboard extends uvm_scoreboard;
         super.new(name, parent);
     endfunction
     function void build_phase(uvm_phase phase);
-        if (!uvm_config_db#(uvm_analysis_port#(aes_transaction))::get(this, "", "transaction_analysis_port", transaction_analysis_port))
-            `uvm_fatal("AES_SCOREBOARD", "Transaction analysis port not set in config DB");
-        if (!uvm_config_db#(uvm_analysis_port#(logic))::get(this, "", "rst_analysis_port", rst_analysis_port))
-            `uvm_fatal("AES_SCOREBOARD", "Reset analysis port not set in config DB");
+        super.build_phase(phase);
+        transaction_analysis_port = new("transaction_analysis_port", this);
+        rst_analysis_port = new("rst_analysis_port", this);
     endfunction
     
     function void write_rst(logic rst);
