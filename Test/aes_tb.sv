@@ -7,27 +7,27 @@ module aes_tb;
     `include "uvm_macros.svh"
     `include "test.sv"
 
-    aes_if aes_if;
+    aes_if aes_vif();
     AES_Cipher dut(
-        .clk(aes_if.clk),
-        .rst_n(aes_if.rst),
-        .plain_text(aes_if.data_input),
-        .cipher_key(aes_if.key),
-        .cipher_text(aes_if.data_output),
-        .cipher_ready(aes_if.finished)
+        .clk(aes_vif.clk),
+        .rst_n(aes_vif.rst),
+        .plain_text(aes_vif.data_input),
+        .cipher_key(aes_vif.key),
+        .cipher_text(aes_vif.data_output),
+        .cipher_ready(aes_vif.finished)
     );
 
     initial begin
-        uvm_config_db#(aes_if)::set(null, "*", "vif", aes_if);
+        uvm_config_db#(aes_vif)::set(null, "*", "vif", aes_vif);
         run_test("aes_test");
     end
     initial begin
-        vif.sig_reset <= 1'b1;
-        vif.sig_clock <= 1'b1;
-        #51 vif.sig_reset = 1'b0;
+        aes_vif.sig_reset <= 1'b1;
+        aes_vif.sig_clock <= 1'b1;
+        #51 aes_vif.sig_reset = 1'b0;
       end
     
       //Generate Clock
     always
-        #5 vif.sig_clock = ~vif.sig_clock;
+        #5 aes_vif.sig_clock = ~aes_vif.sig_clock;
 endmodule
