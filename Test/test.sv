@@ -36,8 +36,8 @@ class aes_test_basic_cipher extends aes_base_test;
     task run_phase(uvm_phase phase);
         `uvm_info(get_type_name(), "Starting test", UVM_LOW)
         super.run_phase(phase);
-        phase.raise_objection();
+        phase.raise_objection(this);
         aes_seq.start(env.sequencer);
-        phase.drop_objection();
+        phase.drop_objection(this);
     endtask
 endclass : aes_test_basic_cipher
