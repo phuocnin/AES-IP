@@ -1,9 +1,8 @@
-`include "aes_sequence.sv"
 class aes_base_test extends uvm_test;
     `uvm_component_utils(aes_base_test)
     virtual aes_if vif;
     aes_sequence aes_seq;
-    aes_env aes_env;
+    aes_env aes_env0;
     
     function new(string name = "aes_base_test", uvm_component parent = null);
         super.new(name, parent);
@@ -13,7 +12,7 @@ class aes_base_test extends uvm_test;
         if (!uvm_config_db#(virtual aes_if)::get(this, "", "vif", vif))
             `uvm_fatal("AES_TEST", "Interface not set in config DB");
         //aes_seq = aes_sequence::type_id::create("aes_seq");
-        aes_env = aes_env::type_id::create("aes_env", this);
+        aes_env0 = aes_env::type_id::create("aes_env0", this);
     endfunction
     function void end_of_elaboration_phase(uvm_phase phase);
         // // Set verbosity for the bus monitor for this demo
