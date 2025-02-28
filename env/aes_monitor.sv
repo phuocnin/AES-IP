@@ -64,7 +64,7 @@ class aes_monitor extends uvm_monitor;
         forever begin
             @(posedge vif.clk);
             if(vif.finished == 1 && vif.rst == 1) begin
-                if(this.count != 10) begin
+                if(this.count != 11) begin
                     `uvm_error("AES_MON", "Signal finished is active at clock edge ");
                 end 
                 else begin
