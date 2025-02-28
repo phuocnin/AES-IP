@@ -15,7 +15,7 @@ module aes_tb;
         .cipher_key(aes_if.key),
         .cipher_text(aes_if.data_output),
         .cipher_ready(aes_if.finished)
-    )
+    );
 
     initial begin
         uvm_config_db#(aes_if)::set(null, "*", "vif", aes_if);
