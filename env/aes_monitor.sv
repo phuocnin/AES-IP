@@ -31,7 +31,7 @@ class aes_monitor extends uvm_monitor;
     task detect_reset();
         forever begin
             @(posedge vif.clk);
-            if(vif.rst == 0) begin
+            if(vif.rst_n == 0) begin
                 `uvm_info("AES_MON", "Reset signal is asserted", UVM_LOW);
                 this.rst = 0;
                 //rst_port.write(this.rst);
@@ -63,7 +63,7 @@ class aes_monitor extends uvm_monitor;
     task check_finish_signal();
         forever begin
             @(posedge vif.clk);
-            if(vif.finished == 1 && vif.rst == 1) begin
+            if(vif.finished == 1 && vif.rst_n == 1) begin
                 if(this.count != 11) begin
                     `uvm_error("AES_MON", "Signal finished is active at clock edge ");
                 end 

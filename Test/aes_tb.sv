@@ -10,7 +10,7 @@ module aes_tb;
     aes_if vif();
     AES_Cipher dut(
         .clk(vif.clk),
-        .rst_n(vif.rst),
+        .rst_n(vif.rst_n),
         .plain_text(vif.data_input),
         .cipher_key(vif.key),
         .cipher_text(vif.data_output),
@@ -22,9 +22,9 @@ module aes_tb;
         run_test("aes_test_basic_cipher");
     end
     initial begin
-        vif.rst <= 1'b0;
+        vif.rst_n <= 1'b0;
         vif.clk <= 1'b1;
-        #51 vif.rst = 1'b1;
+        #51 vif.rst_n = 1'b1;
       end
     
       //Generate Clock
