@@ -34,11 +34,11 @@ class aes_monitor extends uvm_monitor;
             if(vif.rst_n == 0) begin
                 `uvm_info("AES_MON", "Reset signal is asserted", UVM_LOW);
                 this.rst = 0;
-                //rst_port.write(this.rst);
+                rst_port.write(this.rst);
             end
             else begin
                 this.rst = 1;
-                //rst_port.write(this.rst);
+                rst_port.write(this.rst);
             end
         end
     endtask
