@@ -16,7 +16,7 @@ class aes_driver extends uvm_driver #(aes_transaction);
     virtual task run_phase(uvm_phase phase);
         fork
             drive_transaction(aes_trans);
-            //reset_signal();
+            reset_signal();
         join_none
     endtask
 
