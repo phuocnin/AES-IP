@@ -38,8 +38,9 @@ class aes_driver extends uvm_driver #(aes_transaction);
     
     virtual task reset_signal();
         forever begin
-            //@(posedge vif.clk);
+            @(posedge vif.clk);
             if(vif.rst == 0) begin
+                `uvm_info("aes_driver", "Reset signal is asserted", UVM_LOW);
                 vif.data_input <= 128'h0;
                 vif.key <= 128'h0;
                 vif.finished <= 0;
