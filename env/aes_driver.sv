@@ -38,12 +38,11 @@ class aes_driver extends uvm_driver #(aes_transaction);
     
     virtual task reset_signal();
         forever begin
-            @(posedge vif.clk);
-            if(vif.rst == 0) begin
-                vif.data_input <= 128'h0;
-                vif.key <= 128'h0;
-                vif.finished <= 0;
-            end
+            // @(posedge vif.clk);
+            @(negedge vif.rst) 
+            vif.data_input <= 128'h0;
+            vif.key <= 128'h0;
+            vif.finished <= 0;
         end
     endtask
 endclass
