@@ -34,6 +34,7 @@ class aes_scoreboard extends uvm_scoreboard;
         if (!rst) begin
                 rst_flag = 1;
                 `uvm_info("AES_SCOREBOARD", "Reset signal is asserted", UVM_LOW);
+                return;
             end
         else begin
                 rst_flag = 0;
