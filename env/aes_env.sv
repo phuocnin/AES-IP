@@ -23,6 +23,7 @@ class aes_env extends uvm_env;
     function void connect_phase(uvm_phase phase);
         driver.seq_item_port.connect(sequencer.seq_item_export);
         monitor.analysis_port.connect(scoreboard.transaction_analysis_port);
+        monitor.rst_port.connect(scoreboard.rst_port);
     endfunction
     
 endclass

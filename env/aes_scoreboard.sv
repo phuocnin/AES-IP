@@ -31,12 +31,12 @@ class aes_scoreboard extends uvm_scoreboard;
     endfunction
     
     function void write_rst(logic rst);
-            `uvm_info("AES_SCOREBOARD", $sformatf("Received reset signal: %h", rst), UVM_LOW);
-            if (rst) begin
+        `uvm_info("AES_SCOREBOARD", $sformatf("Received reset signal: %h", rst), UVM_LOW);
+        if (rst) begin
                 rst_flag = 0;
                 `uvm_info("AES_SCOREBOARD", "Reset signal is asserted", UVM_LOW);
             end
-            else begin
+        else begin
                 rst_flag = 1;
             end
         
