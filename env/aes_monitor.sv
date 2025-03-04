@@ -5,7 +5,7 @@ class aes_monitor extends uvm_monitor;
     virtual aes_if vif;  // Interface kết nối với DUT
     uvm_analysis_port#(aes_transaction) analysis_port;  // Analysis port để gửi transaction
     uvm_analysis_port#(logic) rst_port;  // Analysis port để gửi reset signal
-    bit count = 0;  // count the number of clock cycles before finished is activated
+    int count = 0;  // count the number of clock cycles before finished is activated
     logic rst;
     aes_transaction trans;
     function new(string aes_monitor = "aes_monitor", uvm_component parent = null);
