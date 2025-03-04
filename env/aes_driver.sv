@@ -30,9 +30,9 @@ class aes_driver extends uvm_driver #(aes_transaction);
                 @(posedge vif.clk);
                 vif.data_input <= aes_trans.data_input;
                 vif.key <= aes_trans.key;
-            
+                end
             seq_item_port.item_done();
-        end
+        
     end
     endtask
     
