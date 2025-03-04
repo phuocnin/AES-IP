@@ -45,11 +45,11 @@ class aes_monitor extends uvm_monitor;
         forever begin
             //@(posedge vif.clk);
             wait (this.count == 1) 
-                `uvm_info("AES_MON", "Collecting data", UVM_LOW);
-                trans = aes_transaction::type_id::create("trans");
-                `uvm_info("AES_MON", $sformatf("Received transaction: in[%h], key[%h]",vif.data_input, vif.key), UVM_LOW);
-                trans.data_input = vif.data_input;
-                trans.key = vif.key;
+            `uvm_info("AES_MON", "Collecting data", UVM_LOW);
+            trans = aes_transaction::type_id::create("trans");
+            `uvm_info("AES_MON", $sformatf("Received transaction: in[%h], key[%h]",vif.data_input, vif.key), UVM_LOW);
+            trans.data_input = vif.data_input;
+            trans.key = vif.key;
             
             @(posedge vif.clk);
             @(posedge vif.finished);

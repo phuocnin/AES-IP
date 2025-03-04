@@ -2,9 +2,9 @@
 `uvm_analysis_imp_decl(_frm_Monitor)
 `uvm_analysis_imp_decl(_rst)
 
-// import "DPI-C" function void aes_encrypt_dpi(input  bit[127:0] dataIn,
-// input  bit[127:0] key,
-// output bit[127:0] dataOut);
+import "DPI-C" function void aes_encrypt_dpi(input  bit[7:0] dataIn[16],
+input  bit[7:0] key[16],
+output bit[7:0] dataOut[16]);
 
 // import "DPI-C" function void aes_decrypt_dpi(input  bit[127:0] dataIn,
 // input  bit[127:0] key,
@@ -20,6 +20,7 @@ class aes_scoreboard extends uvm_scoreboard;
     logic rst_flag;
     int         error_cnt;
     bit [127:0] ref_ciphertext;
+    bit [7:0] plaintext_bytes[16], key_bytes[16], ciphertext_bytes[16];
 
     function new(string name = "aes_scoreboard", uvm_component parent = null);
         super.new(name, parent);
@@ -44,13 +45,21 @@ class aes_scoreboard extends uvm_scoreboard;
 
     function void write_frm_Monitor(aes_transaction trans);
         `uvm_info("AES_SCOREBOARD", $sformatf("Received transaction: in[%2h], key[%2h], out[%2h] ", trans.data_input,trans.key, trans.data_output), UVM_LOW);
-       // aes_encrypt_dpi( trans.data_input,trans.key, ref_ciphertext);
-
-        // if (ref_ciphertext == trans.data_output) begin
-        // `uvm_info("AES_SCOREBOARD", "AES Encryption match", UVM_MEDIUM)
-        // end else begin
-        // `uvm_error("AES_SCOREBOARD", $sformatf("Mismatch: DUT=%h, REF=%h", trans.data_input, ref_ciphertext))
-        // end
+        // Chuyển đổi 128-bit thành mảng 16 byte
+        foreach (plaintext_bytes[i]) begin
+            plaintext_bytes[i] = trans.data_input[i*8 +: 8];
+            key_bytes[i]       = trans.key[i*8 +: 8];
+        end
+        aes_encrypt_dpi( plaintext_bytes,key_bytes, ciphertext_bytes);
+        foreach (ciphertext_bytes[i]) begin
+            ref_ciphertext[i*8 +: 8] = ciphertext_bytes[i];
+        end
+        if (ref_ciphertext == trans.data_output) begin
+        `uvm_info("AES_SCOREBOARD", "AES Encryption match", UVM_MEDIUM)
+        end 
+        else begin
+        `uvm_error("AES_SCOREBOARD", $sformatf("Mismatch: DUT=%h, REF=%h", trans.data_input, ref_ciphertext))
+        end
     endfunction
         
     function void report_phase(uvm_phase phase);
