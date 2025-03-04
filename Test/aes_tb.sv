@@ -22,7 +22,7 @@ module aes_tb;
         run_test("aes_test_basic_cipher");
     end
     initial begin
-        vif.rst <= 1'b1;
+        vif.rst <= 1'b0;
         vif.clk <= 1'b1;
         #51 vif.rst = 1'b1;
       end
