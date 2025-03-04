@@ -27,7 +27,7 @@ class aes_scoreboard extends uvm_scoreboard;
     function void build_phase(uvm_phase phase);
         super.build_phase(phase);
         transaction_analysis_port = new("transaction_analysis_port", this);
-        rst_analysis_port = new("rst_analysis_port", this);
+        rst_port = new("rst_port", this);
     endfunction
     
     function void write_rst(logic rst);
