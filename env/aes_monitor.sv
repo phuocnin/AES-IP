@@ -63,7 +63,8 @@ class aes_monitor extends uvm_monitor;
     task check_finish_signal();
         forever begin
             @(posedge vif.clk);
-            if(posedge vif.finished && vif.rst_n == 1) begin
+            #1;
+            if( vif.finished ==1 && vif.rst_n == 1) begin
                 if(this.count != 11) begin
                     `uvm_error("AES_MON", "Signal finished is active at clock edge ");
                 end 
