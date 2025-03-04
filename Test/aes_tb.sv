@@ -24,7 +24,7 @@ module aes_tb;
     initial begin
         vif.rst_n <= 1'b0;
         vif.clk <= 1'b1;
-        #51 vif.rst_n = 1'b1;
+        #50 vif.rst_n = 1'b1;
       end
     
       //Generate Clock
