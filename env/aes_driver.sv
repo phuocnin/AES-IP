@@ -25,14 +25,14 @@ class aes_driver extends uvm_driver #(aes_transaction);
         forever begin
             seq_item_port.get_next_item(aes_trans);
             `uvm_info("aes_driver", $sformatf("Received transaction: in[%h], key[%h]",aes_trans.data_input, aes_trans.key), UVM_LOW);
-            @(posedge vif.rst_n) 
+            @(vif.rst_n == 1) begin
                 repeat(10) begin
                 @(posedge vif.clk);
                 vif.data_input <= aes_trans.data_input;
                 vif.key <= aes_trans.key;
-                end
+            end
             seq_item_port.item_done();
-        
+        end
     end
     endtask
     
