@@ -28,7 +28,6 @@ class aes_driver extends uvm_driver #(aes_transaction);
             if(vif.rst_n == 1) begin
                 `uvm_info("aes_driver", $sformatf("reset value: %h",vif.rst_n), UVM_LOW);
                 repeat(11) begin
-                
                 vif.data_input <= aes_trans.data_input;
                 vif.key <= aes_trans.key;
                 @(posedge vif.clk);
@@ -37,6 +36,7 @@ class aes_driver extends uvm_driver #(aes_transaction);
         end
     end
         @(posedge vif.clk);
+        vif.rst_n <= 0;
     endtask
     
     virtual task reset_signal();
