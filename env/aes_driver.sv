@@ -35,8 +35,6 @@ class aes_driver extends uvm_driver #(aes_transaction);
             seq_item_port.item_done();
         end
     end
-        @(posedge vif.clk);
-        vif.rst_n <= 0;
     endtask
     
     virtual task reset_signal();
