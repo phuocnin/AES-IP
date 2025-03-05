@@ -6,9 +6,9 @@ import "DPI-C" function void AES128_ECB_encrypt_dpi(input  bit[7:0] dataIn[16],
 input  bit[7:0] key[16],
 output bit[7:0] dataOut[16]);
 
-// import "DPI-C" function void aes_decrypt_dpi(input  bit[127:0] dataIn,
-// input  bit[127:0] key,
-// output bit[127:0] dataOut);
+import "DPI-C" function void aes_decrypt_dpi(input  bit[127:0] dataIn,
+input  bit[127:0] key,
+output bit[127:0] dataOut);
 
 
 class aes_scoreboard extends uvm_scoreboard;
@@ -34,7 +34,7 @@ class aes_scoreboard extends uvm_scoreboard;
     function void write_rst(logic rst);
         if (!rst) begin
                 rst_flag = 1;
-                `uvm_info("AES_SCOREBOARD", "Reset signal is asserted", UVM_LOW);
+                `uvm_info(get_type_name(), "Reset signal is asserted", UVM_LOW);
                 return;
             end
         else begin
@@ -44,23 +44,23 @@ class aes_scoreboard extends uvm_scoreboard;
     endfunction
 
     function void write_frm_Monitor(aes_transaction trans);
-        `uvm_info("AES_SCOREBOARD", $sformatf("Received transaction: in[%2b], key[%2b], out[%2h] ", trans.data_input,trans.key, trans.data_output), UVM_LOW);
+        `uvm_info(get_type_name(), $sformatf("Received transaction: in[%2h], key[%2h], out[%2h] ", trans.data_input,trans.key, trans.data_output), UVM_LOW);
         // Chuyển đổi 128-bit thành mảng 16 byte
         foreach (plaintext_bytes[i]) begin
             plaintext_bytes[i] = trans.data_input[(15-i)*8 +: 8];
             key_bytes[i]       = trans.key[(15-i)*8 +: 8];
         end
         
-        $display("DEBUG: plaintext_bytes=%b, key_bytes=%b", plaintext_bytes[1],key_bytes[0]);
         AES128_ECB_encrypt_dpi( plaintext_bytes,key_bytes, ciphertext_bytes);
         foreach (ciphertext_bytes[i]) begin
             ref_ciphertext[(15-i)*8 +: 8] = ciphertext_bytes[i];
         end
         if (ref_ciphertext == trans.data_output) begin
-        `uvm_info("AES_SCOREBOARD", "AES Encryption match", UVM_MEDIUM)
+        `uvm_info(get_type_name(), "AES Encryption match", UVM_MEDIUM)
         end 
         else begin
-        `uvm_error("AES_SCOREBOARD", $sformatf("Mismatch: DUT=%h, REF=%h", trans.data_output, ref_ciphertext))
+        `uvm_error(get_type_name(), $sformatf("Mismatch: DUT=%h, REF=%h", trans.data_output, ref_ciphertext))
+        error_cnt++;
         end
     endfunction
         
