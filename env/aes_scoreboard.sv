@@ -54,8 +54,10 @@ class aes_scoreboard extends uvm_scoreboard;
                 key_bytes[i]       = trans.key[(15-i)*8 +: 8];
             end
             `ifdef CIPHER
+                `uvm_info(get_type_name(), "Encrypting", UVM_LOW)
                 AES128_ECB_encrypt_dpi( plaintext_bytes,key_bytes, ciphertext_bytes);
             `else
+                `uvm_info(get_type_name(), "Decrypting", UVM_LOW)
                 AES128_ECB_decrypt_dpi(plaintext_bytes,key_bytes, ciphertext_bytes);
             `endif
             foreach (ciphertext_bytes[i]) begin
