@@ -43,7 +43,7 @@ class aes_monitor extends uvm_monitor;
     endtask
 
     task colect_send_data();
-        #1
+        @(posedge vif.rst_n);
         forever begin
             if(this.count ==0 && vif.rst_n == 1);  begin
             `uvm_info(get_type_name(), "Collecting data", UVM_LOW);
@@ -57,9 +57,7 @@ class aes_monitor extends uvm_monitor;
             `uvm_info(get_type_name(), $sformatf("Send transaction to scb: in[%2h], key[%2h], out[%2h]", trans.data_input,trans.key, trans.data_output), UVM_LOW);
             analysis_port.write(trans);  
             end
-            else begin
-                @(posedge vif.rst_n);
-            end
+    
         end
     endtask
 
