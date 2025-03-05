@@ -5,7 +5,7 @@ class aes_monitor extends uvm_monitor;
     virtual aes_if vif;  // Interface kết nối với DUT
     uvm_analysis_port#(aes_transaction) analysis_port;  // Analysis port để gửi transaction
     uvm_analysis_port#(logic) rst_port;  // Analysis port để gửi reset signal
-    int count = 0;  // count the number of clock cycles before finished is activated
+    int count;  // count the number of clock cycles before finished is activated
     bit finished_flag = 0;
     logic rst;
     aes_transaction trans;
@@ -44,7 +44,9 @@ class aes_monitor extends uvm_monitor;
 
     task colect_send_data();
         forever begin
-            wait(this.count ==0 ) 
+            
+            wait(this.count ==0 ) ;
+            wait(vif.rst_n == 1);   
             `uvm_info(get_type_name(), "Collecting data", UVM_LOW);
             trans = aes_transaction::type_id::create("trans");
             trans.data_input = vif.data_input;
