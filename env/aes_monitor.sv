@@ -6,6 +6,7 @@ class aes_monitor extends uvm_monitor;
     uvm_analysis_port#(aes_transaction) analysis_port;  // Analysis port để gửi transaction
     uvm_analysis_port#(logic) rst_port;  // Analysis port để gửi reset signal
     int count = 0;  // count the number of clock cycles before finished is activated
+    bit finished_flag = 0;
     logic rst;
     aes_transaction trans;
     function new(string aes_monitor = "aes_monitor", uvm_component parent = null);
@@ -44,7 +45,7 @@ class aes_monitor extends uvm_monitor;
     task colect_send_data();
         forever begin
             //@(posedge vif.clk);
-            wait (this.count == 1) 
+            wait (this.finished_flag == 1) 
             `uvm_info("AES_MON", "Collecting data", UVM_LOW);
             trans = aes_transaction::type_id::create("trans");
             `uvm_info("AES_MON", $sformatf("Received transaction: in[%h], key[%h]",vif.data_input, vif.key), UVM_LOW);
@@ -64,20 +65,25 @@ class aes_monitor extends uvm_monitor;
             #1;
             if( vif.finished ==1 && vif.rst_n == 1) begin
                 if(this.count != 10) begin
+                    this.finished_flag = 0;
+                    this.count = 0;
                     `uvm_info(get_type_name(), $sformatf("count: %d", this.count), UVM_LOW);
                     `uvm_error("AES_MON", "Signal finished is active at clock edge ");
                 end 
                 else begin
-                    this.count = 1;
+                    this.count = 0;
+                    this.finished_flag = 1;
                     `uvm_info("AES_MON", "Finished signal is asserted", UVM_LOW);
                 end
             end
             else if(vif.rst_n == 1 && vif.finished == 0)begin
                 this.count++;
+                this.finished_flag = 0;
                 `uvm_info("AES_MON", $sformatf("count: %d", this.count), UVM_LOW);
             end
             else begin
                 this.count = 0;
+                this.finished_flag = 0;
             end
         end
     endtask
