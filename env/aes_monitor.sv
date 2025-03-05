@@ -44,9 +44,7 @@ class aes_monitor extends uvm_monitor;
 
     task colect_send_data();
         forever begin
-            wait(this.count ==0);  
-            if(vif.rst_n == 1) begin
-
+            if(this.count ==0 && vif.rst_n);  begin
             `uvm_info(get_type_name(), "Collecting data", UVM_LOW);
             trans = aes_transaction::type_id::create("trans");
             trans.data_input = vif.data_input;
@@ -57,7 +55,7 @@ class aes_monitor extends uvm_monitor;
             trans.data_output = vif.data_output;
             `uvm_info(get_type_name(), $sformatf("Send transaction to scb: in[%2h], key[%2h], out[%2h]", trans.data_input,trans.key, trans.data_output), UVM_LOW);
             analysis_port.write(trans);  
-           end
+            end
         end
     endtask
 
