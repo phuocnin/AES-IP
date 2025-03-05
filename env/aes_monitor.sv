@@ -72,7 +72,7 @@ class aes_monitor extends uvm_monitor;
                     `uvm_info("AES_MON", "Finished signal is asserted", UVM_LOW);
                 end
             end
-            else if(vif.rst_n == 1)begin
+            else if(vif.rst_n == 1 && vif.finished ==0)begin
                 this.count++;
             end
             else begin
