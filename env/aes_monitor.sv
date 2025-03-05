@@ -44,14 +44,13 @@ class aes_monitor extends uvm_monitor;
 
     task colect_send_data();
         forever begin
-            //@(posedge vif.clk);
-            wait (this.count == 0) 
-
+            wait ( vif.rst_n == 1); 
+            if(this.count ==0 ) begin
             `uvm_info(get_type_name(), "Collecting data", UVM_LOW);
             trans = aes_transaction::type_id::create("trans");
             trans.data_input = vif.data_input;
             trans.key = vif.key;
-            
+            end
             @(posedge vif.clk);
             wait(this.finished_flag == 1);
                 trans.data_output = vif.data_output;
