@@ -47,9 +47,10 @@ class aes_scoreboard extends uvm_scoreboard;
         `uvm_info("AES_SCOREBOARD", $sformatf("Received transaction: in[%2b], key[%2b], out[%2h] ", trans.data_input,trans.key, trans.data_output), UVM_LOW);
         // Chuyển đổi 128-bit thành mảng 16 byte
         foreach (plaintext_bytes[i]) begin
-            plaintext_bytes[i] = trans.data_input[i*8 +: 8];
-            key_bytes[i]       = trans.key[i*8 +: 8];
+            plaintext_bytes[i] = trans.data_input[(15-i)*8 +: 8];
+            key_bytes[i]       = trans.key[(15-i)*8 +: 8];
         end
+        
         $display("DEBUG: plaintext_bytes=%b, key_bytes=%b", plaintext_bytes[1],key_bytes[0]);
         AES128_ECB_encrypt_dpi( plaintext_bytes,key_bytes, ciphertext_bytes);
         foreach (ciphertext_bytes[i]) begin
