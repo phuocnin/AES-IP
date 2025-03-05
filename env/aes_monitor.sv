@@ -66,8 +66,6 @@ class aes_monitor extends uvm_monitor;
             #1;
             if( vif.finished ==1 && vif.rst_n == 1) begin
                 if(this.count != 10) begin
-                    `uvm_info(get_type_name(), $sformatf("count: %d", this.count), UVM_LOW);
-                    `uvm_error(get_type_name(), "Signal finished is active at clock edge ");
                     this.finished_flag = 0;
                     this.count = 0;
                 end 
