@@ -2,7 +2,7 @@
 `uvm_analysis_imp_decl(_frm_Monitor)
 `uvm_analysis_imp_decl(_rst)
 
-import "DPI-C" function void aes_encrypt_dpi(input  bit[7:0] dataIn[16],
+import "DPI-C" function void AES128_ECB_encrypt_dpi(input  bit[7:0] dataIn[16],
 input  bit[7:0] key[16],
 output bit[7:0] dataOut[16]);
 
@@ -50,7 +50,7 @@ class aes_scoreboard extends uvm_scoreboard;
             plaintext_bytes[i] = trans.data_input[i*8 +: 8];
             key_bytes[i]       = trans.key[i*8 +: 8];
         end
-        aes_encrypt_dpi( plaintext_bytes,key_bytes, ciphertext_bytes);
+        AES128_ECB_encrypt_dpi( plaintext_bytes,key_bytes, ciphertext_bytes);
         foreach (ciphertext_bytes[i]) begin
             ref_ciphertext[i*8 +: 8] = ciphertext_bytes[i];
         end
