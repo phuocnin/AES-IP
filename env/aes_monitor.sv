@@ -17,7 +17,7 @@ class aes_monitor extends uvm_monitor;
 
     function void build_phase(uvm_phase phase);
        if (!uvm_config_db#(virtual aes_if)::get(this, "", "vif", vif))
-          `uvm_fatal("AES_MON", "Interface not set in config DB");
+          `uvm_fatal(get_type_name(), "Interface not set in config DB");
     endfunction
  
     task run_phase(uvm_phase phase);
@@ -33,7 +33,7 @@ class aes_monitor extends uvm_monitor;
         forever begin
             @(posedge vif.clk);
             if(vif.rst_n == 0) begin
-                `uvm_info("AES_MON", "Reset signal is asserted", UVM_LOW);
+                `uvm_info(get_type_name(), "Reset signal is asserted", UVM_LOW);
                 rst_port.write(vif.rst_n);
             end
             else begin
@@ -46,15 +46,15 @@ class aes_monitor extends uvm_monitor;
         forever begin
             //@(posedge vif.clk);
             wait (this.finished_flag == 1) 
-            `uvm_info("AES_MON", "Collecting data", UVM_LOW);
+            `uvm_info(get_type_name(), "Collecting data", UVM_LOW);
             trans = aes_transaction::type_id::create("trans");
-            `uvm_info("AES_MON", $sformatf("Received transaction: in[%h], key[%h]",vif.data_input, vif.key), UVM_LOW);
             trans.data_input = vif.data_input;
             trans.key = vif.key;
             
             @(posedge vif.clk);
             @(posedge vif.finished);
                 trans.data_output = vif.data_output;
+                `uvm_info(get_type_name(), $sformatf("Send transaction to scb: in[%2h], key[%2h], out[%2h]", trans.data_input,trans.key, trans.data_output), UVM_LOW);
                 analysis_port.write(trans);  
         end
     endtask
@@ -68,18 +68,18 @@ class aes_monitor extends uvm_monitor;
                     this.finished_flag = 0;
                     this.count = 0;
                     `uvm_info(get_type_name(), $sformatf("count: %d", this.count), UVM_LOW);
-                    `uvm_error("AES_MON", "Signal finished is active at clock edge ");
+                    `uvm_error(get_type_name(), "Signal finished is active at clock edge ");
                 end 
                 else begin
                     this.count = 0;
                     this.finished_flag = 1;
-                    `uvm_info("AES_MON", "Finished signal is asserted", UVM_LOW);
+                    `uvm_info(get_type_name(), "Finished signal is asserted", UVM_LOW);
                 end
             end
             else if(vif.rst_n == 1 && vif.finished == 0)begin
                 this.count++;
                 this.finished_flag = 0;
-                `uvm_info("AES_MON", $sformatf("count: %d", this.count), UVM_LOW);
+                `uvm_info(get_type_name(), $sformatf("count: %d", this.count), UVM_LOW);
             end
             else begin
                 this.count = 0;
