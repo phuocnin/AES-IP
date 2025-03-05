@@ -81,7 +81,6 @@ class aes_monitor extends uvm_monitor;
             else if(vif.rst_n == 1 && vif.finished == 0)begin
                 this.count++;
                 this.finished_flag = 0;
-                `uvm_info(get_type_name(), $sformatf("count: %d", this.count), UVM_LOW);
             end
             else begin
                 this.count = 0;
