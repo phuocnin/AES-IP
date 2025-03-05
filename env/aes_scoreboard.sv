@@ -6,9 +6,9 @@ import "DPI-C" function void AES128_ECB_encrypt_dpi(input  bit[7:0] dataIn[16],
 input  bit[7:0] key[16],
 output bit[7:0] dataOut[16]);
 
-import "DPI-C" function void aes_decrypt_dpi(input  bit[127:0] dataIn,
-input  bit[127:0] key,
-output bit[127:0] dataOut);
+import "DPI-C" function void AES128_ECB_decrypt_dpi(input  bit[7:0] dataIn[16],
+input  bit[7:0] key[16],
+output bit[7:0] dataOut[16]);
 
 
 class aes_scoreboard extends uvm_scoreboard;
@@ -53,8 +53,11 @@ class aes_scoreboard extends uvm_scoreboard;
                 plaintext_bytes[i] = trans.data_input[(15-i)*8 +: 8];
                 key_bytes[i]       = trans.key[(15-i)*8 +: 8];
             end
-            
-            AES128_ECB_encrypt_dpi( plaintext_bytes,key_bytes, ciphertext_bytes);
+            `ifdef CIPHER
+                AES128_ECB_encrypt_dpi( plaintext_bytes,key_bytes, ciphertext_bytes);
+            `else
+                AES128_ECB_decrypt_dpi(plaintext_bytes,key_bytes, ciphertext_bytes);
+            `endif
             foreach (ciphertext_bytes[i]) begin
                 ref_ciphertext[(15-i)*8 +: 8] = ciphertext_bytes[i];
             end
