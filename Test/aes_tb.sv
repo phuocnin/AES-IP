@@ -8,13 +8,13 @@ module aes_tb;
     `include "test.sv"
 
     aes_if vif();
-    AES_Cipher dut(
+    AES_CORE dut(
         .clk(vif.clk),
         .rst_n(vif.rst_n),
-        .plain_text(vif.data_input),
-        .cipher_key(vif.key),
-        .cipher_text(vif.data_output),
-        .cipher_ready(vif.finished)
+        .data_in(vif.data_input),
+        .key(vif.key),
+        .data_out(vif.data_output),
+        .finished(vif.finished)
     );
 
     initial begin
