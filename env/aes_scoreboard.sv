@@ -50,7 +50,7 @@ class aes_scoreboard extends uvm_scoreboard;
             plaintext_bytes[i] = trans.data_input[i*8 +: 8];
             key_bytes[i]       = trans.key[i*8 +: 8];
         end
-        $display("DEBUG: plaintext_bytes=%s, key_bytes=%s", string'(plaintext_bytes), string'(key_bytes));
+        $display("DEBUG: plaintext_bytes=%h, key_bytes=%h", plaintext_bytes[1],key_bytes[0]);
         AES128_ECB_encrypt_dpi( plaintext_bytes,key_bytes, ciphertext_bytes);
         foreach (ciphertext_bytes[i]) begin
             ref_ciphertext[i*8 +: 8] = ciphertext_bytes[i];
