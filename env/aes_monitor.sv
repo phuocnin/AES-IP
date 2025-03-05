@@ -46,6 +46,7 @@ class aes_monitor extends uvm_monitor;
         @(posedge vif.rst_n);
         forever begin
             if(this.count ==0 && vif.rst_n == 1);  begin
+                #1;
             `uvm_info(get_type_name(), "Collecting data", UVM_LOW);
             trans = aes_transaction::type_id::create("trans");
             trans.data_input = vif.data_input;
@@ -64,7 +65,7 @@ class aes_monitor extends uvm_monitor;
     task check_finish_signal();
         forever begin
             @(posedge vif.clk);
-            #1;
+            
             if( vif.finished ==1 && vif.rst_n == 1) begin
                 if(this.count != 10) begin
                     this.finished_flag = 0;
