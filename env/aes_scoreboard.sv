@@ -58,7 +58,7 @@ class aes_scoreboard extends uvm_scoreboard;
         `uvm_info("AES_SCOREBOARD", "AES Encryption match", UVM_MEDIUM)
         end 
         else begin
-        `uvm_error("AES_SCOREBOARD", $sformatf("Mismatch: DUT=%h, REF=%h", trans.data_input, ref_ciphertext))
+        `uvm_error("AES_SCOREBOARD", $sformatf("Mismatch: DUT=%h, REF=%h", trans.data_output, ref_ciphertext))
         end
     endfunction
         
