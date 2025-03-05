@@ -54,7 +54,7 @@ class aes_scoreboard extends uvm_scoreboard;
         $display("DEBUG: plaintext_bytes=%b, key_bytes=%b", plaintext_bytes[1],key_bytes[0]);
         AES128_ECB_encrypt_dpi( plaintext_bytes,key_bytes, ciphertext_bytes);
         foreach (ciphertext_bytes[i]) begin
-            ref_ciphertext[i*8 +: 8] = ciphertext_bytes[i];
+            ref_ciphertext[(15-i)*8 +: 8] = ciphertext_bytes[i];
         end
         if (ref_ciphertext == trans.data_output) begin
         `uvm_info("AES_SCOREBOARD", "AES Encryption match", UVM_MEDIUM)
