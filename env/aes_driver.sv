@@ -40,8 +40,8 @@ class aes_driver extends uvm_driver #(aes_transaction);
         forever begin
             // @(posedge vif.clk);
             @(negedge vif.rst_n) 
-            vif.data_input <= 128'hx;
-            vif.key <= 128'hx;
+            vif.data_input <= 128'h0;
+            vif.key <= 128'h0;
             //vif.finished <= 0;
         end
     endtask
