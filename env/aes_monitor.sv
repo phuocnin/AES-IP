@@ -53,7 +53,7 @@ class aes_monitor extends uvm_monitor;
             trans.key = vif.key;
             
             @(posedge vif.clk);
-            @(posedge vif.finished);
+            wait(this.finished_flag == 1);
                 trans.data_output = vif.data_output;
                 `uvm_info(get_type_name(), $sformatf("Send transaction to scb: in[%2h], key[%2h], out[%2h]", trans.data_input,trans.key, trans.data_output), UVM_LOW);
                 analysis_port.write(trans);  
