@@ -43,7 +43,6 @@ class aes_monitor extends uvm_monitor;
     endtask
 
     task colect_send_data();
-        @(posedge vif.rst_n);
         forever begin
             wait(this.count ==0 ) 
             `uvm_info(get_type_name(), "Collecting data", UVM_LOW);
@@ -63,7 +62,7 @@ class aes_monitor extends uvm_monitor;
     task check_finish_signal();
         forever begin
             @(posedge vif.clk);
-            #1;
+            
             if( vif.finished ==1 && vif.rst_n == 1) begin
                 if(this.count != 10) begin
                     this.finished_flag = 0;
