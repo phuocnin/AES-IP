@@ -45,7 +45,7 @@ class aes_monitor extends uvm_monitor;
     task colect_send_data();
         forever begin
             $display(vif.rst_n);
-            if(this.count ==0 && vif.rst_n == 1);  begin
+            if(this.count ==0 && vif.rst_n == 1)  begin
             `uvm_info(get_type_name(), "Collecting data", UVM_LOW);
             
             trans = aes_transaction::type_id::create("trans");
