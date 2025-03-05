@@ -72,8 +72,9 @@ class aes_monitor extends uvm_monitor;
                     `uvm_info("AES_MON", "Finished signal is asserted", UVM_LOW);
                 end
             end
-            else if(vif.rst_n == 1 && vif.finished ==0)begin
+            else if(vif.rst_n == 1 && vif.finished == 0)begin
                 this.count++;
+                `uvm_info("AES_MON", $sformatf("count: %d", this.count), UVM_LOW);
             end
             else begin
                 this.count = 0;
