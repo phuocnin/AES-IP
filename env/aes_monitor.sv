@@ -48,7 +48,7 @@ class aes_monitor extends uvm_monitor;
            
             `uvm_info(get_type_name(), "Collecting data", UVM_LOW);
             trans = aes_transaction::type_id::create("trans");
-            if(this.count ==0 ) begin
+            if(this.count ==1 ) begin
             trans.data_input = vif.data_input;
             trans.key = vif.key;
             end
