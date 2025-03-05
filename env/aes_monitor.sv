@@ -45,7 +45,9 @@ class aes_monitor extends uvm_monitor;
     task colect_send_data();
         forever begin
            // wait ( vif.rst_n == 1); 
-           wait(this.count ==0 ) 
+            wait(this.count ==0 ) 
+            `uvm_info(get_type_name(), "Waiting for reset signal to be de-asserted", UVM_LOW);
+           if (vif.rst_n == 1) begin
             `uvm_info(get_type_name(), "Collecting data", UVM_LOW);
             trans = aes_transaction::type_id::create("trans");
             
@@ -54,9 +56,10 @@ class aes_monitor extends uvm_monitor;
             
             @(posedge vif.clk);
             wait(this.finished_flag == 1);
-                trans.data_output = vif.data_output;
-                `uvm_info(get_type_name(), $sformatf("Send transaction to scb: in[%2h], key[%2h], out[%2h]", trans.data_input,trans.key, trans.data_output), UVM_LOW);
-                analysis_port.write(trans);  
+            trans.data_output = vif.data_output;
+            `uvm_info(get_type_name(), $sformatf("Send transaction to scb: in[%2h], key[%2h], out[%2h]", trans.data_input,trans.key, trans.data_output), UVM_LOW);
+            analysis_port.write(trans);  
+           end
         end
     endtask
 
