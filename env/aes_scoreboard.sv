@@ -34,8 +34,6 @@ class aes_scoreboard extends uvm_scoreboard;
     function void write_rst(logic rst);
         if (!rst) begin
                 rst_flag = 1;
-                `uvm_info(get_type_name(), "Reset signal is asserted", UVM_LOW);
-                return;
             end
         else begin
                 rst_flag = 0;
@@ -44,23 +42,29 @@ class aes_scoreboard extends uvm_scoreboard;
     endfunction
 
     function void write_frm_Monitor(aes_transaction trans);
-        `uvm_info(get_type_name(), $sformatf("Received transaction: in[%2h], key[%2h], out[%2h] ", trans.data_input,trans.key, trans.data_output), UVM_LOW);
-        // Chuyển đổi 128-bit thành mảng 16 byte
-        foreach (plaintext_bytes[i]) begin
-            plaintext_bytes[i] = trans.data_input[(15-i)*8 +: 8];
-            key_bytes[i]       = trans.key[(15-i)*8 +: 8];
+        if(rst_flag == 1) begin
+            `uvm_info(get_type_name(), "Reset signal is asserted", UVM_LOW);
+            return;
         end
-        
-        AES128_ECB_encrypt_dpi( plaintext_bytes,key_bytes, ciphertext_bytes);
-        foreach (ciphertext_bytes[i]) begin
-            ref_ciphertext[(15-i)*8 +: 8] = ciphertext_bytes[i];
-        end
-        if (ref_ciphertext == trans.data_output) begin
-        `uvm_info(get_type_name(), "AES Encryption match", UVM_MEDIUM)
-        end 
         else begin
-        `uvm_error(get_type_name(), $sformatf("Mismatch: DUT=%h, REF=%h", trans.data_output, ref_ciphertext))
-        error_cnt++;
+            `uvm_info(get_type_name(), $sformatf("Received transaction: in[%2h], key[%2h], out[%2h] ", trans.data_input,trans.key, trans.data_output), UVM_LOW);
+
+            foreach (plaintext_bytes[i]) begin
+                plaintext_bytes[i] = trans.data_input[(15-i)*8 +: 8];
+                key_bytes[i]       = trans.key[(15-i)*8 +: 8];
+            end
+            
+            AES128_ECB_encrypt_dpi( plaintext_bytes,key_bytes, ciphertext_bytes);
+            foreach (ciphertext_bytes[i]) begin
+                ref_ciphertext[(15-i)*8 +: 8] = ciphertext_bytes[i];
+            end
+            if (ref_ciphertext == trans.data_output) begin
+            `uvm_info(get_type_name(), "AES Encryption match", UVM_MEDIUM)
+            end 
+            else begin
+            `uvm_error(get_type_name(), $sformatf("Mismatch: DUT=%h, REF=%h", trans.data_output, ref_ciphertext))
+            error_cnt++;
+            end
         end
     endfunction
         
