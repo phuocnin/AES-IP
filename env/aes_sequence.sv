@@ -6,16 +6,30 @@ virtual class aes_base_sequence extends uvm_sequence #(aes_transaction);
 endclass : aes_base_sequence
 
 
-class aes_sequence extends aes_base_sequence;
-        `uvm_object_utils(aes_sequence)
+class aes_single_seq extends aes_base_sequence;
+        `uvm_object_utils(aes_single_seq)
         aes_transaction req;
-        function new(string name = "aes_sequence");
+        function new(string name = "aes_single_seq");
             super.new(name);
         endfunction
         task body();
-            `uvm_info("aes_sequence", "Starting aes_sequence", UVM_LOW)
-            repeat(5) begin
+            `uvm_info("aes_single_seq", "Starting aes_single_seq", UVM_LOW)
+            repeat(1) begin
                 `uvm_do(req);
             end
         endtask
-endclass : aes_sequence
+endclass : aes_single_seq
+
+class aes_multi_seq extends aes_base_sequence;
+    `uvm_object_utils(aes_multi_seq)
+    aes_transaction req;
+    function new(string name = "aes_multi_seq");
+        super.new(name);
+    endfunction
+    task body();
+        `uvm_info("aes_multi_seq", "Starting aes_multi_seq", UVM_LOW)
+        repeat(10) begin
+            `uvm_do(req);
+        end
+    endtask
+endclass : aes_multi_seq
