@@ -17,6 +17,7 @@ class aes_single_seq extends aes_base_sequence;
             repeat(1) begin
                 req = aes_transaction::type_id::create("req");
                 start_item(req);
+                $srandom($time);
                 req.randomize();
                 finish_item(req);
             end
