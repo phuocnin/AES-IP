@@ -5,7 +5,7 @@ class aes_base_test extends uvm_test;
     virtual aes_if vif;
     aes_env aes_env0;
     uvm_table_printer printer;
-    aes_single_seq aes_single_seq;
+    aes_single_seq aes_seq;
     
     function new(string name = "aes_base_test", uvm_component parent = null);
         super.new(name, parent);
