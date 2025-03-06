@@ -1,8 +1,8 @@
-class aes_test_single_enc extends aes_base_test;
-    `uvm_component_utils(aes_test_single_enc)
+class aes_test_basic_cipher extends aes_base_test;
+    `uvm_component_utils(aes_test_basic_cipher)
     aes_single_seq aes_seq;
 
-    function new(string name = "aes_test_single_enc", uvm_component parent = null);
+    function new(string name = "aes_test_basic_cipher", uvm_component parent = null);
         super.new(name, parent);
     endfunction
     function void build_phase(uvm_phase phase);
@@ -16,4 +16,4 @@ class aes_test_single_enc extends aes_base_test;
         aes_seq.start(aes_env0.sequencer);
         phase.drop_objection(this);
     endtask
-endclass : aes_test_single_enc
+endclass : aes_test_basic_cipher
