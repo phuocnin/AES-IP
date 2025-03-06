@@ -23,7 +23,7 @@ class aes_single_seq extends aes_base_sequence;
             end
         endtask
 endclass : aes_single_seq
-
+/*
 class aes_multi_seq extends aes_base_sequence;
     `uvm_object_utils(aes_multi_seq)
     aes_transaction req;
@@ -37,4 +37,4 @@ class aes_multi_seq extends aes_base_sequence;
         end
     endtask
 endclass : aes_multi_seq
-
+*/
