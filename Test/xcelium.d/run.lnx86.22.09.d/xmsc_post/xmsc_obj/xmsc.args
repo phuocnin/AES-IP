@@ -1,5 +1,0 @@
--nocopyright
--COMPILEONLY
--cdslib /home/DN04/Phuoc/AES-IP/Test/./xcelium.d/run.lnx86.22.09.d/cdsrun.lib
--hdlvar /home/DN04/Phuoc/AES-IP/Test/./xcelium.d/run.lnx86.22.09.d/hdlrun.var
--work worklib
