@@ -15,7 +15,10 @@ class aes_single_seq extends aes_base_sequence;
         task body();
             `uvm_info("aes_single_seq", "Starting aes_single_seq", UVM_LOW)
             repeat(1) begin
-                `uvm_do(req);
+                req = aes_transaction::type_id::create("req");
+                start_item(req);
+                req.randomize();
+                finish_item(req);
             end
         endtask
 endclass : aes_single_seq
