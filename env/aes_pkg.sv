@@ -10,4 +10,5 @@ package aes_pkg;
     `include "aes_sequencer.sv"
     `include "aes_scoreboard.sv"
     `include "aes_env.sv"
+    `include "../Test/encryption/aes_test_single_enc/aes_test_single_enc.sv"
 endpackage: aes_pkg
