@@ -5,7 +5,7 @@ module aes_tb;
     import uvm_pkg::*;
     import aes_pkg::*;
     `include "uvm_macros.svh"
-    `include "test.sv"
+    //`include "test.sv"
 
     aes_if vif();
     AES_CORE dut(
