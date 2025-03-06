@@ -1,5 +1,5 @@
 class aes_test_single_enc extends aes_base_test;
-    `uvm_component_utils(aes_test_basic_cipher)
+    `uvm_component_utils(aes_test_single_enc)
     aes_single_seq aes_seq;
 
     function new(string name = "aes_test_single_enc", uvm_component parent = null);
