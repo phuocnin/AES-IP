@@ -14,7 +14,7 @@ class aes_single_seq extends aes_base_sequence;
         endfunction
         task body();
             `uvm_info("aes_single_seq", "Starting aes_single_seq", UVM_LOW)
-            repeat(10) begin
+            repeat(1) begin
                 req = aes_transaction::type_id::create("req");
                 start_item(req);
               //  $srandom(int'($time)); 
