@@ -1,5 +1,7 @@
+`include "aes_sequence.sv"
 class aes_test_basic_cipher extends aes_base_test;
     `uvm_component_utils(aes_test_basic_cipher)
+    aes_single_seq aes_single_seq;
     function new(string name = "aes_test_basic_cipher", uvm_component parent = null);
         super.new(name, parent);
     endfunction
