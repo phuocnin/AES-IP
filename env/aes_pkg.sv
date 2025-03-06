@@ -13,4 +13,5 @@ package aes_pkg;
     `include "../Test/test.sv"
     `include "../Test/encryption/aes_test_single_enc/aes_test_single_enc.sv"
     `include "../Test/encryption/aes_test_continuous_enc/aes_test_continuous_enc.sv"
+    `include "../Test/encryption/aes_test_special_case/aes_test_special_case.sv"
 endpackage: aes_pkg

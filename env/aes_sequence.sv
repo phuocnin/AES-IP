@@ -38,4 +38,20 @@ class aes_multi_seq extends aes_base_sequence;
     endtask
 endclass : aes_multi_seq
  // Plan test 5 
- 
+class aes_spec_case extends aes_base_sequence;
+    `uvm_object_utils(aes_spec_case)
+    aes_transaction req;
+    function new(string name = "aes_spec_case");
+        super.new(name);
+    endfunction
+    task body();
+        `uvm_info("aes_spec_case", "Starting aes_spec_case", UVM_LOW)
+         repeat(1) begin
+                req = aes_transaction::type_id::create("req");
+                start_item(req);
+              //  $srandom(int'($time)); 
+                req.randomize() with {data_input = 32'h00000000};
+                finish_item(req);
+        end
+    endtask
+endclass : aes_spec_case
