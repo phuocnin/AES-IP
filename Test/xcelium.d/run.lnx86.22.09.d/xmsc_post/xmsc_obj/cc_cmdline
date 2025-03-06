@@ -1,0 +1,9 @@
+ 
+-DNCSC
+-DXMSC
+-D_GLIBCXX_USE_CXX11_ABI=1 -c
+-I/mnt/CADENCE/xcelium_2209/tools/inca/include
+-I/mnt/CADENCE/xcelium_2209/tools/include
+-I/mnt/CADENCE/xcelium_2209/tools/methodology/UVM/CDNS-1.1d/ml/sc
+-I/mnt/CADENCE/xcelium_2209/tools/methodology/UVM/CDNS-1.1d/sc/sc
+-x c -m32  -Wall 

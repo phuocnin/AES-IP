@@ -1,0 +1,27 @@
+$CDSROOT = /mnt/CADENCE/xcelium_2209
+$TESTDIR = /home/DN04/Phuoc/AES-IP/Test
+
+TOOL:	xmsc	22.09-s004
+xmsc cc parameters: 
+	$CDSROOT/tools/cdsgcc/gcc/9.3/bin/gcc
+	-I$CDSROOT/tools/include
+	-I$CDSROOT/tools/inca/include
+	-I$CDSROOT/tools/methodology/UVM/CDNS-1.1d/sc/sc
+	-I$CDSROOT/tools/methodology/UVM/CDNS-1.1d/ml/sc 
+	-DXMSC
+	-DNCSC
+	-D_GLIBCXX_USE_CXX11_ABI=1 -c
+	-x c -m32  -Wall 
+
+xmsc: compiling $TESTDIR/../AES128-C-master/aes.c
+
+make: *** [xcelium.d/run.lnx86.22.09.d/xmsc_post/xmsc_obj/aes_0.o] Error 1
+In file included from /usr/include/features.h:399,
+                 from /usr/include/stdlib.h:24,
+                 from $CDSROOT/tools.lnx86/cdsgcc/gcc/9.3/install/include/c++/9.3.0/stdlib.h:30,
+                 from $TESTDIR/../AES128-C-master/aes.c:35:
+/usr/include/gnu/stubs.h:7:11: fatal error: gnu/stubs-32.h: No such file or directory
+    7 | # include <gnu/stubs-32.h>
+      |           ^~~~~~~~~~~~~~~~
+compilation terminated.
+xmsc_run: *E,TBBLDF: Failed to generate object ./xcelium.d/run.lnx86.22.09.d/xmsc_post/xmsc_obj/aes_0.o
