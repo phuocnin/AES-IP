@@ -85,7 +85,7 @@ class aes_scoreboard extends uvm_scoreboard;
             `uvm_info(get_type_name(), "Test passed", UVM_LOW)
     endfunction: report_phase
     
-        
+      
     
 endclass
 */
