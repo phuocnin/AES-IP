@@ -1,5 +1,5 @@
 
-/*
+
 `uvm_analysis_imp_decl(_frm_Monitor)
 `uvm_analysis_imp_decl(_rst)
 
@@ -10,7 +10,7 @@ output bit[7:0] dataOut[16]);
 import "DPI-C" function void AES128_ECB_decrypt_dpi(input  bit[7:0] dataIn[16],
 input  bit[7:0] key[16],
 output bit[7:0] dataOut[16]);
-
+/*
 
 class aes_scoreboard extends uvm_scoreboard;
     `uvm_component_utils(aes_scoreboard)
