@@ -18,8 +18,8 @@ class aes_single_seq extends aes_base_sequence;
                 req = aes_transaction::type_id::create("req");
                 start_item(req);
               //  $srandom(int'($time)); 
-                req.randomize() with {data_input == 128'h00112233445566778899aabbccddeeff;
-                key == 128'h000102030405060708090a0b0c0d0e0f;};
+                req.randomize() with {data_input == 128'h69c4e0d86a7b0430d8cdb78070b4c55a;
+                key == 128'h13111d7fe3944a17f307a78b4d2b30c5;};
                 finish_item(req);
             end
         endtask
