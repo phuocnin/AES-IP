@@ -50,7 +50,7 @@ class aes_spec_case extends aes_base_sequence;
                 req = aes_transaction::type_id::create("req");
                 start_item(req);
               //  $srandom(int'($time)); 
-                req.randomize() with {data_input = 128'h0; key = 128'h0;};
+                req.randomize() with {data_input == 128'h0; key == 128'h0;};
                 finish_item(req);
         end
     endtask
