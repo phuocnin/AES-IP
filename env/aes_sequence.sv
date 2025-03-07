@@ -19,7 +19,7 @@ class aes_single_seq extends aes_base_sequence;
                 start_item(req);
               //  $srandom(int'($time)); 
                 req.randomize() with {data_input == 128'h00112233445566778899aabbccddeeff;
-                key == 000102030405060708090a0b0c0d0e0f;};
+                key == 128'h000102030405060708090a0b0c0d0e0f;};
                 finish_item(req);
             end
         endtask
