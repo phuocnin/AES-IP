@@ -47,7 +47,7 @@ class aes_spec_case extends aes_base_sequence;
     task body();
         `uvm_info("aes_spec_case", "Starting aes_spec_case", UVM_LOW)
         //plan 5.1 
-         repeat(2) begin
+         repeat(3) begin
                 req = aes_transaction::type_id::create("req");
                 start_item(req);
               //  $srandom(int'($time)); 
