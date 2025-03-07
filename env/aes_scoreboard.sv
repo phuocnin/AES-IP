@@ -64,7 +64,7 @@ class aes_scoreboard extends uvm_scoreboard;
                 ref_ciphertext[(15-i)*8 +: 8] = ciphertext_bytes[i];
             end
             if (ref_ciphertext == trans.data_output) begin
-            `uvm_info(get_type_name(), "AES Encryption match", UVM_MEDIUM)
+            `uvm_info(get_type_name(),  $sformatf("Match: DUT=%h, REF=%h", trans.data_output, ref_ciphertext), UVM_MEDIUM)
             end 
             else begin
             `uvm_error(get_type_name(), $sformatf("Mismatch: DUT=%h, REF=%h", trans.data_output, ref_ciphertext))
