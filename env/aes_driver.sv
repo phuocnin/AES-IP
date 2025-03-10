@@ -32,7 +32,7 @@ class aes_driver extends uvm_driver #(aes_transaction);
                 @(posedge vif.clk);
             end
             seq_item_port.item_done();
-            if(seq_item_port.has_do_available()) begin
+            if(!seq_item_port.has_do_available()) begin
                 `uvm_info(get_type_name(), "Starting new transaction", UVM_LOW);
                 @(posedge vif.clk);
                 @(negedge vif.clk);
