@@ -32,6 +32,10 @@ class aes_driver extends uvm_driver #(aes_transaction);
                 @(posedge vif.clk);
             end
             seq_item_port.item_done();
+            if(seq_item_port.has_do_available()) begin
+                @(posedge vif.clk);
+                @(negedge vif.clk);
+            end
         end
     end
     endtask
