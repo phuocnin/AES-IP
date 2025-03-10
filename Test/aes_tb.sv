@@ -18,7 +18,7 @@ module aes_tb;
 
     initial begin
         uvm_config_db#(virtual aes_if)::set(null, "*", "vif", vif);
-        run_test("aes_test_continuous_enc");
+        run_test("aes_test_singel_enc");
     end
     initial begin
         vif.rst_n <= 1'b0;
