@@ -18,12 +18,14 @@ module aes_tb;
 
     initial begin
         uvm_config_db#(virtual aes_if)::set(null, "*", "vif", vif);
-        run_test("aes_test_single_enc");
+        run_test("aes_test_reset_enc");
     end
     initial begin
         vif.rst_n <= 1'b0;
         vif.clk <= 1'b1;
         #51 vif.rst_n = 1'b1;
+        #50 vif.rst_n = 1'b0;
+        #50 vif.rst_n = 1'b1;
       end
     
       //Generate Clock

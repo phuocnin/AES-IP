@@ -14,4 +14,5 @@ package aes_pkg;
     `include "../Test/encryption/aes_test_single_enc/aes_test_single_enc.sv"
     `include "../Test/encryption/aes_test_continuous_enc/aes_test_continuous_enc.sv"
     `include "../Test/encryption/aes_test_special_case/aes_test_special_case.sv"
+    `include "../Test/reset/aes_test_reset_enc/aes_test_reset_enc.sv"
 endpackage: aes_pkg

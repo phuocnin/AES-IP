@@ -26,12 +26,20 @@ class aes_driver extends uvm_driver #(aes_transaction);
             seq_item_port.get_next_item(aes_trans);
             `uvm_info(get_type_name(), $sformatf("Received transaction: in[%h], key[%h]",aes_trans.data_input, aes_trans.key), UVM_LOW);
             if(vif.rst_n == 1) begin
-                repeat(11) begin
+                repeat(10) begin
                 vif.data_input <= aes_trans.data_input;
                 vif.key <= aes_trans.key;
                 @(posedge vif.clk);
             end
-            seq_item_port.item_done();
+            
+            if(!seq_item_port.has_do_available()) begin
+                @(posedge vif.clk);
+                @(posedge vif.clk);
+                seq_item_port.item_done();
+            end
+            else begin
+                seq_item_port.item_done();
+            end
         end
     end
     endtask
@@ -42,7 +50,6 @@ class aes_driver extends uvm_driver #(aes_transaction);
             @(negedge vif.rst_n) 
             vif.data_input <= 128'h0;
             vif.key <= 128'h0;
-            //vif.finished <= 0;
         end
     endtask
 endclass
