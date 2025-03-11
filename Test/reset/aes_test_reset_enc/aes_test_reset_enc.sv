@@ -15,8 +15,8 @@ class aes_test_reset_enc extends aes_base_test;
         super.run_phase(phase);
         phase.raise_objection(this);
         fork
-            aes_rst_seq.start(aes_env0.sequencer);
-            //aes_seq.start(aes_env0.sequencer);
+            //saes_rst_seq.start(aes_env0.sequencer);
+            aes_seq.start(aes_env0.sequencer);
         join
         phase.drop_objection(this);
     endtask
