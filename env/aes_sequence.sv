@@ -70,7 +70,7 @@ class aes_reset_seq extends aes_base_sequence;
 
     task body();
         // Đợi một thời gian ngẫu nhiên trước khi kích reset
-        #(10 + $urandom_range(5, 15));  
+        #(10 + $urandom_range(5, 9));  
         `uvm_info("aes_reset_seq", "Triggering Reset!", UVM_LOW)
 
         vif.rst_n = 0;
