@@ -5,6 +5,7 @@ class aes_transaction extends uvm_sequence_item;
     rand bit [127:0] data_input;
     rand bit [127:0] key;
     logic [127:0] data_output;
+    rand int unsigned reset_wait_time;
 
     function new(string name = "aes_transaction");
       super.new(name);
