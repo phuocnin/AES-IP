@@ -2,7 +2,7 @@
 #define _AES_H_
 
 #include <stdint.h>
-#include <svdpi.h>
+//#include <svdpi.h>
 
 // CBC enables AES128 encryption in CBC-mode of operation and handles 0-padding.
 // ECB enables the basic ECB 16-byte block algorithm. Both can be enabled simultaneously.
