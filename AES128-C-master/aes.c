@@ -36,7 +36,7 @@ static state_t *state;
 
 // The array that stores the round keys.
 static uint8_t RoundKey[176];
-static uint8_t InvRoundKey[176];  // Mảng chứa khóa giải mã
+static uint8_t InvRoundKey[176]; // Mảng chứa khóa giải mã
 // The Key input to the AES Program
 static const uint8_t *Key;
 
@@ -120,7 +120,7 @@ static uint8_t getSBoxInvert(uint8_t num)
 }
 
 //------------------------------------------------------------------------------------------------------------------------//
-//         KeyExpansion 
+//         KeyExpansion
 //------------------------------------------------------------------------------------------------------------------------//
 // This function produces Nb(Nr+1) round keys. The round keys are used in each round to decrypt the states.
 static void KeyExpansion(void)
@@ -131,19 +131,18 @@ static void KeyExpansion(void)
   // The first round key is the key itself.
   for (i = 0; i < Nk; ++i)
   {
-    RoundKey[(i * 4) + 0] = Key[(i * 4) + 0];  
-    RoundKey[(i * 4) + 1] = Key[(i * 4) + 1]; //1
-    RoundKey[(i * 4) + 2] = Key[(i * 4) + 2];//2
-    RoundKey[(i * 4) + 3] = Key[(i * 4) + 3];//33
+    RoundKey[(i * 4) + 0] = Key[(i * 4) + 0];
+    RoundKey[(i * 4) + 1] = Key[(i * 4) + 1]; // 1
+    RoundKey[(i * 4) + 2] = Key[(i * 4) + 2]; // 2
+    RoundKey[(i * 4) + 3] = Key[(i * 4) + 3]; // 33
   }
 
   // All other round keys are found from the previous round keys.
-  for (; (i < (Nb * (Nr + 1))); ++i) //i = 4, được khởi tạo từ kết thúc for trước 
+  for (; (i < (Nb * (Nr + 1))); ++i) // i = 4, được khởi tạo từ kết thúc for trước
   {
-    for (j = 0; j < 4; ++j) // lấy 4 byte của khóa trước đó đưa vào tampa 
+    for (j = 0; j < 4; ++j) // lấy 4 byte của khóa trước đó đưa vào tampa
     {
       tempa[j] = RoundKey[(i - 1) * 4 + j];
-      
     }
     if (i % Nk == 0)
     {
@@ -172,7 +171,7 @@ static void KeyExpansion(void)
 
       tempa[0] = tempa[0] ^ Rcon[i / Nk];
     }
-    
+
     else if (Nk > 6 && i % Nk == 4)
     {
       // Function Subword()
@@ -190,75 +189,69 @@ static void KeyExpansion(void)
   }
 }
 
-
-
-
-
 //---------------------------------------------------------------------------------------------------------------------------//
-//         InverKeyExpansion 
+//         InverKeyExpansion
 //------------------------------------------------------------------------------------------------------------------------//
 //
 
 static void InvKeyExpansion(void)
 {
-  uint32_t i, k ;
+  uint32_t i, k;
   uint32_t m, n;
   uint8_t temp[4]; // Used for the column/row operations
 
   // The first round key is the key itself.
-  for (i = 0; i <4 ; ++i)
+  for (i = 0; i < 4; ++i)
   {
-    InvRoundKey[(i * 4) + 0] = Key[(i * 4) + 0];  
-    InvRoundKey[(i * 4) + 1] = Key[(i * 4) + 1]; //1
-    InvRoundKey[(i * 4) + 2] = Key[(i * 4) + 2];//2
-    InvRoundKey[(i * 4) + 3] = Key[(i * 4) + 3];//33
+    InvRoundKey[(i * 4) + 0] = Key[(i * 4) + 0];
+    InvRoundKey[(i * 4) + 1] = Key[(i * 4) + 1]; // 1
+    InvRoundKey[(i * 4) + 2] = Key[(i * 4) + 2]; // 2
+    InvRoundKey[(i * 4) + 3] = Key[(i * 4) + 3]; // 33
   }
-   // tai thoi diem nay thi i = 39 
-  //RoundKey[i * 4 + 0] = RoundKey[(i - Nk) * 4 + 0] ^ tempa[0];
-  for (; i < 44 ; ++i)
-      //if (i%4 !=0)
+  // tai thoi diem nay thi i = 39
+  // RoundKey[i * 4 + 0] = RoundKey[(i - Nk) * 4 + 0] ^ tempa[0];
+  for (; i < 44; ++i)
+  // if (i%4 !=0)
   {
-    if (i%4 !=0)
+    if (i % 4 != 0)
     {
-    InvRoundKey[(i * 4) + 0] = InvRoundKey[(i - 5) * 4 + 0] ^ InvRoundKey[(i - 4) * 4 + 0];
-    InvRoundKey[(i * 4) + 1] = InvRoundKey[(i - 5) * 4 + 1] ^ InvRoundKey[(i - 4) * 4 + 1];
-    InvRoundKey[(i * 4) + 2] = InvRoundKey[(i - 5) * 4 + 2] ^ InvRoundKey[(i - 4) * 4 + 2];
-    InvRoundKey[(i * 4) + 3] = InvRoundKey[(i - 5) * 4 + 3] ^ InvRoundKey[(i - 4) * 4 + 3];
+      InvRoundKey[(i * 4) + 0] = InvRoundKey[(i - 5) * 4 + 0] ^ InvRoundKey[(i - 4) * 4 + 0];
+      InvRoundKey[(i * 4) + 1] = InvRoundKey[(i - 5) * 4 + 1] ^ InvRoundKey[(i - 4) * 4 + 1];
+      InvRoundKey[(i * 4) + 2] = InvRoundKey[(i - 5) * 4 + 2] ^ InvRoundKey[(i - 4) * 4 + 2];
+      InvRoundKey[(i * 4) + 3] = InvRoundKey[(i - 5) * 4 + 3] ^ InvRoundKey[(i - 4) * 4 + 3];
     }
     if (i == 7 || i == 11 || i == 15 || i == 19 || i == 23 || i == 27 || i == 31 || i == 35 || i == 39 || i == 43)
     {
-      for (m = 4 ; m < 43   ; m +=4)
-       {
-         for (n = 0; n<4 ; ++n)
-          {
-            temp[n] = InvRoundKey[(m + 3) * 4 + n ];
-          }
-      // Function RotWord()
-          {
-            k = temp[0];
-            temp[0] = temp[1];
-            temp[1] = temp[2];
-            temp[2] = temp[3];
-            temp[3] = k;
-           }
-
-
-      // Function Subword()
-          {
-            temp[0] = getSBoxValue(temp[0]);
-            temp[1] = getSBoxValue(temp[1]);
-            temp[2] = getSBoxValue(temp[2]);
-            temp[3] = getSBoxValue(temp[3]);
-          }
-
-           temp[0] = temp[0] ^ Rcon[(44 - m) / Nk];
-   
-
-        InvRoundKey[4*m + 0] = InvRoundKey[(m - 4) * 4 + 0] ^ temp[0];
-        InvRoundKey[4*m + 1] = InvRoundKey[(m - 4) * 4 + 1] ^ temp[1];
-        InvRoundKey[4*m + 2] = InvRoundKey[(m - 4) * 4 + 2] ^ temp[2];
-        InvRoundKey[4*m + 3] = InvRoundKey[(m - 4) * 4 + 3] ^ temp[3];
+      for (m = 4; m < 43; m += 4)
+      {
+        for (n = 0; n < 4; ++n)
+        {
+          temp[n] = InvRoundKey[(m + 3) * 4 + n];
         }
+        // Function RotWord()
+        {
+          k = temp[0];
+          temp[0] = temp[1];
+          temp[1] = temp[2];
+          temp[2] = temp[3];
+          temp[3] = k;
+        }
+
+        // Function Subword()
+        {
+          temp[0] = getSBoxValue(temp[0]);
+          temp[1] = getSBoxValue(temp[1]);
+          temp[2] = getSBoxValue(temp[2]);
+          temp[3] = getSBoxValue(temp[3]);
+        }
+
+        temp[0] = temp[0] ^ Rcon[(44 - m) / Nk];
+
+        InvRoundKey[4 * m + 0] = InvRoundKey[(m - 4) * 4 + 0] ^ temp[0];
+        InvRoundKey[4 * m + 1] = InvRoundKey[(m - 4) * 4 + 1] ^ temp[1];
+        InvRoundKey[4 * m + 2] = InvRoundKey[(m - 4) * 4 + 2] ^ temp[2];
+        InvRoundKey[4 * m + 3] = InvRoundKey[(m - 4) * 4 + 3] ^ temp[3];
+      }
     }
   }
 }
@@ -513,7 +506,7 @@ static void BlockCopy(uint8_t *output, uint8_t *input)
 /* Public functions:                                                         */
 /*****************************************************************************/
 
- #if defined(ECB) && ECB
+#if defined(ECB) && ECB
 void AES128_ECB_encrypt_dpi(svBitVec32 *input, const svBitVec32 *key, svBitVec32 *output)
 {
   uint8_t *encryptInput;
@@ -530,6 +523,8 @@ void AES128_ECB_encrypt_dpi(svBitVec32 *input, const svBitVec32 *key, svBitVec32
     encryptInput[i] = (uint8_t)input[i];
     encryptKey[i] = (uint8_t)key[i];
   }
+  printf("encryptInput: %s\n", encryptInput);
+  printf("encryptKey: %s\n", encryptKey);
 
   AES128_ECB_encrypt(encryptInput, encryptKey, encryptOutput);
 
@@ -606,7 +601,7 @@ static void XorWithIv(uint8_t *buf)
 void AES128_CBC_encrypt_buffer(uint8_t *output, uint8_t *input, uint32_t length, const uint8_t *key, const uint8_t *iv)
 {
   uintptr_t i;
-  uint8_t remainders = length % KEYLEN; // Remaining bytes in the last non-full block 
+  uint8_t remainders = length % KEYLEN; // Remaining bytes in the last non-full block
 
   BlockCopy(output, input);
   state = (state_t *)output;
@@ -637,7 +632,7 @@ void AES128_CBC_encrypt_buffer(uint8_t *output, uint8_t *input, uint32_t length,
   if (remainders)
   {
     BlockCopy(output, input);
-    memset(output + remainders, 0, KEYLEN - remainders); //add 0-padding 
+    memset(output + remainders, 0, KEYLEN - remainders); // add 0-padding
     state = (state_t *)output;
     Cipher();
   }
@@ -646,7 +641,7 @@ void AES128_CBC_encrypt_buffer(uint8_t *output, uint8_t *input, uint32_t length,
 void AES128_CBC_decrypt_buffer(uint8_t *output, uint8_t *input, uint32_t length, const uint8_t *key, const uint8_t *iv)
 {
   uintptr_t i;
-  uint8_t remainders = length % KEYLEN; // Remaining bytes in the last non-full block 
+  uint8_t remainders = length % KEYLEN; // Remaining bytes in the last non-full block
 
   BlockCopy(output, input);
   state = (state_t *)output;
@@ -678,7 +673,7 @@ void AES128_CBC_decrypt_buffer(uint8_t *output, uint8_t *input, uint32_t length,
   if (remainders)
   {
     BlockCopy(output, input);
-    memset(output + remainders, 0, KEYLEN - remainders);  //add 0-padding 
+    memset(output + remainders, 0, KEYLEN - remainders); // add 0-padding
     state = (state_t *)output;
     InvCipher();
   }
