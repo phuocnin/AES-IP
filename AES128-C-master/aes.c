@@ -1,33 +1,4 @@
-/*
 
-This is an implementation of the AES128 algorithm, specifically ECB and CBC mode.
-
-The implementation is verified against the test vectors in:
-  National Institute of Standards and Technology Special Publication 800-38A 2001 ED
-
-ECB-AES128
-----------
-
-  plain-text:
-    6bc1bee22e409f96e93d7e117393172a
-    ae2d8a571e03ac9c9eb76fac45af8e51
-    30c81c46a35ce411e5fbc1191a0a52ef
-    f69f2445df4f9b17ad2b417be66c3710
-
-  key:
-    2b7e151628aed2a6abf7158809cf4f3c
-
-  resulting cipher
-    3ad77bb40d7a3660a89ecaf32466ef97
-    f5d3d58503b9699de785895a96fdbaaf
-    43b1cd7f598ece23881b00e3ed030688
-    7b0c785e27e8ad3f8223207104725dd4
-
-
-NOTE:   String length must be evenly divisible by 16byte (str_len % 16 == 0)
-        You should pad the end of the string with zeros if this is not the case.
-
-*/
 
 /*****************************************************************************/
 /* Includes:                                                                 */
@@ -65,7 +36,7 @@ static state_t *state;
 
 // The array that stores the round keys.
 static uint8_t RoundKey[176];
-//static uint8_t DecryptionKey[176];  // Mảng chứa khóa giải mã
+static uint8_t InvRoundKey[176];  // Mảng chứa khóa giải mã
 // The Key input to the AES Program
 static const uint8_t *Key;
 
@@ -219,18 +190,10 @@ static void KeyExpansion(void)
   }
 }
 
-// void ReverseKey()
-// {
-//     int round;
-//     for (round = 0; round <= Nr; round++) 
-//     {
-//         // Copy khóa của từng vòng nhưng theo thứ tự ngược lại
-//         memcpy(&DecryptionKey[round * 16], &RoundKey[(Nr - round) * 16], 16);
-//     }
-// }
 
 
-/*
+
+
 //---------------------------------------------------------------------------------------------------------------------------//
 //         InverKeyExpansion 
 //------------------------------------------------------------------------------------------------------------------------//
@@ -238,87 +201,72 @@ static void KeyExpansion(void)
 
 static void InvKeyExpansion(void)
 {
-  uint32_t i, j, k;
-  uint8_t tempa[4]; // Used for the column/row operations
+  uint32_t i, k ;
+  uint32_t m, n;
+  uint8_t temp[4]; // Used for the column/row operations
 
   // The first round key is the key itself.
-  for (i = 43; i > 39; --i)
+  for (i = 0; i <4 ; ++i)
   {
-    RoundKey[(i * 4) + 3] = Key[172 - (i * 4) + 0]; //W[0]
-    RoundKey[(i * 4) + 2] = Key[172 - (i * 4) + 1]; //1
-    RoundKey[(i * 4) + 1] = Key[172 - (i * 4) + 2];//2
-    RoundKey[(i * 4) + 0] = Key[172 - (i * 4) + 3];//33
-   }
+    InvRoundKey[(i * 4) + 0] = Key[(i * 4) + 0];  
+    InvRoundKey[(i * 4) + 1] = Key[(i * 4) + 1]; //1
+    InvRoundKey[(i * 4) + 2] = Key[(i * 4) + 2];//2
+    InvRoundKey[(i * 4) + 3] = Key[(i * 4) + 3];//33
+  }
    // tai thoi diem nay thi i = 39 
   //RoundKey[i * 4 + 0] = RoundKey[(i - Nk) * 4 + 0] ^ tempa[0];
-  for (; i > 0; --i)
+  for (; i < 44 ; ++i)
+      //if (i%4 !=0)
   {
-  
-  
-    // W5 = W0 XOR W1 
-  RoundKey[(i * 4) + 3] = RoundKey[(i + 4) * 4 + 7] ^ RoundKey[(i + 4) * 4 + 3];
-  RoundKey[(i * 4) + 2] = RoundKey[(i + 4) * 4 + 6] ^ RoundKey[(i + 4) * 4 + 2];
-  RoundKey[(i * 4) + 1] = RoundKey[(i + 4) * 4 + 5] ^ RoundKey[(i + 4) * 4 + 1];
-  RoundKey[(i * 4) + 0] = RoundKey[(i + 4) * 4 + 4] ^ RoundKey[(i + 4) * 4 + 0];
-  
-  if (i % 4 == 0)
-  {
-  {
-    for (j = 3; j >=0 ; --j)
+    if (i%4 !=0)
     {
-      tempa[j] = RoundKey[(i) * 4 + j ];
+    InvRoundKey[(i * 4) + 0] = InvRoundKey[(i - 5) * 4 + 0] ^ InvRoundKey[(i - 4) * 4 + 0];
+    InvRoundKey[(i * 4) + 1] = InvRoundKey[(i - 5) * 4 + 1] ^ InvRoundKey[(i - 4) * 4 + 1];
+    InvRoundKey[(i * 4) + 2] = InvRoundKey[(i - 5) * 4 + 2] ^ InvRoundKey[(i - 4) * 4 + 2];
+    InvRoundKey[(i * 4) + 3] = InvRoundKey[(i - 5) * 4 + 3] ^ InvRoundKey[(i - 4) * 4 + 3];
     }
-  
-      // This function rotates the 4 bytes in a word to the left once.
-      // [a0,a1,a2,a3] becomes [a1,a2,a3,a0]
-
+    if (i == 7 || i == 11 || i == 15 || i == 19 || i == 23 || i == 27 || i == 31 || i == 35 || i == 39 || i == 43)
+    {
+      for (m = 4 ; m < 43   ; m +=4)
+       {
+         for (n = 0; n<4 ; ++n)
+          {
+            temp[n] = InvRoundKey[(m + 3) * 4 + n ];
+          }
       // Function RotWord()
-      {
-        k = tempa[3];
-        tempa[3] = tempa[2];
-        tempa[2] = tempa[1];
-        tempa[1] = tempa[0];
-        tempa[0] = k;
-      }
+          {
+            k = temp[0];
+            temp[0] = temp[1];
+            temp[1] = temp[2];
+            temp[2] = temp[3];
+            temp[3] = k;
+           }
 
-      // SubWord() is a function that takes a four-byte input word and
-      // applies the S-box to each of the four bytes to produce an output word.
 
       // Function Subword()
-      {
-        tempa[3] = getSBoxValue(tempa[3]);
-        tempa[2] = getSBoxValue(tempa[2]);
-        tempa[1] = getSBoxValue(tempa[1]);
-        tempa[0] = getSBoxValue(tempa[0]);
-      }
+          {
+            temp[0] = getSBoxValue(temp[0]);
+            temp[1] = getSBoxValue(temp[1]);
+            temp[2] = getSBoxValue(temp[2]);
+            temp[3] = getSBoxValue(temp[3]);
+          }
 
-      tempa[3] = tempa[3] ^ Rcon[(i +4) / Nk];
-    }
-    else if (Nk > 6 && i % Nk == 4)
-    {
-      // Function Subword()
-      {
-        tempa[0] = getSBoxValue(tempa[0]);
-        tempa[1] = getSBoxValue(tempa[1]);
-        tempa[2] = getSBoxValue(tempa[2]);
-        tempa[3] = getSBoxValue(tempa[3]);
-      }
-    }
+           temp[0] = temp[0] ^ Rcon[(44 - m) / Nk];
+   
 
-    RoundKey[(i + 4) * 4 - 1] = RoundKey[(i + 7) * 4 + 3] ^ tempa[3];
-    RoundKey[(i + 4) * 4 - 2] = RoundKey[(i + 7) * 4 + 2] ^ tempa[2];
-    RoundKey[(i + 4) * 4 - 3] = RoundKey[(i + 7) * 4 + 1] ^ tempa[1];
-    RoundKey[(i + 4) * 4 - 4] = RoundKey[(i + 7) * 4 + 0] ^ tempa[0];
+        InvRoundKey[4*m + 0] = InvRoundKey[(m - 4) * 4 + 0] ^ temp[0];
+        InvRoundKey[4*m + 1] = InvRoundKey[(m - 4) * 4 + 1] ^ temp[1];
+        InvRoundKey[4*m + 2] = InvRoundKey[(m - 4) * 4 + 2] ^ temp[2];
+        InvRoundKey[4*m + 3] = InvRoundKey[(m - 4) * 4 + 3] ^ temp[3];
+        }
+    }
   }
 }
-}
-*/
-
-
 
 //------------------------------------------------------------------------------------------------------------------------//
 // This function adds the round key to state.
 // The round key is added to the state by an XOR function.
+/// MAX HOA
 static void AddRoundKey(uint8_t round)
 {
   uint8_t i, j;
@@ -330,7 +278,18 @@ static void AddRoundKey(uint8_t round)
     }
   }
 }
-
+// GIA MA
+static void InvAddRoundKey(uint8_t iround)
+{
+  uint8_t i, j;
+  for (i = 0; i < 4; ++i)
+  {
+    for (j = 0; j < 4; ++j)
+    {
+      (*state)[i][j] ^= InvRoundKey[iround * Nb * 4 + i * Nb + j];
+    }
+  }
+}
 // The SubBytes Function Substitutes the values in the
 // state matrix with values in an S-box.
 static void SubBytes(void)
@@ -518,19 +477,19 @@ static void Cipher(void)
 
 static void InvCipher(void)
 {
-  uint8_t round = 0;
+  uint8_t iround = 0;
 
   // Add the First round key to the state before starting the rounds.
-  AddRoundKey(Nr);
+  InvAddRoundKey(0);
 
   // There will be Nr rounds.
   // The first Nr-1 rounds are identical.
   // These Nr-1 rounds are executed in the loop below.
-  for (round = Nr - 1; round > 0; round--)
+  for (iround = 1; iround < Nr; ++iround)
   {
     InvShiftRows();
     InvSubBytes();
-    AddRoundKey(round);
+    InvAddRoundKey(iround);
     InvMixColumns();
   }
 
@@ -538,7 +497,7 @@ static void InvCipher(void)
   // The MixColumns function is not here in the last round.
   InvShiftRows();
   InvSubBytes();
-  AddRoundKey(0);
+  InvAddRoundKey(Nr);
 }
 
 static void BlockCopy(uint8_t *output, uint8_t *input)
@@ -627,16 +586,14 @@ void AES128_ECB_decrypt(uint8_t *input, const uint8_t *key, uint8_t *output)
 
   // The KeyExpansion routine must be called before encryption.
   Key = key;
-  KeyExpansion();
-  //ReverseKey();
+  InvKeyExpansion();
 
- // printf("acb \n");
   InvCipher();
 }
 
-#endif // #if defined(ECB) && ECB
+//#endif // #if defined(ECB) && ECB
 
-#if defined(CBC) && CBC
+//#if defined(CBC) && CBC
 static void XorWithIv(uint8_t *buf)
 {
   uint8_t i;
