@@ -132,9 +132,10 @@ class aes_scoreboard extends uvm_scoreboard;
         `uvm_info(get_type_name(), $sformatf("DUT Output Data : %h", trans.data_output), UVM_LOW);
 
         foreach (plaintext_bytes[i]) begin
-            `uvm_info(get_type_name(), $sformatf("Processing byte %0d", plaintext_bytes[i]), UVM_LOW);
+            
             plaintext_bytes[i] = trans.data_input[(15-i)*8 +: 8];
             key_bytes[i]       = trans.key[(15-i)*8 +: 8];
+            `uvm_info(get_type_name(), $sformatf("Processing byte %0d", key_bytes[i]), UVM_LOW);
         end
 
         `ifdef CIPHER
