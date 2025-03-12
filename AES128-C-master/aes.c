@@ -513,7 +513,7 @@ static void BlockCopy(uint8_t *output, uint8_t *input)
 /* Public functions:                                                         */
 /*****************************************************************************/
 
-#if defined(ECB) && ECB
+ #if defined(ECB) && ECB
 void AES128_ECB_encrypt_dpi(svBitVec32 *input, const svBitVec32 *key, svBitVec32 *output)
 {
   uint8_t *encryptInput;
@@ -591,9 +591,9 @@ void AES128_ECB_decrypt(uint8_t *input, const uint8_t *key, uint8_t *output)
   InvCipher();
 }
 
-//#endif // #if defined(ECB) && ECB
+#endif // #if defined(ECB) && ECB
 
-//#if defined(CBC) && CBC
+#if defined(CBC) && CBC
 static void XorWithIv(uint8_t *buf)
 {
   uint8_t i;
