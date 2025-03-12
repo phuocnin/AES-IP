@@ -3,7 +3,6 @@ class aes_driver extends uvm_driver #(aes_transaction);
     `uvm_component_utils(aes_driver)
     virtual aes_if vif;
     aes_transaction aes_trans;
-    int unsigned delay;
     function new(string name, uvm_component parent);
         super.new(name, parent);
     endfunction
@@ -26,7 +25,6 @@ class aes_driver extends uvm_driver #(aes_transaction);
         forever begin
             seq_item_port.get_next_item(aes_trans);
             `uvm_info(get_type_name(), $sformatf("Received transaction: in[%h], key[%h]",aes_trans.data_input, aes_trans.key), UVM_LOW);
-            this.delay = aes_trans.delay;
             if(vif.rst_n == 1) begin
                 repeat(10 ) begin
                     vif.data_input <= aes_trans.data_input;
