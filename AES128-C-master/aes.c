@@ -603,85 +603,85 @@ static void XorWithIv(uint8_t *buf)
   }
 }
 
-void AES128_CBC_encrypt_buffer(uint8_t *output, uint8_t *input, uint32_t length, const uint8_t *key, const uint8_t *iv)
-{
-  uintptr_t i;
-  uint8_t remainders = length % KEYLEN; // Remaining bytes in the last non-full block 
+// void AES128_CBC_encrypt_buffer(uint8_t *output, uint8_t *input, uint32_t length, const uint8_t *key, const uint8_t *iv)
+// {
+//   uintptr_t i;
+//   uint8_t remainders = length % KEYLEN; // Remaining bytes in the last non-full block 
 
-  BlockCopy(output, input);
-  state = (state_t *)output;
+//   BlockCopy(output, input);
+//   state = (state_t *)output;
 
-  // Skip the key expansion if key is passed as 0
-  if (0 != key)
-  {
-    Key = key;
-    KeyExpansion();
-  }
+//   // Skip the key expansion if key is passed as 0
+//   if (0 != key)
+//   {
+//     Key = key;
+//     KeyExpansion();
+//   }
 
-  if (iv != 0)
-  {
-    Iv = (uint8_t *)iv;
-  }
+//   if (iv != 0)
+//   {
+//     Iv = (uint8_t *)iv;
+//   }
 
-  for (i = 0; i < length; i += KEYLEN)
-  {
-    XorWithIv(input);
-    BlockCopy(output, input);
-    state = (state_t *)output;
-    Cipher();
-    Iv = output;
-    input += KEYLEN;
-    output += KEYLEN;
-  }
+//   for (i = 0; i < length; i += KEYLEN)
+//   {
+//     XorWithIv(input);
+//     BlockCopy(output, input);
+//     state = (state_t *)output;
+//     Cipher();
+//     Iv = output;
+//     input += KEYLEN;
+//     output += KEYLEN;
+//   }
 
-  if (remainders)
-  {
-    BlockCopy(output, input);
-    memset(output + remainders, 0, KEYLEN - remainders); //add 0-padding 
-    state = (state_t *)output;
-    Cipher();
-  }
-}
+//   if (remainders)
+//   {
+//     BlockCopy(output, input);
+//     memset(output + remainders, 0, KEYLEN - remainders); //add 0-padding 
+//     state = (state_t *)output;
+//     Cipher();
+//   }
+// }
 
-void AES128_CBC_decrypt_buffer(uint8_t *output, uint8_t *input, uint32_t length, const uint8_t *key, const uint8_t *iv)
-{
-  uintptr_t i;
-  uint8_t remainders = length % KEYLEN; // Remaining bytes in the last non-full block 
+// void AES128_CBC_decrypt_buffer(uint8_t *output, uint8_t *input, uint32_t length, const uint8_t *key, const uint8_t *iv)
+// {
+//   uintptr_t i;
+//   uint8_t remainders = length % KEYLEN; // Remaining bytes in the last non-full block 
 
-  BlockCopy(output, input);
-  state = (state_t *)output;
+//   BlockCopy(output, input);
+//   state = (state_t *)output;
 
-  // Skip the key expansion if key is passed as 0
-  if (0 != key)
-  {
-    Key = key;
-    KeyExpansion();
-  }
+//   // Skip the key expansion if key is passed as 0
+//   if (0 != key)
+//   {
+//     Key = key;
+//     KeyExpansion();
+//   }
 
-  // If iv is passed as 0, we continue to encrypt without re-setting the Iv
-  if (iv != 0)
-  {
-    Iv = (uint8_t *)iv;
-  }
+//   // If iv is passed as 0, we continue to encrypt without re-setting the Iv
+//   if (iv != 0)
+//   {
+//     Iv = (uint8_t *)iv;
+//   }
 
-  for (i = 0; i < length; i += KEYLEN)
-  {
-    BlockCopy(output, input);
-    state = (state_t *)output;
-    InvCipher();
-    XorWithIv(output);
-    Iv = input;
-    input += KEYLEN;
-    output += KEYLEN;
-  }
+//   for (i = 0; i < length; i += KEYLEN)
+//   {
+//     BlockCopy(output, input);
+//     state = (state_t *)output;
+//     InvCipher();
+//     XorWithIv(output);
+//     Iv = input;
+//     input += KEYLEN;
+//     output += KEYLEN;
+//   }
 
-  if (remainders)
-  {
-    BlockCopy(output, input);
-    memset(output + remainders, 0, KEYLEN - remainders);  //add 0-padding 
-    state = (state_t *)output;
-    InvCipher();
-  }
-}
+//   if (remainders)
+//   {
+//     BlockCopy(output, input);
+//     memset(output + remainders, 0, KEYLEN - remainders);  //add 0-padding 
+//     state = (state_t *)output;
+//     InvCipher();
+//   }
+// }
 
-#endif // #if defined(CBC) && CBC
+// #endif // #if defined(CBC) && CBC
