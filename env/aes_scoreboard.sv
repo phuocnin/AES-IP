@@ -94,7 +94,7 @@ class aes_scoreboard extends uvm_scoreboard;
     
     uvm_analysis_imp_frm_Monitor#(aes_transaction, aes_scoreboard) transaction_analysis_port;
     uvm_analysis_imp_rst#(logic, aes_scoreboard) rst_port;
-
+    string key_str;
     logic rst_flag;
     int         error_cnt;
     bit [127:0] ref_ciphertext;
@@ -143,7 +143,7 @@ class aes_scoreboard extends uvm_scoreboard;
             `uvm_info(get_type_name(), "Performing Decryption...", UVM_LOW);
             AES128_ECB_decrypt_dpi(plaintext_bytes, key_bytes, ciphertext_bytes);
         `endif
-            string key_str;
+          
             key_str = "";  // Khởi tạo chuỗi rỗng
             foreach (key_bytes[i]) begin
                 key_str = {key_str, $sformatf("%02X", key_bytes[i])}; // Ghép từng byte vào chuỗi hex
