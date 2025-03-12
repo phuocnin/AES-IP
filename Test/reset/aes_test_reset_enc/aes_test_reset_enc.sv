@@ -1,5 +1,6 @@
 class aes_test_reset_enc extends aes_base_test;
     `uvm_component_utils(aes_test_reset_enc)
+    virtual dut_if vif; 
     aes_multi_seq aes_seq;
     //aes_reset_seq aes_rst_seq;
     function new(string name = "aes_test_reset_enc", uvm_component parent = null);
@@ -15,9 +16,14 @@ class aes_test_reset_enc extends aes_base_test;
         super.run_phase(phase);
         phase.raise_objection(this);
         fork
-            //saes_rst_seq.start(aes_env0.sequencer);
             aes_seq.start(aes_env0.sequencer);
-        join
+            begin
+               #(20);
+               vif.rst_n <= 0;'
+                #(20);
+                vif.rst_n <= 1;
+            end
+        join_none
         phase.drop_objection(this);
     endtask
 endclass : aes_test_reset_enc
