@@ -65,7 +65,7 @@ static state_t *state;
 
 // The array that stores the round keys.
 static uint8_t RoundKey[176];
-static uint8_t DecryptionKey[176];  // Mảng chứa khóa giải mã
+//static uint8_t DecryptionKey[176];  // Mảng chứa khóa giải mã
 // The Key input to the AES Program
 static const uint8_t *Key;
 
@@ -219,15 +219,15 @@ static void KeyExpansion(void)
   }
 }
 
-void ReverseKey()
-{
-    int round;
-    for (round = 0; round <= Nr; round++) 
-    {
-        // Copy khóa của từng vòng nhưng theo thứ tự ngược lại
-        memcpy(&DecryptionKey[round * 16], &RoundKey[(Nr - round) * 16], 16);
-    }
-}
+// void ReverseKey()
+// {
+//     int round;
+//     for (round = 0; round <= Nr; round++) 
+//     {
+//         // Copy khóa của từng vòng nhưng theo thứ tự ngược lại
+//         memcpy(&DecryptionKey[round * 16], &RoundKey[(Nr - round) * 16], 16);
+//     }
+// }
 
 
 /*
@@ -628,7 +628,7 @@ void AES128_ECB_decrypt(uint8_t *input, const uint8_t *key, uint8_t *output)
   // The KeyExpansion routine must be called before encryption.
   Key = key;
   KeyExpansion();
-  ReverseKey();
+  //ReverseKey();
 
  // printf("acb \n");
   InvCipher();
