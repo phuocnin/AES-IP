@@ -3,6 +3,7 @@ class aes_driver extends uvm_driver #(aes_transaction);
     `uvm_component_utils(aes_driver)
     virtual aes_if vif;
     aes_transaction aes_trans;
+    int unsigned delay;
     function new(string name, uvm_component parent);
         super.new(name, parent);
     endfunction
@@ -16,7 +17,7 @@ class aes_driver extends uvm_driver #(aes_transaction);
     virtual task run_phase(uvm_phase phase);
         fork
             drive_transaction(aes_trans);
-            reset_signal();
+            //reset_signal();
         join_none
     endtask
 
@@ -25,18 +26,19 @@ class aes_driver extends uvm_driver #(aes_transaction);
         forever begin
             seq_item_port.get_next_item(aes_trans);
             `uvm_info(get_type_name(), $sformatf("Received transaction: in[%h], key[%h]",aes_trans.data_input, aes_trans.key), UVM_LOW);
+            this.delay = aes_trans.delay;
             if(vif.rst_n == 1) begin
-                repeat(10) begin
-                vif.data_input <= aes_trans.data_input;
-                vif.key <= aes_trans.key;
-                @(posedge vif.clk);
-            end
-            
-            if(!seq_item_port.has_do_available()) begin
-                @(posedge vif.clk);
-                @(posedge vif.clk);
-                seq_item_port.item_done();
-            end
+                repeat(10 ) begin
+                    vif.data_input <= aes_trans.data_input;
+                    vif.key <= aes_trans.key;
+                    @(posedge vif.clk);
+                end
+     
+                if(!seq_item_port.has_do_available()) begin
+                    @(posedge vif.clk);
+                    @(posedge vif.clk);
+                    seq_item_port.item_done();
+                end
             else begin
                 seq_item_port.item_done();
             end
@@ -44,12 +46,9 @@ class aes_driver extends uvm_driver #(aes_transaction);
     end
     endtask
     
-    virtual task reset_signal();
-        forever begin
-            // @(posedge vif.clk);
-            @(negedge vif.rst_n) 
-            vif.data_input <= 128'h0;
-            vif.key <= 128'h0;
-        end
-    endtask
+    // virtual task reset_signal();
+    //     forever begin
+
+    //     end
+    // endtask
 endclass

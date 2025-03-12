@@ -62,22 +62,3 @@ class aes_spec_case extends aes_base_sequence;
     endtask
 endclass : aes_spec_case
 
-class aes_reset_seq extends aes_base_sequence;
-    `uvm_object_utils(aes_reset_seq)
-    virtual aes_if vif;
-
-    function new(string name = "aes_reset_seq");
-        super.new(name);
-    endfunction
-
-    task body();
-        `uvm_info("aes_reset_seq", "Starting aes_reset_seq", UVM_LOW)
-        // Đợi một thời gian ngẫu nhiên trước khi kích reset
-        #(10 + $urandom_range(1, 8));  
-        `uvm_info("aes_reset_seq", "Triggering Reset!", UVM_LOW)
-        vif.rst_n = 0;
-        repeat(5) @(posedge vif.clk);
-        vif.rst_n = 1;
-        `uvm_info("aes_reset_seq", "Reset Released!", UVM_LOW)
-    endtask
-endclass : aes_reset_seq
