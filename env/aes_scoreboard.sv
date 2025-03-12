@@ -143,7 +143,13 @@ class aes_scoreboard extends uvm_scoreboard;
             `uvm_info(get_type_name(), "Performing Decryption...", UVM_LOW);
             AES128_ECB_decrypt_dpi(plaintext_bytes, key_bytes, ciphertext_bytes);
         `endif
-
+            string key_str;
+            key_str = "";  // Khởi tạo chuỗi rỗng
+            foreach (key_bytes[i]) begin
+                key_str = {key_str, $sformatf("%02X", key_bytes[i])}; // Ghép từng byte vào chuỗi hex
+            end
+            `uvm_info(get_type_name(), $sformatf("Key: %s", key_str), UVM_LOW);
+            
         `uvm_info(get_type_name(), "Reference Model Output:", UVM_LOW);
         foreach (ciphertext_bytes[i]) begin
             ref_ciphertext[(15-i)*8 +: 8] = ciphertext_bytes[i];
