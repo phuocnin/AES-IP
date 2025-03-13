@@ -105,4 +105,18 @@ class aes_single_de extends aes_base_sequence;
             end
         endtask
 endclass : aes_single_de
+// plan 7 
 
+class aes_multi_de extends aes_base_sequence;
+    `uvm_object_utils(aes_multi_de)
+    aes_transaction req;
+    function new(string name = "aes_multi_de");
+        super.new(name);
+    endfunction
+    task body();
+        `uvm_info("aes_multi_de", "Starting aes_multi_de", UVM_LOW)
+        repeat(10) begin
+            `uvm_do(req);
+        end
+    endtask
+endclass : aes_multi_de
