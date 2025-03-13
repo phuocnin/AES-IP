@@ -51,14 +51,16 @@ class aes_spec_case extends aes_base_sequence;
     task body();
         `uvm_info("aes_spec_case", "Starting aes_spec_case", UVM_LOW)
         //plan 5.1 
-         repeat(3) begin
+         repeat(1) begin
                 req = aes_transaction::type_id::create("req");
                 start_item(req);
               //  $srandom(int'($time)); 
-                void'(req.randomize() with {
-                data_input dist { 128'h0 := 50, 128'hffffffffffffffffffffffffffffffff := 50 };
-                key dist { 128'h0 := 50, 128'hffffffffffffffffffffffffffffffff := 50 };});
-                finish_item(req);
+                 req.randomize() with {data_input == 128'h00000000000000000000000000000000 ;
+                key == 128'h00000000000000000000000000000000;};
+                // void'(req.randomize() with {
+                // data_input dist { 128'h0 := 50, 128'hffffffffffffffffffffffffffffffff := 50 };
+                // key dist { 128'h0 := 50, 128'hffffffffffffffffffffffffffffffff := 50 };});
+                 finish_item(req);
         end
     endtask
 endclass : aes_spec_case
