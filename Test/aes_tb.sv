@@ -28,7 +28,7 @@ module aes_tb;
     begin
         vif.rst_n <= 1'b0;
         vif.clk <= 1'b1;
-        #45 vif.rst_n = 1'b1;
+        #42 vif.rst_n = 1'b1;
       //  # 100 vif.rst_n = 1'b0;
        
     end
