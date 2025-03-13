@@ -1,7 +1,7 @@
-/*class aes_test_single_dec extends aes_base_test;
-    `uvm_component_utils(aes_test_single_dec)
+class aes_test_definetion_dec extends aes_base_test;
+    `uvm_component_utils(aes_test_definetion_dec)
     aes_single_seq aes_seq;
-    function new(string name = "aes_test_single_dec", uvm_component parent = null);
+    function new(string name = "aes_test_definetion_dec", uvm_component parent = null);
         super.new(name, parent);
     endfunction
     function void build_phase(uvm_phase phase);
@@ -15,5 +15,4 @@
         aes_seq.start(aes_env0.sequencer);
         phase.drop_objection(this);
     endtask
-endclass : aes_test_single_dec*/
-
+endclass : aes_test_definetion_dec
