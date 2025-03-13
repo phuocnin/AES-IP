@@ -4,80 +4,51 @@ virtual class aes_base_sequence extends uvm_sequence #(aes_transaction);
         super.new(name);
     endfunction
 endclass : aes_base_sequence
-
+/// Plan Test for ENCRYPTION 
 // Plan test 3
-class aes_single_seq extends aes_base_sequence;
-        `uvm_object_utils(aes_single_seq)
+class aes_single_en extends aes_base_sequence;
+        `uvm_object_utils(aes_single_en)
         aes_transaction req;
-        function new(string name = "aes_single_seq");
+        function new(string name = "aes_single_en");
             super.new(name);
         endfunction
         task body();
-            `uvm_info("aes_single_seq", "Starting aes_single_seq", UVM_LOW)
+            `uvm_info("aes_single_en", "Starting aes_single_en", UVM_LOW)
             repeat(2) begin
                 req = aes_transaction::type_id::create("req");
                 start_item(req);
                 //$srandom(int'($time)); 
-               // req.randomize() with {data_input == 128'h00112233445566778899aabbccddeeff ;
-                //key == 128'h000102030405060708090a0b0c0d0e0f;};
-               req.randomize() with   {data_input == 128'h69c4e0d86a7b0430d8cdb78070b4c55a ;
-               key == 128'h13111d7fe3944a17f307a78b4d2b30c5;};
+               req.randomize() with {data_input == 128'h00112233445566778899aabbccddeeff ;
+               key == 128'h000102030405060708090a0b0c0d0e0f;};
                 finish_item(req);
             end
         endtask
-endclass : aes_single_seq
+endclass : aes_single_en
 // plan test 4
-class aes_multi_seq extends aes_base_sequence;
-    `uvm_object_utils(aes_multi_seq)
+class aes_multi_en extends aes_base_sequence;
+    `uvm_object_utils(aes_multi_en)
     aes_transaction req;
-    function new(string name = "aes_multi_seq");
+    function new(string name = "aes_multi_en");
         super.new(name);
     endfunction
     task body();
-        `uvm_info("aes_multi_seq", "Starting aes_multi_seq", UVM_LOW)
+        `uvm_info("aes_multi_en", "Starting aes_multi_en", UVM_LOW)
         repeat(10) begin
             `uvm_do(req);
         end
     endtask
-endclass : aes_multi_seq
+endclass : aes_multi_en
 
  // Plan test 5 
- /*
-class aes_spec_case extends aes_base_sequence;
-    `uvm_object_utils(aes_spec_case)
-    aes_transaction req;
-    function new(string name = "aes_spec_case");
-        super.new(name);
-    endfunction
-    task body();
-        `uvm_info("aes_spec_case", "Starting aes_spec_case", UVM_LOW)
-        //plan 5.1 
-         repeat(1) begin
-                req = aes_transaction::type_id::create("req");
-                start_item(req);
-            
-                req.randomize() with {data_input == 128'h00000000000000000000000000000000 ;
-                key == 128'h00000000000000000000000000000000;};
-                req.randomize() with {data_input == 128'hFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF ;
-                key == 128'hFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF;};
-                req.randomize() with {data_input == 128'hAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ;
-                key == 128'hAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA;};
-                req.randomize() with {data_input == 128'h55555555555555555555555555555555 ;
-                key == 128'h55555555555555555555555555555555;};
-                 finish_item(req);
-        end
-    endtask
-endclass : aes_spec_case
-*/
-class aes_spec_case extends aes_base_sequence;
-    `uvm_object_utils(aes_spec_case)
+class aes_spec_case_en extends aes_base_sequence;
+    `uvm_object_utils(aes_spec_case_en)
     aes_transaction req;
     
     // Khai báo mảng dữ liệu
     bit [127:0] data_inputs[4];
     bit [127:0] keys[4];
 
-    function new(string name = "aes_spec_case");
+    function new(string name = "aes_spec_case_en");
         super.new(name);
         
         // Gán giá trị cho mảng
@@ -97,7 +68,7 @@ class aes_spec_case extends aes_base_sequence;
     endfunction
 
     task body();
-        `uvm_info("aes_spec_case", "Starting aes_spec_case", UVM_LOW)
+        `uvm_info("aes_spec_case_en", "Starting aes_spec_case_en", UVM_LOW)
         
         foreach (data_inputs[i]) begin
             req = aes_transaction::type_id::create("req");
@@ -112,6 +83,26 @@ class aes_spec_case extends aes_base_sequence;
             finish_item(req);
         end
     endtask
-endclass : aes_spec_case
+endclass : aes_spec_case_en
 
+// Plan Test for DECRYPTION 
+// Plan 6 
+class aes_single_de extends aes_base_sequence;
+        `uvm_object_utils(aes_single_de)
+        aes_transaction req;
+        function new(string name = "aes_single_de");
+            super.new(name);
+        endfunction
+        task body();
+            `uvm_info("aes_single_de", "Starting aes_single_de", UVM_LOW)
+            repeat(2) begin
+                req = aes_transaction::type_id::create("req");
+                start_item(req);
+                //$srandom(int'($time)); 
+               req.randomize() with   {data_input == 128'h69c4e0d86a7b0430d8cdb78070b4c55a ;
+               key == 128'h13111d7fe3944a17f307a78b4d2b30c5;};
+                finish_item(req);
+            end
+        endtask
+endclass : aes_single_de
 
