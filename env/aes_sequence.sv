@@ -42,6 +42,7 @@ class aes_multi_seq extends aes_base_sequence;
 endclass : aes_multi_seq
 
  // Plan test 5 
+ /*
 class aes_spec_case extends aes_base_sequence;
     `uvm_object_utils(aes_spec_case)
     aes_transaction req;
@@ -64,6 +65,47 @@ class aes_spec_case extends aes_base_sequence;
                 req.randomize() with {data_input == 128'h55555555555555555555555555555555 ;
                 key == 128'h55555555555555555555555555555555;};
                  finish_item(req);
+        end
+    endtask
+endclass : aes_spec_case
+*/
+class aes_spec_case extends aes_base_sequence;
+    `uvm_object_utils(aes_spec_case)
+    aes_transaction req;
+
+    function new(string name = "aes_spec_case");
+        super.new(name);
+    endfunction
+
+    task body();
+        `uvm_info("aes_spec_case", "Starting aes_spec_case", UVM_LOW)
+        
+        // Danh sách các giá trị cần kiểm tra
+        bit [127:0] data_inputs[4] = '{
+            128'h00000000000000000000000000000000,
+            128'hFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF,
+            128'hAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,
+            128'h55555555555555555555555555555555
+        };
+
+        bit [127:0] keys[4] = '{
+            128'h00000000000000000000000000000000,
+            128'hFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF,
+            128'hAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,
+            128'h55555555555555555555555555555555
+        };
+
+        // Lặp qua từng cặp giá trị data_input và key
+        foreach (data_inputs[i]) begin
+            req = aes_transaction::type_id::create("req");
+            start_item(req);
+
+            assert(req.randomize() with {
+                data_input == data_inputs[i];
+                key == keys[i];
+            }) else `uvm_error("aes_spec_case", "Randomization failed!")
+
+            finish_item(req);
         end
     endtask
 endclass : aes_spec_case
