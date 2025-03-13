@@ -24,12 +24,14 @@ module aes_tb;
        
         
     end
-    initial begin
-        vif.rst_n <= 1'b0;
-        vif.clk <= 1'b1;
+    initial 
+    begin
+        vif.rst_n = 1'b0;
+        vif.clk = 1'b1;
         #51 vif.rst_n = 1'b1;
+        # 100 vif.rst_n = 1'b0;
        
-      end
+    end
     
       //Generate Clock
     always
