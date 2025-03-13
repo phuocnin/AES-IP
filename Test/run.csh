@@ -13,10 +13,10 @@ gcc -m32 -shared -fPIC -o ../AES128-C-master/_sv_export.so ../AES128-C-master/ae
          endif
 
 # Compile SystemVerilog testbench
-  xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -compile aes_tb.sv
+  xrun -access +rwc -define DECIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -compile aes_tb.sv
 #  xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -compile aes_tb.sv
 
 #Run simulation with DPI and waveform logging
-  xrun -access +rwc  -define CIPHER  -uvm -sv +incdir+../env +incdir+../AES_CORE \
+  xrun -access +rwc  -define DECIPHER  -uvm -sv +incdir+../env +incdir+../AES_CORE \
        -sv_lib `pwd`/../AES128-C-master/_sv_export.so aes_tb.sv -input run_wave.tcl
 
