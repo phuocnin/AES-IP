@@ -11,7 +11,7 @@ package aes_pkg;
     `include "aes_scoreboard.sv"
     `include "aes_env.sv"
     `include "../Test/test.sv"
-    `include "../Test/encryption/aes_test_single_enc/aes_test_single_enc.sv"
+    `include "../Test/encryption/aes_test_definetion_enc/aes_test_definetion_enc.sv"
     `include "../Test/encryption/aes_test_continuous_enc/aes_test_continuous_enc.sv"
     `include "../Test/encryption/aes_test_special_case/aes_test_special_case.sv"
     `include "../Test/reset/aes_test_reset_enc/aes_test_reset_enc.sv"
