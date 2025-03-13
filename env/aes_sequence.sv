@@ -35,11 +35,12 @@ class aes_multi_seq extends aes_base_sequence;
     endfunction
     task body();
         `uvm_info("aes_multi_seq", "Starting aes_multi_seq", UVM_LOW)
-        repeat(1) begin
+        repeat(5) begin
             `uvm_do(req);
         end
     endtask
 endclass : aes_multi_seq
+
  // Plan test 5 
 class aes_spec_case extends aes_base_sequence;
     `uvm_object_utils(aes_spec_case)
