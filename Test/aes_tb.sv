@@ -31,6 +31,9 @@ module aes_tb;
         #42 vif.rst_n = 1'b1;
         #50 vif.rst_n = 1'b0;
         #100 vif.rst_n = 1'b1;
+        #150 vif.rst_n = 1'b0;
+        #200 vif.rst_n = 1'b1;
+        #250 vif.rst_n = 1'b0;
        
     end
     
