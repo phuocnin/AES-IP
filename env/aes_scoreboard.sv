@@ -135,7 +135,6 @@ class aes_scoreboard extends uvm_scoreboard;
             
             plaintext_bytes[i] = trans.data_input[(15-i)*8 +: 8];
             key_bytes[i]       = trans.key[(15-i)*8 +: 8];
-        //    `uvm_info(get_type_name(), $sformatf("Processing byte %0h", key_bytes[i]), UVM_LOW);
         end
 
         `ifdef CIPHER
