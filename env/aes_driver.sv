@@ -29,9 +29,8 @@ class aes_driver extends uvm_driver #(aes_transaction);
             seq_item_port.get_next_item(aes_trans);
             `uvm_info(get_type_name(), $sformatf("Received transaction: in[%h], key[%h]",aes_trans.data_input, aes_trans.key), UVM_LOW);
             
-            has_next = seq_item_port.try_next_item(aes_trans);
             
-            clk_cycles = (trans_count == 0 || !has_next) ? 11 : 10;
+            clk_cycles = (trans_count == 0) ? 11 : 10;
             
             repeat(clk_cycles) begin
                     vif.data_input <= aes_trans.data_input;
