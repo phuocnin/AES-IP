@@ -14,16 +14,15 @@ class aes_driver extends uvm_driver #(aes_transaction);
     endfunction
 
     virtual task run_phase(uvm_phase phase);
-        fork
             drive_transaction(aes_trans);
+            @(posedge vif.clk);
+            `uvm_info(get_type_name(), "Driver run_phase", UVM_LOW);
             //reset_signal();
-        join_none
     endtask
 
     task drive_transaction(aes_transaction aes_trans);
         @(posedge vif.rst_n);
         forever begin
-            `uvm_info(get_type_name(), $sformatf("seq_item_port.has_do_available(): %b",seq_item_port.has_do_available()), UVM_LOW);
 
             seq_item_port.get_next_item(aes_trans);
             `uvm_info(get_type_name(), $sformatf("Received transaction: in[%h], key[%h]",aes_trans.data_input, aes_trans.key), UVM_LOW);            
@@ -33,10 +32,8 @@ class aes_driver extends uvm_driver #(aes_transaction);
                     @(posedge vif.clk);
             end
             seq_item_port.item_done();
-            `uvm_info("aec", $sformatf("has_do_available(): %b",seq_item_port.has_do_available()), UVM_LOW);
 
         end
-        `uvm_info("aeb", $sformatf("has_do_available(): %b",seq_item_port.has_do_available()), UVM_LOW);
 
     endtask
     
