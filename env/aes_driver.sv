@@ -23,6 +23,7 @@ class aes_driver extends uvm_driver #(aes_transaction);
     task drive_transaction(aes_transaction aes_trans);
         int trans_count = 0;  // Đếm số lượng transaction đã xử lý
         bit has_next;
+        int clk_cycles
        @(posedge vif.rst_n);
         forever begin
             seq_item_port.get_next_item(aes_trans);
@@ -30,7 +31,7 @@ class aes_driver extends uvm_driver #(aes_transaction);
             
             has_next = seq_item_port.try_next_item(aes_trans);
             
-            int clk_cycles = (trans_count == 0 || !has_next) ? 11 : 10;
+            clk_cycles = (trans_count == 0 || !has_next) ? 11 : 10;
             
             repeat(clk_cycles) begin
                     vif.data_input <= aes_trans.data_input;
