@@ -14,10 +14,10 @@ class aes_driver extends uvm_driver #(aes_transaction);
     endfunction
 
     virtual task run_phase(uvm_phase phase);
+        fork
             drive_transaction(aes_trans);
-            @(posedge vif.clk);
-            `uvm_info(get_type_name(), "Driver run_phase", UVM_LOW);
             //reset_signal();
+        join_none
     endtask
 
     task drive_transaction(aes_transaction aes_trans);
