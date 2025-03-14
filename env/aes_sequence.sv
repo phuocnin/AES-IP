@@ -33,8 +33,14 @@ class aes_multi_en extends aes_base_sequence;
     endfunction
     task body();
         `uvm_info("aes_multi_en", "Starting aes_multi_en", UVM_LOW)
-        repeat(10) begin
-            `uvm_do(req);
+        // repeat(10) begin
+        //     `uvm_do(req);
+        // end
+        repeat (10) begin
+            req = aes_transaction::type_id::create("req");
+            start_item(req);
+            if (!req.randomize()) `uvm_fatal("aes_multi_en", "Randomization failed")
+            finish_item(req);
         end
     endtask
 endclass : aes_multi_en
