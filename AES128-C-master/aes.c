@@ -523,8 +523,6 @@ void AES128_ECB_encrypt_dpi(svBitVec32 *input, const svBitVec32 *key, svBitVec32
     encryptInput[i] = (uint8_t)input[i];
     encryptKey[i] = (uint8_t)key[i];
   }
-  printf("encryptInput: %s\n", encryptInput);
-  printf("encryptKey: %s\n", encryptKey);
 
   AES128_ECB_encrypt(encryptInput, encryptKey, encryptOutput);
 
