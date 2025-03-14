@@ -21,27 +21,26 @@ class aes_driver extends uvm_driver #(aes_transaction);
     endtask
 
     task drive_transaction(aes_transaction aes_trans);
+        int trans_count = 0;  // Đếm số lượng transaction đã xử lý
+        bit has_next;
        @(posedge vif.rst_n);
         forever begin
             seq_item_port.get_next_item(aes_trans);
             `uvm_info(get_type_name(), $sformatf("Received transaction: in[%h], key[%h]",aes_trans.data_input, aes_trans.key), UVM_LOW);
-            //if(vif.rst_n == 1) begin
-                repeat(10) begin
+            
+            has_next = seq_item_port.try_next_item(aes_trans);
+            
+            int clk_cycles = (trans_count == 0 || !has_next) ? 11 : 10;
+            
+            repeat(clk_cycles) begin
                     vif.data_input <= aes_trans.data_input;
                     vif.key <= aes_trans.key;
                     @(posedge vif.clk);
-                end
-                `uvm_info(get_type_name(), $sformatf("seq_item_port.has_do_available(): %b",seq_item_port.has_do_available()), UVM_LOW);
-                if(seq_item_port.has_do_available()) begin
-                    @(posedge vif.clk);
-                    @(posedge vif.clk);
-                    seq_item_port.item_done();
-                end
-                else begin
-                    seq_item_port.item_done();
-                end
+            end
+            `uvm_info(get_type_name(), $sformatf("seq_item_port.has_do_available(): %b",seq_item_port.has_do_available()), UVM_LOW);
+            seq_item_port.item_done();
+            trans_count++;
         end
-   // end
     endtask
     
     // virtual task reset_signal();
