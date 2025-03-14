@@ -34,6 +34,8 @@ class aes_driver extends uvm_driver #(aes_transaction);
             end
             seq_item_port.item_done();
         end
+        `uvm_info(get_type_name(), $sformatf("has_do_available(): %b",seq_item_port.has_do_available()), UVM_LOW);
+
     endtask
     
     // virtual task reset_signal();
