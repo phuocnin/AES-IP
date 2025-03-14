@@ -23,8 +23,8 @@ class aes_driver extends uvm_driver #(aes_transaction);
     task drive_transaction(aes_transaction aes_trans);
         int trans_count = 0;  // Đếm số lượng transaction đã xử lý
         bit has_next;
-        int clk_cycles
-       @(posedge vif.rst_n);
+        int clk_cycles;
+        @(posedge vif.rst_n);
         forever begin
             seq_item_port.get_next_item(aes_trans);
             `uvm_info(get_type_name(), $sformatf("Received transaction: in[%h], key[%h]",aes_trans.data_input, aes_trans.key), UVM_LOW);
