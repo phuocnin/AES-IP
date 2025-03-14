@@ -19,21 +19,24 @@ module aes_tb;
     initial begin
         uvm_config_db#(virtual aes_if)::set(null, "*", "vif", vif);
         //run_test("aes_test_definetion_enc");
-        run_test("aes_test_continuous_enc");
         //run_test("aes_test_special_data_enc");
-       
+        //run_test("aes_test_continuous_enc");
+
+        //run_test("aes_test_definetion_dec");
+        run_test("aes_test_continuous_dec");
+       // run_test("aes_test_special_data_dec");
         
     end
     initial 
     begin
         vif.rst_n <= 1'b0;
         vif.clk <= 1'b1;
-        #42 vif.rst_n = 1'b1;
-        #50 vif.rst_n = 1'b0;
-        #100 vif.rst_n = 1'b1;
-        #150 vif.rst_n = 1'b0;
-        #200 vif.rst_n = 1'b1;
-        #250 vif.rst_n = 1'b0;
+        #18 vif.rst_n = 1'b1;
+        // #50 vif.rst_n = 1'b0;
+        // #100 vif.rst_n = 1'b1;
+        // #150 vif.rst_n = 1'b0;
+        // #200 vif.rst_n = 1'b1;
+        // #250 vif.rst_n = 1'b0;
        
     end
     
