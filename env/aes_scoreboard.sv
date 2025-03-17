@@ -22,15 +22,8 @@ class aes_scoreboard extends uvm_scoreboard;
     bit [127:0] ref_ciphertext;
     bit [7:0] plaintext_bytes[16], key_bytes[16], ciphertext_bytes[16];
 
-    `uvm_component_utils_begin(aes_scoreboard)
-        `uvm_field_int(error_cnt, UVM_DEFAULT)
-        `uvm_field_int(disable_scoreboard, UVM_DEFAULT)
-        `uvm_field_int(rst_flag, UVM_DEFAULT)
-        `uvm_field_int(ref_ciphertext, UVM_DEFAULT)
-        `uvm_field_int(plaintext_bytes, UVM_DEFAULT)
-        `uvm_field_int(key_bytes, UVM_DEFAULT)
-        `uvm_field_int(ciphertext_bytes, UVM_DEFAULT)
-    `uvm_component_utils_end
+    `uvm_component_utils(aes_scoreboard);
+        
     function new(string name = "aes_scoreboard", uvm_component parent = null);
         super.new(name, parent);
     endfunction
