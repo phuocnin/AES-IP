@@ -15,7 +15,7 @@ class aes_scoreboard extends uvm_scoreboard;
 
     uvm_analysis_imp_frm_Monitor#(aes_transaction, aes_scoreboard) transaction_analysis_port;
     uvm_analysis_imp_rst#(logic, aes_scoreboard) rst_port;
-    protected bit disable_scoreboard = 0;
+    bit disable_scoreboard = 0;
     string key_str;
     logic rst_flag;
     int         error_cnt;
