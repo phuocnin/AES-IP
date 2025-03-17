@@ -45,7 +45,6 @@ class aes_scoreboard extends uvm_scoreboard;
 
     function void write_frm_Monitor(aes_transaction trans);
         if (disable_scoreboard == 1) begin
-            `uvm_info(get_type_name(), "Scoreboard is disabled, skipping transaction", UVM_LOW);
             return;
         end
 
