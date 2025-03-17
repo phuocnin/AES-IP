@@ -7,6 +7,11 @@ class aes_test_reset_enc extends aes_base_test;
     endfunction
     function void build_phase(uvm_phase phase);
         super.build_phase(phase);
+        if (aes_env0 == null)
+        `uvm_error("BUILD", "aes_env0 is NULL!")
+    
+        if (aes_env0.scoreboard == null)
+            `uvm_error("BUILD", "aes_env0.scoreboard is NULL!")
         aes_seq = aes_multi_en::type_id::create("aes_seq");
         aes_env0.scoreboard.disable_scoreboard = 1;
     endfunction
