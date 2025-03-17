@@ -19,10 +19,10 @@ class aes_test_reset_enc extends aes_base_test;
             aes_seq.start(aes_env0.sequencer);
             begin
                 `uvm_info(get_type_name(), "Resetting DUT", UVM_LOW)
-                repeat (20) @(posedge vif.clk);
+                repeat (15) @(posedge vif.clk);
                 vif.rst_n <= 0;
                 `uvm_info(get_type_name(), "Releasing reset", UVM_LOW)
-                repeat (10) @(posedge vif.clk);
+                repeat (8) @(posedge vif.clk);
                 vif.rst_n <= 1;
             end
         join
