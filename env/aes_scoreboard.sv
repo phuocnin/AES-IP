@@ -12,16 +12,25 @@ input  bit[7:0] key[16],
 output bit[7:0] dataOut[16]);
 
 class aes_scoreboard extends uvm_scoreboard;
-    `uvm_component_utils(aes_scoreboard)
-    
+
     uvm_analysis_imp_frm_Monitor#(aes_transaction, aes_scoreboard) transaction_analysis_port;
     uvm_analysis_imp_rst#(logic, aes_scoreboard) rst_port;
+    protected bit disable_scoreboard = 0;
     string key_str;
     logic rst_flag;
     int         error_cnt;
     bit [127:0] ref_ciphertext;
     bit [7:0] plaintext_bytes[16], key_bytes[16], ciphertext_bytes[16];
 
+    `uvm_component_utils_begin(aes_scoreboard)
+        `uvm_field_int(error_cnt, UVM_DEFAULT)
+        `uvm_field_int(disable_scoreboard, UVM_DEFAULT)
+        `uvm_field_int(rst_flag, UVM_DEFAULT)
+        `uvm_field_int(ref_ciphertext, UVM_DEFAULT)
+        `uvm_field_int(plaintext_bytes, UVM_DEFAULT)
+        `uvm_field_int(key_bytes, UVM_DEFAULT)
+        `uvm_field_int(ciphertext_bytes, UVM_DEFAULT)
+    `uvm_component_utils_end
     function new(string name = "aes_scoreboard", uvm_component parent = null);
         super.new(name, parent);
     endfunction
@@ -42,6 +51,11 @@ class aes_scoreboard extends uvm_scoreboard;
     endfunction
 
     function void write_frm_Monitor(aes_transaction trans);
+        if (disable_scoreboard == 1) begin
+            `uvm_info(get_type_name(), "Scoreboard is disabled, skipping transaction", UVM_LOW);
+            return;
+        end
+
         if (rst_flag == 1) begin
             `uvm_info(get_type_name(), "Reset signal is asserted, skipping transaction", UVM_LOW);
             return;
@@ -54,7 +68,6 @@ class aes_scoreboard extends uvm_scoreboard;
         `uvm_info(get_type_name(), $sformatf("DUT Output Data : %h", trans.data_output), UVM_LOW);
 
         foreach (plaintext_bytes[i]) begin
-            
             plaintext_bytes[i] = trans.data_input[(15-i)*8 +: 8];
             key_bytes[i]       = trans.key[(15-i)*8 +: 8];
         end
@@ -82,18 +95,22 @@ class aes_scoreboard extends uvm_scoreboard;
             `uvm_error(get_type_name(), $sformatf(" MISMATCH: DUT=%h, REF=%h", trans.data_output, ref_ciphertext));
             error_cnt++;
         end
-
         `uvm_info(get_type_name(), "----------------------------------------", UVM_LOW);
     endfunction
         
     function void report_phase(uvm_phase phase);
         super.report_phase(phase);
-        `uvm_info(get_type_name(), $sformatf("***** ERROR COUNT = %0d *****", error_cnt), UVM_LOW);
-        if (error_cnt != 0) begin
-            `uvm_error(get_type_name(), "TEST FAILED ");
+        if(!disable_scoreboard) begin
+            `uvm_info(get_type_name(), $sformatf("***** ERROR COUNT = %0d *****", error_cnt), UVM_LOW);
+            if (error_cnt != 0) begin
+                `uvm_error(get_type_name(), "TEST FAILED ");
+            end
+            else begin
+                `uvm_info(get_type_name(), "TEST PASSED ", UVM_LOW);
+            end
         end
         else begin
-            `uvm_info(get_type_name(), "TEST PASSED ", UVM_LOW);
-        end
+            `uvm_info(get_type_name(), "THIS TESTCASE NOT USING SCROREBOARD TO CHECK RESULT", UVM_LOW)
+          end
     endfunction
 endclass
