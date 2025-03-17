@@ -22,7 +22,7 @@ class aes_scoreboard extends uvm_scoreboard;
     bit [127:0] ref_ciphertext;
     bit [7:0] plaintext_bytes[16], key_bytes[16], ciphertext_bytes[16];
 
-    `uvm_component_utils(aes_scoreboard);
+    `uvm_component_utils(aes_scoreboard)
         
     function new(string name = "aes_scoreboard", uvm_component parent = null);
         super.new(name, parent);
