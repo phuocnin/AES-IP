@@ -15,7 +15,7 @@ class aes_test_reset_enc extends aes_base_test;
         super.run_phase(phase);
         aes_env0.scoreboard.disable_scoreboard = 1;
         phase.raise_objection(this);
-        fork
+        
             aes_seq.start(aes_env0.sequencer);
             // begin
             //     repeat (2) @(posedge vif.clk);
@@ -23,7 +23,6 @@ class aes_test_reset_enc extends aes_base_test;
             //     repeat (2) @(posedge vif.clk);
             //     vif.rst_n <= 1;
             // end
-        join_none
         phase.drop_objection(this);
     endtask
 endclass : aes_test_reset_enc
