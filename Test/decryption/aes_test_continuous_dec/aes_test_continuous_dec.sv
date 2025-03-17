@@ -6,7 +6,7 @@ class aes_test_continuous_dec extends aes_base_test;
     endfunction
     function void build_phase(uvm_phase phase);
         super.build_phase(phase);
-    aes_mul_seq_de = aes_multi_de::type_id::create("aes_mul_seq_de");
+        aes_mul_seq_de = aes_multi_de::type_id::create("aes_mul_seq_de");
     endfunction
     task run_phase(uvm_phase phase);
         `uvm_info(get_type_name(), "Starting test", UVM_LOW)
