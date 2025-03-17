@@ -10,6 +10,8 @@ class aes_test_reset_enc extends aes_base_test;
         super.build_phase(phase);
         aes_seq = aes_multi_seq::type_id::create("aes_seq");
         aes_env0.aes_scoreboard.disable_scoreboard = 1;
+        if (!uvm_config_db#(virtual dut_if)::get(this, "", "vif", vif))
+            `uvm_fatal("NOVIF", {"Virtual interface must be set for: ", get_full_name()})
     endfunction
     task run_phase(uvm_phase phase);
         `uvm_info(get_type_name(), "Starting test", UVM_LOW)
