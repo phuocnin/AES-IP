@@ -15,7 +15,8 @@ class aes_env extends uvm_env;
         monitor = aes_monitor::type_id::create("monitor", this);
         scoreboard = aes_scoreboard::type_id::create("scoreboard", this);
         sequencer = uvm_sequencer#(aes_transaction)::type_id::create("sequencer", this);
-
+        if(scoreboard == null)
+            `uvm_error("BUILD", "scoreboard is NULL!")
         if (!uvm_config_db#(virtual aes_if)::get(this, "", "vif", vif))
             `uvm_fatal("NOVIF", {"Virtual interface must be set for: ", get_full_name()})
     endfunction
