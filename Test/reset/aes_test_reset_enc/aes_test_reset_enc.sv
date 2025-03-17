@@ -17,12 +17,12 @@ class aes_test_reset_enc extends aes_base_test;
         phase.raise_objection(this);
         fork
             aes_seq.start(aes_env0.sequencer);
-            // begin
-            //     repeat (2) @(posedge vif.clk);
-            //     vif.rst_n <= 0;
-            //     repeat (2) @(posedge vif.clk);
-            //     vif.rst_n <= 1;
-            // end
+            begin
+                repeat (2) @(posedge vif.clk);
+                vif.rst_n <= 0;
+                repeat (2) @(posedge vif.clk);
+                vif.rst_n <= 1;
+            end
         join
         phase.drop_objection(this);
     endtask
