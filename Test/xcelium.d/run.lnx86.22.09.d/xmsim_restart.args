@@ -1,0 +1,37 @@
+//
+// File created by:  xrun
+// Do not modify this file
+//
+-INPUT
+"@source /mnt/CADENCE/xcelium_2209/tools/methodology/UVM/CDNS-1.1d/additions/sv/files/tcl/uvm_sim.tcl"
++incdir+../env
++incdir+../AES_CORE
+-uvmhome
+/mnt/CADENCE/xcelium_2209/tools/methodology/UVM/CDNS-1.1d
+-sv_lib
+/mnt/CADENCE/xcelium_2209/tools/methodology/UVM/CDNS-1.1d/additions/sv/lib/libuvmpli.so
+-sv_lib
+/home/DN04/Vinh/AES-IP/Test/../AES128-C-master/_sv_export.so
+-INPUT
+run_wave.tcl
+-MESSAGES
+-SV_LIB
+/mnt/CADENCE/xcelium_2209/tools/methodology/UVM/CDNS-1.1d/additions/sv/lib/libuvmdpi.so
++EMGRLOG
+xrun.log
+-XLSTIME
+1742262829
+-XLKEEP
+-XLMODE
+./xcelium.d/run.lnx86.22.09.d
+-RUNMODE
+-CDSLIB
+./xcelium.d/run.lnx86.22.09.d/cds.lib
+-HDLVAR
+./xcelium.d/run.lnx86.22.09.d/hdl.var
+-XLNAME
+xrun
+-XLVERSION
+"TOOL:	xrun	22.09-s004"
+-XLNAME
+./xcelium.d/run.lnx86.22.09.d/training_22990

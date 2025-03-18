@@ -1,0 +1,232 @@
+
+#
+# Preferences
+#
+preferences set toolbar-Standard-WatchWindow {
+  usual
+  shown 0
+}
+preferences set toolbar-SimControl-WatchList {
+  usual
+  hide step_in
+  hide step_over
+  hide step_adjacent
+  hide set_break
+  position -row 0 -pos 1
+}
+preferences set toolbar-SimControl-SrcBrowser {
+  usual
+  show step_out
+  hide set_break
+  position -row 0 -pos 0
+}
+preferences set toolbar-CursorControl-SrcBrowser {
+  usual
+  hide usage
+  hide previous_edge
+  hide next_edge
+}
+preferences set toolbar-CursorControl-WatchList {
+  usual
+  hide lock
+  hide usage
+  hide previous_edge
+  hide next_edge
+}
+preferences set plugin-enable-svdatabrowser-new 1
+preferences set toolbar-TimeSearch-SrcBrowser {
+  usual
+  shown 0
+  position -anchor e
+}
+preferences set toolbar-Standard-WatchList {
+  usual
+  hide open
+  hide opensim
+  shown 0
+  position -pos 2
+}
+preferences set toolbar-CursorControl-UVMRegViewer {
+  usual
+  position -row 1 -pos 0
+}
+preferences set cursorctl-dont-show-sync-warning 1
+preferences set toolbar-CursorControl-WaveWindow {
+  usual
+  hide usage
+  hide count_edges
+  position -row 1 -pos 1
+}
+preferences set toolbar-Windows-WatchWindow {
+  usual
+  shown 0
+}
+preferences set toolbar-SvDataBrowser-SrcBrowser {
+  usual
+  position -pos 3
+  name SvDataBrowser
+}
+preferences set toolbar-Uvm-WatchList {
+  usual
+  position -row 0 -pos 0 -anchor w
+}
+preferences set toolbar-TimeSearch-WaveWindow {
+  usual
+  position -pos 2
+}
+preferences set toolbar-Windows-Console {
+  usual
+  hide design_search
+  hide send_to
+  shown 1
+  position -pos 2 -anchor w
+}
+preferences set toolbar-Edit-WatchList {
+  usual
+  hide cut
+  hide copy
+  hide paste
+  hide delete
+  hide clear
+  position -pos 2
+}
+preferences set toolbar-Standard-Console {
+  usual
+  hide open
+  hide opensim
+  hide cut
+  hide delete
+}
+preferences set toolbar-Standard-SrcBrowser {
+  usual
+  hide opensrc
+  hide opensim
+  hide copy
+  hide edit
+  position -pos 2
+}
+preferences set toolbar-SignalTrace-SrcBrowser {
+  usual
+  hide previous
+  hide next
+  hide history-prev
+  hide history-next
+  position -row 1 -pos 2
+}
+preferences set toolbar-Windows-UVMRegViewer {
+  usual
+  position -pos 2
+}
+preferences set toolbar-NavSignalList-WaveWindow {
+  usual
+  position -row 0 -pos 1
+}
+preferences set toolbar-Windows-SrcBrowser {
+  usual
+  hide tools
+}
+preferences set toolbar-Standard-WaveWindow {
+  usual
+  hide open
+  hide opensim
+  hide delete
+  hide search_toggle
+}
+preferences set plugin-enable-groupscope 0
+preferences set standard-methodology-filtering 1
+preferences set toolbar-SrcCallstack-SrcBrowser {
+  usual
+  hide callstackmove
+  shown 1
+  position -row 0 -pos 1 -anchor w
+}
+preferences set plugin-enable-interleaveandcompare 0
+preferences set plugin-enable-waveformfrequencyplot 0
+preferences set toolbar-SimControl-WatchWindow {
+  usual
+  shown 0
+}
+preferences set toolbar-Windows-WaveWindow {
+  usual
+  hide tools
+  hide add
+  position -pos 10
+}
+preferences set toolbar-Windows-WatchList {
+  usual
+  hide tools
+  hide selectdeep
+  hide add
+  position -pos 4
+}
+preferences set toolbar-Uvm-Console {
+  usual
+  position -anchor e
+}
+preferences set toolbar-WaveZoom-WaveWindow {
+  usual
+  hide label
+  hide link
+  hide time_range
+  position -row 1 -pos 3
+}
+preferences set toolbar-TimeSearch-WatchList {
+  usual
+  shown 0
+  position -row 0 -pos 4
+}
+preferences set savedlg-simulator ppe
+preferences set sb-callstack-size 5
+preferences set toolbar-TimeSearch-WatchWindow {
+  usual
+  shown 0
+}
+preferences set toolbar-Uvm-SrcBrowser {
+  usual
+  shown 0
+  position -row 1
+}
+
+#
+# Mnemonic Maps
+#
+mmap new  -reuse -name {Boolean as Logic} -radix %b -contents {{%c=FALSE -edgepriority 1 -shape low}
+{%c=TRUE -edgepriority 1 -shape high}}
+mmap new  -reuse -name {Example Map} -radix %x -contents {{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=* -label %x -linecolor gray -shape bus}}
+
+#
+# Waveform windows
+#
+if {[catch {window new WaveWindow -name "Waveform 1" -geometry 1165x420+32+36}] != ""} {
+    window geometry "Waveform 1" 1165x420+32+36
+}
+window target "Waveform 1" on
+waveform using {Waveform 1}
+waveform sidebar select designbrowser
+waveform set \
+    -primarycursor TimeA \
+    -signalnames name \
+    -signalwidth 175 \
+    -units ns \
+    -valuewidth 75
+waveform baseline set -time 0
+
+
+waveform xview limits 0 1000000000ns
+
+#
+# Waveform Window Links
+#
+
+#
+# Console windows
+#
+console set -windowname Console
+window geometry Console 600x250+0+0
+
+#
+# Layout selection
+#
