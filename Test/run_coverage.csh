@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/bin/csh
 
 # ================================
 # SETUP ENVIRONMENT
 # ================================
-export LD_LIBRARY_PATH=$(pwd)/../AES128-C-master:$LD_LIBRARY_PATH
-export CDS_INST_DIR=/mnt/CADENCE/xcelium_2209
-export PATH=$CDS_INST_DIR/bin:$PATH
+setenv LD_LIBRARY_PATH `pwd`/../AES128-C-master:$LD_LIBRARY_PATH
+setenv CDS_INST_DIR /mnt/CADENCE/xcelium_2209
+set path = ($CDS_INST_DIR/bin $path)
 
 # ================================
 # COMPILE C MODEL TO SHARED OBJECT (.so)
@@ -14,10 +14,10 @@ echo "[INFO] Compiling AES128 DPI C model..."
 gcc -m32 -shared -fPIC -o ../AES128-C-master/_sv_export.so ../AES128-C-master/aes.c -I$CDS_INST_DIR/tools/xcelium/include
 
 # Verify shared object is created
-if [ ! -e ../AES128-C-master/_sv_export.so ]; then
+if (! -e ../AES128-C-master/_sv_export.so) then
     echo "[ERROR] Failed to create _sv_export.so"
     exit 1
-fi
+endif
 echo "[INFO] Successfully created _sv_export.so"
 
 # ================================
@@ -29,14 +29,23 @@ xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -co
 # ================================
 # RUN SIMULATION FOR MULTIPLE TEST CASES
 # ================================
-TESTS=("aes_test_reset_enc" "aes_test_reset_dec" "aes_test_definetion_enc" "aes_test_continuous_enc" "aes_test_special_data_enc" "aes_test_definetion_dec" "aes_test_continuous_dec" "aes_test_special_data_dec" )  # <-- Thêm test case tại đây
+set TESTS = ( \
+    aes_test_reset_enc \
+    aes_test_reset_dec \
+    aes_test_definetion_enc \
+    aes_test_continuous_enc \
+    aes_test_special_data_enc \
+    aes_test_definetion_dec \
+    aes_test_continuous_dec \
+    aes_test_special_data_dec \
+)
 
-for TEST in "${TESTS[@]}"; do
+foreach TEST ($TESTS)
     echo "[INFO] Running simulation for $TEST..."
     xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE \
-         -sv_lib $(pwd)/../AES128-C-master/_sv_export.so \
+         -sv_lib `pwd`/../AES128-C-master/_sv_export.so \
          -covwork cov_work -covappend -R +UVM_TESTNAME=$TEST
-done
+end
 
 # ================================
 # MERGE COVERAGE REPORT
