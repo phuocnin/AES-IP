@@ -29,7 +29,7 @@ xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -co
 # ================================
 # RUN SIMULATION FOR MULTIPLE TEST CASES
 # ================================
-set TESTS=(aes_test_reset_enc aes_test_reset_dec aes_test_definetion_enc aes_test_continuous_enc aes_test_special_data_enc aes_test_definetion_dec aes_test_continuous_dec aes_test_special_data_dec )  # <-- Thêm test case tại đây
+set TESTS = (aes_test_reset_enc aes_test_reset_dec aes_test_definetion_enc aes_test_continuous_enc aes_test_special_data_enc aes_test_definetion_dec aes_test_continuous_dec aes_test_special_data_dec )  # <-- Thêm test case tại đây
 
 foreach TEST ($TESTS)
     echo "[INFO] Running simulation for $TEST..."
