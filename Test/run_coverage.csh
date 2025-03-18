@@ -44,14 +44,19 @@ foreach TEST ($TESTS)
     echo "[INFO] Running simulation for $TEST..."
     xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE \
          -sv_lib `pwd`/../AES128-C-master/_sv_export.so \
-         -covwork cov_work -covappend -R +UVM_TESTNAME=$TEST
+         -covwork cov_work -covoverwrite -R +UVM_TESTNAME=$TEST
+
+    if ($status != 0) then
+        echo "[ERROR] Test $TEST failed. Exiting..."
+        exit 1
+    endif
 end
 
 # ================================
 # MERGE COVERAGE REPORT
 # ================================
 echo "[INFO] Merging coverage results..."
-urg -dir cov_work -report coverage_report
+urg -dir cov_work -merge -report coverage_report
 
 # ================================
 # GENERATE HTML COVERAGE REPORT
