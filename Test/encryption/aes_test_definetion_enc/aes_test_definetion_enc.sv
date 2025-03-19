@@ -13,6 +13,7 @@ class aes_test_definetion_enc extends aes_base_test;
         super.run_phase(phase);
         phase.raise_objection(this);
         aes_seq.start(aes_env0.sequencer);
+        @(posedge vif.rst_n);
         phase.drop_objection(this);
     endtask
 endclass : aes_test_definetion_enc
