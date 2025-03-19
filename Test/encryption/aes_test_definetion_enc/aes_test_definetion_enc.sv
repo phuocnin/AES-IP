@@ -12,8 +12,8 @@ class aes_test_definetion_enc extends aes_base_test;
         `uvm_info(get_type_name(), "Starting test", UVM_LOW)
         super.run_phase(phase);
         phase.raise_objection(this);
-        aes_seq.start(aes_env0.sequencer);
-           // @(posedge vif.rst_n);
+            aes_seq.start(aes_env0.sequencer);
+            @(posedge vif.clk);
         phase.drop_objection(this);
     endtask
 endclass : aes_test_definetion_enc
