@@ -52,16 +52,4 @@ foreach TEST ($TESTS)
     endif
 end
 
-# ================================
-# MERGE COVERAGE REPORT
-# ================================
-# echo "[INFO] Merging coverage results..."
-# urg -dir cov_work -merge -report coverage_report
 
-# # ================================
-# # GENERATE HTML COVERAGE REPORT
-# # ================================
-# echo "[INFO] Generating HTML coverage report..."
-# urg -dir cov_work -format html -report coverage_html
-
-# echo "[INFO] Coverage report generated: Open coverage_html/index.html in a browser."
