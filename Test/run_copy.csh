@@ -12,8 +12,8 @@ gcc -m32 -shared -fPIC -o ../AES128-C-master/_sv_export.so ../AES128-C-master/ae
          exit 1
          endif
 #set test = "aes_test_reset_enc"
- set test = "aes_test_definetion_enc"
-# set test = "aes_test_continuous_enc"
+#set test = "aes_test_definetion_enc"
+ set test = "aes_test_continuous_enc"
 # set test = "aes_test_special_data_enc"
 # set test = "aes_test_reset_dec"
 # Compile SystemVerilog testbench
