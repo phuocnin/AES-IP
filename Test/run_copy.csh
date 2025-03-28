@@ -14,13 +14,17 @@ gcc -m32 -shared -fPIC -o ../AES128-C-master/_sv_export.so ../AES128-C-master/ae
 #set test = "aes_test_reset_enc"
 #set test = "aes_test_definetion_enc"
 #set test = "aes_test_continuous_enc"
- set test = "aes_test_special_data_enc"
-# set test = "aes_test_reset_dec"
+#set test = "aes_test_special_data_enc"
+ set test = "aes_test_reset_dec"
+#set test = "aes_test_definetion_dec"
+#set test = "aes_test_continuous_dec"
+#set test = "aes_test_special_data_dec"
+
 # Compile SystemVerilog testbench
-  xrun -access +rwc -define CIPHER -coverage B:E:F -uvm -sv +incdir+../env +incdir+../AES_CORE -compile aes_tb.sv
+  xrun -access +rwc -define DECIPHER -coverage B:E:F -uvm -sv +incdir+../env +incdir+../AES_CORE -compile aes_tb.sv
 #  xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -compile aes_tb.sv
 
 #Run simulation with DPI and waveform logging
-  xrun -access +rwc  -define CIPHER  -covtest $test -coverage B:E:F -uvm -sv +incdir+../env +incdir+../AES_CORE \
+  xrun -access +rwc  -define DECIPHER  -covtest $test -coverage B:E:F -uvm -sv +incdir+../env +incdir+../AES_CORE \
        -sv_lib `pwd`/../AES128-C-master/_sv_export.so aes_tb.sv +UVM_TESTNAME=$test -input run_wave.tcl
 
