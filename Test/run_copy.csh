@@ -11,12 +11,16 @@ gcc -m32 -shared -fPIC -o ../AES128-C-master/_sv_export.so ../AES128-C-master/ae
      echo "Error: Failed to create _sv_export.so"
          exit 1
          endif
-
+set test = "aes_test_reset_enc"
+# set test = "aes_test_reset_dec"
+# set test = "aes_test_definetion_enc"
+# set test = "aes_test_continuous_enc"
+# set test = "aes_test_special_data_enc"
 # Compile SystemVerilog testbench
-  xrun -access +rwc -define DECIPHER -coverage b -uvm -sv +incdir+../env +incdir+../AES_CORE -compile aes_tb.sv
+  xrun -access +rwc -define CIPHER -coverage b -uvm -sv +incdir+../env +incdir+../AES_CORE -compile aes_tb.sv
 #  xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -compile aes_tb.sv
 
 #Run simulation with DPI and waveform logging
-  xrun -access +rwc  -define DECIPHER  -coverage b -uvm -sv +incdir+../env +incdir+../AES_CORE \
-       -sv_lib `pwd`/../AES128-C-master/_sv_export.so aes_tb.sv -input run_wave.tcl
+  xrun -access +rwc  -define CIPHER  -covtest $test -coverage b -uvm -sv +incdir+../env +incdir+../AES_CORE \
+       -sv_lib `pwd`/../AES128-C-master/_sv_export.so aes_tb.sv +UVM_TESTNAME=$test -input run_wave.tcl
 

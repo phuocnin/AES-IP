@@ -24,7 +24,7 @@ echo "[INFO] Successfully created _sv_export.so"
 # COMPILE SYSTEMVERILOG TESTBENCH
 # ================================
 echo "[INFO] Compiling SystemVerilog testbench..."
-xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE  -compile aes_tb.sv
+xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -coverage all -covwork cov_work -compile aes_tb.sv
 
 # ================================
 # RUN SIMULATION FOR MULTIPLE TEST CASES
@@ -44,8 +44,10 @@ foreach TEST ($TESTS)
     echo "[INFO] Running simulation for $TEST..."
     xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE \
          -sv_lib `pwd`/../AES128-C-master/_sv_export.so \
-          +UVM_TESTNAME=$TEST
-
+         -coverage all -covwork cov_work -covoverwrite -R +UVM_TESTNAME=$TEST
+    xrun -access +rwc -define  -uvm -sv +incdir+../env +incdir+../AES_CORE \
+         -sv_lib `pwd`/../AES128-C-master/_sv_export.so aes_tb.sv +UVM_TESTNAME=$test\
+         -covtest $test -covwork cov_work -input run_wave.tcl
     if ($status != 0) then
         echo "[ERROR] Test $TEST failed. Exiting..."
         exit 1
