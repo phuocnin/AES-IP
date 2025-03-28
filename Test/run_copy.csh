@@ -15,8 +15,8 @@ gcc -m32 -shared -fPIC -o ../AES128-C-master/_sv_export.so ../AES128-C-master/ae
 #set test = "aes_test_definetion_enc"
 #set test = "aes_test_continuous_enc"
 #set test = "aes_test_special_data_enc"
- set test = "aes_test_reset_dec"
-#set test = "aes_test_definetion_dec"
+#set test = "aes_test_reset_dec"
+set test = "aes_test_definetion_dec"
 #set test = "aes_test_continuous_dec"
 #set test = "aes_test_special_data_dec"
 
