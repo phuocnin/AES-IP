@@ -11,11 +11,11 @@ gcc -m32 -shared -fPIC -o ../AES128-C-master/_sv_export.so ../AES128-C-master/ae
      echo "Error: Failed to create _sv_export.so"
          exit 1
          endif
-set test = "aes_test_reset_enc"
-# set test = "aes_test_reset_dec"
-# set test = "aes_test_definetion_enc"
+#set test = "aes_test_reset_enc"
+ set test = "aes_test_definetion_enc"
 # set test = "aes_test_continuous_enc"
 # set test = "aes_test_special_data_enc"
+# set test = "aes_test_reset_dec"
 # Compile SystemVerilog testbench
   xrun -access +rwc -define CIPHER -coverage B:E:F -uvm -sv +incdir+../env +incdir+../AES_CORE -compile aes_tb.sv
 #  xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -compile aes_tb.sv
