@@ -4,7 +4,7 @@
 //
 -RUNMODE
 -DEFINE
-CIPHER
+DECIPHER
 -sv
 -I_INCDIR
 /mnt/CADENCE/xcelium_2209/tools/methodology/UVM/CDNS-1.1d/sv/src

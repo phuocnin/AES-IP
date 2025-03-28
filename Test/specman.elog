@@ -1,0 +1,10 @@
+Welcome to Specman Elite (22.09.001-s Build 342899)  -  Linked on Sun Sep 18 19:07:01 2022
+
+Specman> read cover cov_work/scope/test/icc_03549715_00000000.ucd 
+   *** Error: Cannot read coverage - no .e file loaded on top of Specman
+
+Specman> 
+Specman> [A[A[B[B[B[B[B[B[B[B[B[B[B[B[B[B[B
+   *** Error: Unterminated '['
+
+Specman> exit
