@@ -3,6 +3,6 @@
 // The default is decipher (decrypt data).
 
 package AES_Parameter;
-`define CIPHER
-// `define DECIPHER
+//`define CIPHER
+`define DECIPHER
 endpackage: AES_Parameter
