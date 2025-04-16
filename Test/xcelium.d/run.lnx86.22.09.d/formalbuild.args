@@ -1,0 +1,10 @@
+//
+// File created by:  xrun
+// Do not modify this file
+//
++NoArgsToLog
+-COVERAGE
+all
+-COVWORKDIR
+cov_work
+-UPDATE
