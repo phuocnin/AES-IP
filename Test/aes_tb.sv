@@ -27,8 +27,8 @@ module aes_tb;
        // run_test("aes_test_special_data_enc");
         
 
-        run_test("aes_test_definetion_dec");
-        //run_test("aes_test_continuous_dec");
+        //run_test("aes_test_definetion_dec");
+        run_test("aes_test_continuous_dec");
         //run_test("aes_test_special_data_dec");
         
  
