@@ -13,6 +13,7 @@ class aes_test_continuous_dec extends aes_base_test;
         super.run_phase(phase);
         phase.raise_objection(this);
         aes_mul_seq.start(aes_env0.sequencer);
+        @(posedge vif.clk);
         phase.drop_objection(this);
     endtask
 endclass : aes_test_continuous_dec

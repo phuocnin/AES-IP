@@ -1,0 +1,86 @@
+*** Message Type: info ***
+When: Thu Mar 20 10:44:34 AM +07 2025
+SimVision started.
+Version: TOOL:  simvision       22.09-s004
+User: DN04
+Host: training
+Platform: Linux/x86_64/3.10.0-1160.119.1.el7.x86_64
+Started: Thu Mar 20 10:44:34 AM +07 2025
+Command: /mnt/CADENCE/xcelium_2209/tools.lnx86/simvision/bin/simvision.exe -connect dc:training:35842 -nocopyright
+Work Directory: /home/DN04/Phuoc/AES-IP/Test
+ 
+*** Message Type: info ***
+When: Thu Mar 20 10:44:35 AM +07 2025
+Create browser window: "Design Browser 1"
+ 
+*** Message Type: info ***
+When: Thu Mar 20 10:45:04 AM +07 2025
+Create console window: "Console"
+ 
+*** Message Type: info ***
+When: Thu Mar 20 10:45:17 AM +07 2025
+Exit Simulator: abnormal
+      Design: Unknown
+   Languages: Unknown
+   Simulator: Unknown
+     Version: Unknown
+        User: Unknown
+        Host: Unknown
+Time Started: Unknown
+  Process ID: Unknown
+   Directory: Unknown
+     Command: Unknown
+
+ 
+*** Message Type: error ***
+When: Thu Mar 20 10:45:19 AM +07 2025
+Simulator Crashed:
+      Design: Unknown
+   Languages: Unknown
+   Simulator: Unknown
+     Version: Unknown
+        User: Unknown
+        Host: Unknown
+Time Started: Unknown
+  Process ID: Unknown
+   Directory: Unknown
+     Command: Unknown
+      Design: Unknown
+   Languages: Unknown
+   Simulator: Unknown
+     Version: Unknown
+        User: Unknown
+        Host: Unknown
+Time Started: Unknown
+  Process ID: Unknown
+   Directory: Unknown
+     Command: Unknown
+
+Outstanding STRAP Requests:
+        strap::get g . -xu
+        strap::get g . -ck
+        strap::get g . -sa
+ 
+*** Message Type: info ***
+When: Thu Mar 20 10:45:19 AM +07 2025
+Connect to Simulator
+      Design: Unknown
+   Languages: Unknown
+   Simulator: Unknown
+     Version: Unknown
+        User: Unknown
+        Host: Unknown
+Time Started: Unknown
+  Process ID: Unknown
+   Directory: Unknown
+     Command: Unknown
+
+ 
+*** Message Type: info ***
+When: Thu Mar 20 10:45:22 AM +07 2025
+Create utility window: "Properties"
+ 
+*** Message Type: info ***
+When: Thu Mar 20 10:45:34 AM +07 2025
+SimVision Exit.
+ 

@@ -8,6 +8,8 @@
 /mnt/CADENCE/xcelium_2209/tools/methodology/UVM/CDNS-1.1d/additions/sv/lib/libuvmpli.so:uvm_pli_boot
 -ACCESS
 +rwc
+-COVERAGE
+B:E:F
 -no_analogsolver
 -MESSAGES
 -XLMODE

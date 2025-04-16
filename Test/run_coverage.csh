@@ -45,23 +45,13 @@ foreach TEST ($TESTS)
     xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE \
          -sv_lib `pwd`/../AES128-C-master/_sv_export.so \
          -coverage all -covwork cov_work -covoverwrite -R +UVM_TESTNAME=$TEST
-
+    xrun -access +rwc -define  -uvm -sv +incdir+../env +incdir+../AES_CORE \
+         -sv_lib `pwd`/../AES128-C-master/_sv_export.so aes_tb.sv +UVM_TESTNAME=$test\
+         -covtest $test -covwork cov_work -input run_wave.tcl
     if ($status != 0) then
         echo "[ERROR] Test $TEST failed. Exiting..."
         exit 1
     endif
 end
 
-# ================================
-# MERGE COVERAGE REPORT
-# ================================
-# echo "[INFO] Merging coverage results..."
-# urg -dir cov_work -merge -report coverage_report
 
-# # ================================
-# # GENERATE HTML COVERAGE REPORT
-# # ================================
-# echo "[INFO] Generating HTML coverage report..."
-# urg -dir cov_work -format html -report coverage_html
-
-# echo "[INFO] Coverage report generated: Open coverage_html/index.html in a browser."

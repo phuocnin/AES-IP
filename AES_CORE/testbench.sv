@@ -1,7 +1,7 @@
 // Code your testbench here
 // or browse Examples
 `timescale 1ns / 1ps
-`define DECIPHER
+`include "AES_Config_Parameter.v"
 module AES_CORE_TB;
 
     // Testbench signals
@@ -45,7 +45,7 @@ module AES_CORE_TB;
         wait (finished);
         $display("AES Operation Completed. Output: %h", data_out);
 
-        #20;
+        #5;
         data_in = 128'h3243f6a8885a308d313198a2e0370734; // Sample input
         key = 128'h2b7e151628aed2a6abf7158809cf4f3c;  // Sample key
         

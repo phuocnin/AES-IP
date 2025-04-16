@@ -24,6 +24,12 @@ class aes_test_reset_enc extends aes_base_test;
                 `uvm_info(get_type_name(), "Releasing reset", UVM_LOW)
                 repeat (8) @(posedge vif.clk);
                 vif.rst_n <= 1;
+                `uvm_info(get_type_name(), "Resetting DUT", UVM_LOW)
+                repeat (14) @(posedge vif.clk);
+                vif.rst_n <= 0;
+                `uvm_info(get_type_name(), "Releasing reset", UVM_LOW)
+                repeat (8) @(posedge vif.clk);
+                vif.rst_n <= 1;
             end
         join
         phase.drop_objection(this);

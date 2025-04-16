@@ -9,7 +9,7 @@
 -define
 UVM_PLI
 -DEFINE
-CIPHER
+DECIPHER
 -sv
 -INCDIR
 ../env

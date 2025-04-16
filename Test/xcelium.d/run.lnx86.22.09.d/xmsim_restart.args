@@ -10,8 +10,11 @@
 /mnt/CADENCE/xcelium_2209/tools/methodology/UVM/CDNS-1.1d
 -sv_lib
 /mnt/CADENCE/xcelium_2209/tools/methodology/UVM/CDNS-1.1d/additions/sv/lib/libuvmpli.so
+-COVTEST
+aes_test_special_data_dec
 -sv_lib
-/home/DN04/Vinh/AES-IP/Test/../AES128-C-master/_sv_export.so
+/home/DN04/Phuoc/AES-IP/Test/../AES128-C-master/_sv_export.so
++UVM_TESTNAME=aes_test_special_data_dec
 -INPUT
 run_wave.tcl
 -MESSAGES
@@ -20,7 +23,11 @@ run_wave.tcl
 +EMGRLOG
 xrun.log
 -XLSTIME
+<<<<<<< HEAD
 1744773741
+=======
+1743130309
+>>>>>>> 57f889f27d53ab3e12c9349ec9678e57c91b9f8b
 -XLKEEP
 -XLMODE
 ./xcelium.d/run.lnx86.22.09.d
@@ -34,4 +41,8 @@ xrun
 -XLVERSION
 "TOOL:	xrun	22.09-s004"
 -XLNAME
+<<<<<<< HEAD
 ./xcelium.d/run.lnx86.22.09.d/training_2704
+=======
+./xcelium.d/run.lnx86.22.09.d/training_16120
+>>>>>>> 57f889f27d53ab3e12c9349ec9678e57c91b9f8b

@@ -1,0 +1,1 @@
+vlog -work work -sv aes_tb.sv +incdir+C:\Users\hph\Downloads\uvm-1.2\src +incdir+C:\Users\hph\OneDrive - The University of Technology\ktmt\FPT\aes\AES_CORE +define+UVM_CMDLINE_NO_DPI +define+UVM_REGEX_NO_DPI +define+UVM_NO_DPI

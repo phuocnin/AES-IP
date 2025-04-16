@@ -3,7 +3,7 @@
 // Do not modify this file
 //
 -DEFINE
-CIPHER
+DECIPHER
 -sv
 -INCDIR
 ../env
