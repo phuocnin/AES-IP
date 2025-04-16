@@ -1,176 +1,24 @@
 xrun: 22.09-s004: (c) Copyright 1995-2022 Cadence Design Systems, Inc.
-TOOL:	xrun	22.09-s004: Started on Mar 28, 2025 at 09:51:49 +07
+TOOL:	xrun	22.09-s004: Started on Apr 16, 2025 at 10:24:24 +07
 xrun
 	-access +rwc
 	-define DECIPHER
-	-covtest aes_test_special_data_dec
-	-coverage B:E:F
 	-uvm
 	-sv
 	+incdir+../env
 	+incdir+../AES_CORE
-	-sv_lib /home/DN04/Phuoc/AES-IP/Test/../AES128-C-master/_sv_export.so
+	-sv_lib /home/DN04/Vinh/AES-IP/Test/../AES128-C-master/_sv_export.so
 	aes_tb.sv
-	+UVM_TESTNAME=aes_test_special_data_dec
 	-input run_wave.tcl
-Loading snapshot worklib.aes_tb:sv .................... Done
-SVSEED default: 1
-xmsim: *W,DSEM2009: This SystemVerilog design is simulated as per IEEE 1800-2009 SystemVerilog simulation semantics. Use -disable_sem2009 option for turning off SV 2009 simulation semantics.
-xcelium> source /mnt/CADENCE/xcelium_2209/tools/xcelium/files/xmsimrc
-xcelium> source /mnt/CADENCE/xcelium_2209/tools/methodology/UVM/CDNS-1.1d/additions/sv/files/tcl/uvm_sim.tcl
-xcelium> database -open waves -into waves.shm -default
-Created default SHM database waves
-xcelium> probe -create aes_tb -shm -all -depth all
-Created probe 1
-xcelium> 
-xcelium> run
-----------------------------------------------------------------
-CDNS-UVM-1.1d (22.09-s004)
-(C) 2007-2013 Mentor Graphics Corporation
-(C) 2007-2013 Cadence Design Systems, Inc.
-(C) 2006-2013 Synopsys, Inc.
-(C) 2011-2013 Cypress Semiconductor Corp.
-----------------------------------------------------------------
-
-  ***********       IMPORTANT RELEASE NOTES         ************
-
-  You are using a version of the UVM library that has been compiled
-  with `UVM_NO_DEPRECATED undefined.
-  See http://www.eda.org/svdb/view.php?id=3313 for more details.
-
-  You are using a version of the UVM library that has been compiled
-  with `UVM_OBJECT_MUST_HAVE_CONSTRUCTOR undefined.
-  See http://www.eda.org/svdb/view.php?id=3770 for more details.
-
-      (Specify +UVM_NO_RELNOTES to turn off this notice)
-
-UVM_INFO @ 0: reporter [RNTST] Running test aes_test_special_data_dec...
-UVM_INFO ../Test/test.sv(26) @ 0: uvm_test_top [aes_test_special_data_dec] Printing the test topology :
---------------------------------------------------------------------------
-Name                             Type                          Size  Value
---------------------------------------------------------------------------
-uvm_test_top                     aes_test_special_data_dec     -     @2676
-  aes_env0                       aes_env                       -     @2736
-    driver                       aes_driver                    -     @2787
-      rsp_port                   uvm_analysis_port             -     @2887
-      seq_item_port              uvm_seq_item_pull_port        -     @2836
-    monitor                      aes_monitor                   -     @2918
-      analysis_port              uvm_analysis_port             -     @2968
-      rst_port                   uvm_analysis_port             -     @3017
-    scoreboard                   aes_scoreboard                -     @3048
-      rst_port                   uvm_analysis_imp_rst          -     @3793
-      transaction_analysis_port  uvm_analysis_imp_frm_Monitor  -     @3744
-    sequencer                    uvm_sequencer                 -     @3079
-      rsp_export                 uvm_analysis_export           -     @3138
-      seq_item_export            uvm_seq_item_pull_imp         -     @3686
-      arbitration_queue          array                         0     -    
-      lock_queue                 array                         0     -    
-      num_last_reqs              integral                      32    'd1  
-      num_last_rsps              integral                      32    'd1  
---------------------------------------------------------------------------
-
-UVM_INFO ../Test/decryption/aes_test_special_data_dec/aes_test_special_data_dec.sv(12) @ 0: uvm_test_top [aes_test_special_data_dec] Starting test
-UVM_INFO ../env/aes_sequence.sv(153) @ 0: uvm_test_top.aes_env0.sequencer@@aes_spec_de [aes_spec_case_de] Starting aes_spec_case_de
-UVM_INFO ../env/aes_monitor.sv(36) @ 0: uvm_test_top.aes_env0.monitor [aes_monitor] Reset signal is asserted
-UVM_INFO ../env/aes_monitor.sv(36) @ 10: uvm_test_top.aes_env0.monitor [aes_monitor] Reset signal is asserted
-UVM_INFO ../env/aes_driver.sv(27) @ 18: uvm_test_top.aes_env0.driver [aes_driver] Received transaction: in[00000000000000000000000000000000], key[00000000000000000000000000000000]
-UVM_INFO ../env/aes_monitor.sv(48) @ 20: uvm_test_top.aes_env0.monitor [aes_monitor] Collecting data
-UVM_INFO ../env/aes_driver.sv(27) @ 120: uvm_test_top.aes_env0.driver [aes_driver] Received transaction: in[ffffffffffffffffffffffffffffffff], key[ffffffffffffffffffffffffffffffff]
-UVM_INFO ../env/aes_monitor.sv(78) @ 130: uvm_test_top.aes_env0.monitor [aes_monitor] Finished signal is asserted
-UVM_INFO ../env/aes_monitor.sv(57) @ 130: uvm_test_top.aes_env0.monitor [aes_monitor] Send transaction to scb: in[00], key[00], out[caaa4ef95352be2b2884c7b6a142944]
-UVM_INFO ../env/aes_scoreboard.sv(56) @ 130: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] ----------------------------------------
-UVM_INFO ../env/aes_scoreboard.sv(57) @ 130: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] Received new transaction:
-UVM_INFO ../env/aes_scoreboard.sv(58) @ 130: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] DUT Input Data  : 00000000000000000000000000000000
-UVM_INFO ../env/aes_scoreboard.sv(59) @ 130: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] DUT Key         : 00000000000000000000000000000000
-UVM_INFO ../env/aes_scoreboard.sv(60) @ 130: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] DUT Output Data : 0caaa4ef95352be2b2884c7b6a142944
-UVM_INFO ../env/aes_scoreboard.sv(71) @ 130: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] Performing Decryption...
-UVM_INFO ../env/aes_scoreboard.sv(76) @ 130: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] Reference Model Output:
-UVM_INFO ../env/aes_scoreboard.sv(81) @ 130: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] Reference Output Data : 0caaa4ef95352be2b2884c7b6a142944
-UVM_INFO ../env/aes_scoreboard.sv(84) @ 130: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] MATCH: DUT=0caaa4ef95352be2b2884c7b6a142944, REF=0caaa4ef95352be2b2884c7b6a142944
-UVM_INFO ../env/aes_scoreboard.sv(90) @ 130: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] ----------------------------------------
-UVM_INFO ../env/aes_monitor.sv(48) @ 130: uvm_test_top.aes_env0.monitor [aes_monitor] Collecting data
-UVM_INFO ../env/aes_driver.sv(27) @ 230: uvm_test_top.aes_env0.driver [aes_driver] Received transaction: in[aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa], key[aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]
-UVM_INFO ../env/aes_monitor.sv(78) @ 240: uvm_test_top.aes_env0.monitor [aes_monitor] Finished signal is asserted
-UVM_INFO ../env/aes_monitor.sv(57) @ 240: uvm_test_top.aes_env0.monitor [aes_monitor] Send transaction to scb: in[ffffffffffffffffffffffffffffffff], key[ffffffffffffffffffffffffffffffff], out[19484caffd9f329a2f04638e1bb6a28]
-UVM_INFO ../env/aes_scoreboard.sv(56) @ 240: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] ----------------------------------------
-UVM_INFO ../env/aes_scoreboard.sv(57) @ 240: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] Received new transaction:
-UVM_INFO ../env/aes_scoreboard.sv(58) @ 240: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] DUT Input Data  : ffffffffffffffffffffffffffffffff
-UVM_INFO ../env/aes_scoreboard.sv(59) @ 240: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] DUT Key         : ffffffffffffffffffffffffffffffff
-UVM_INFO ../env/aes_scoreboard.sv(60) @ 240: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] DUT Output Data : 019484caffd9f329a2f04638e1bb6a28
-UVM_INFO ../env/aes_scoreboard.sv(71) @ 240: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] Performing Decryption...
-UVM_INFO ../env/aes_scoreboard.sv(76) @ 240: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] Reference Model Output:
-UVM_INFO ../env/aes_scoreboard.sv(81) @ 240: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] Reference Output Data : 019484caffd9f329a2f04638e1bb6a28
-UVM_INFO ../env/aes_scoreboard.sv(84) @ 240: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] MATCH: DUT=019484caffd9f329a2f04638e1bb6a28, REF=019484caffd9f329a2f04638e1bb6a28
-UVM_INFO ../env/aes_scoreboard.sv(90) @ 240: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] ----------------------------------------
-UVM_INFO ../env/aes_monitor.sv(48) @ 240: uvm_test_top.aes_env0.monitor [aes_monitor] Collecting data
-UVM_INFO ../env/aes_driver.sv(27) @ 340: uvm_test_top.aes_env0.driver [aes_driver] Received transaction: in[55555555555555555555555555555555], key[55555555555555555555555555555555]
-UVM_INFO ../env/aes_monitor.sv(78) @ 350: uvm_test_top.aes_env0.monitor [aes_monitor] Finished signal is asserted
-UVM_INFO ../env/aes_monitor.sv(57) @ 350: uvm_test_top.aes_env0.monitor [aes_monitor] Send transaction to scb: in[aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa], key[aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa], out[8788295cbed139d7478da33f09b01779]
-UVM_INFO ../env/aes_scoreboard.sv(56) @ 350: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] ----------------------------------------
-UVM_INFO ../env/aes_scoreboard.sv(57) @ 350: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] Received new transaction:
-UVM_INFO ../env/aes_scoreboard.sv(58) @ 350: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] DUT Input Data  : aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-UVM_INFO ../env/aes_scoreboard.sv(59) @ 350: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] DUT Key         : aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-UVM_INFO ../env/aes_scoreboard.sv(60) @ 350: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] DUT Output Data : 8788295cbed139d7478da33f09b01779
-UVM_INFO ../env/aes_scoreboard.sv(71) @ 350: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] Performing Decryption...
-UVM_INFO ../env/aes_scoreboard.sv(76) @ 350: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] Reference Model Output:
-UVM_INFO ../env/aes_scoreboard.sv(81) @ 350: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] Reference Output Data : 8788295cbed139d7478da33f09b01779
-UVM_INFO ../env/aes_scoreboard.sv(84) @ 350: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] MATCH: DUT=8788295cbed139d7478da33f09b01779, REF=8788295cbed139d7478da33f09b01779
-UVM_INFO ../env/aes_scoreboard.sv(90) @ 350: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] ----------------------------------------
-UVM_INFO ../env/aes_monitor.sv(48) @ 350: uvm_test_top.aes_env0.monitor [aes_monitor] Collecting data
-UVM_INFO ../env/aes_monitor.sv(78) @ 460: uvm_test_top.aes_env0.monitor [aes_monitor] Finished signal is asserted
-UVM_INFO ../env/aes_monitor.sv(57) @ 460: uvm_test_top.aes_env0.monitor [aes_monitor] Send transaction to scb: in[55555555555555555555555555555555], key[55555555555555555555555555555555], out[f2c2dca29a530839c8b5e699cd1fb631]
-UVM_INFO ../env/aes_scoreboard.sv(56) @ 460: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] ----------------------------------------
-UVM_INFO ../env/aes_scoreboard.sv(57) @ 460: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] Received new transaction:
-UVM_INFO ../env/aes_scoreboard.sv(58) @ 460: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] DUT Input Data  : 55555555555555555555555555555555
-UVM_INFO ../env/aes_scoreboard.sv(59) @ 460: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] DUT Key         : 55555555555555555555555555555555
-UVM_INFO ../env/aes_scoreboard.sv(60) @ 460: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] DUT Output Data : f2c2dca29a530839c8b5e699cd1fb631
-UVM_INFO ../env/aes_scoreboard.sv(71) @ 460: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] Performing Decryption...
-UVM_INFO ../env/aes_scoreboard.sv(76) @ 460: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] Reference Model Output:
-UVM_INFO ../env/aes_scoreboard.sv(81) @ 460: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] Reference Output Data : f2c2dca29a530839c8b5e699cd1fb631
-UVM_INFO ../env/aes_scoreboard.sv(84) @ 460: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] MATCH: DUT=f2c2dca29a530839c8b5e699cd1fb631, REF=f2c2dca29a530839c8b5e699cd1fb631
-UVM_INFO ../env/aes_scoreboard.sv(90) @ 460: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] ----------------------------------------
-UVM_INFO ../env/aes_monitor.sv(48) @ 460: uvm_test_top.aes_env0.monitor [aes_monitor] Collecting data
-UVM_INFO /mnt/CADENCE/xcelium_2209/tools/methodology/UVM/CDNS-1.1d/sv/src/base/uvm_objection.svh(1268) @ 460: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
-UVM_INFO ../env/aes_scoreboard.sv(96) @ 460: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] ***** ERROR COUNT = 0 *****
-UVM_INFO ../env/aes_scoreboard.sv(101) @ 460: uvm_test_top.aes_env0.scoreboard [aes_scoreboard] TEST PASSED 
-
---- UVM Report catcher Summary ---
-
-
-Number of demoted UVM_FATAL reports  :    0
-Number of demoted UVM_ERROR reports  :    0
-Number of demoted UVM_WARNING reports:    0
-Number of caught UVM_FATAL reports   :    0
-Number of caught UVM_ERROR reports   :    0
-Number of caught UVM_WARNING reports :    0
-
---- UVM Report Summary ---
-
-** Report counts by severity
-UVM_INFO :   66
-UVM_WARNING :    0
-UVM_ERROR :    0
-UVM_FATAL :    0
-** Report counts by id
-[RNTST]     1
-[TEST_DONE]     1
-[aes_driver]     4
-[aes_monitor]    15
-[aes_scoreboard]    42
-[aes_spec_case_de]     1
-[aes_test_special_data_dec]     2
-Simulation complete via $finish(1) at time 460 NS + 60
-/mnt/CADENCE/xcelium_2209/tools/methodology/UVM/CDNS-1.1d/sv/src/base/uvm_root.svh:457     $finish;
-xcelium> database -close waves
-xcelium> exit
-
-coverage setup:
-  workdir  :  ./cov_work
-  dutinst  :  aes_tb(aes_tb)
-  scope    :  scope
-  testname :  aes_test_special_data_dec
-
-coverage files:
-  model(design data) :  ./cov_work/scope/icc_4bed4b3a_00000000.ucm (reused)
-  data               :  ./cov_work/scope/aes_test_special_data_dec/icc_4bed4b3a_00000000.ucd
-TOOL:	xrun	22.09-s004: Exiting on Mar 28, 2025 at 09:51:50 +07  (total: 00:00:01)
+xrun: *F,INTERR: INTERNAL EXCEPTION
+-----------------------------------------------------------------
+The tool has encountered an unexpected condition and must exit.
+Contact Cadence Design Systems customer support about this
+problem and provide enough information to help us reproduce it,
+including the logfile that contains this error message.
+  TOOL:	xrun	22.09-s004
+  HOSTNAME: training
+  OPERATING SYSTEM: Linux 3.10.0-1160.119.1.el7.x86_64 #1 SMP Tue Jun 4 14:43:51 UTC 2024 x86_64
+  MESSAGE: bad parameter passed to spath_absolute()
+-----------------------------------------------------------------
+TOOL:	xrun	22.09-s004: Exiting on Apr 16, 2025 at 10:24:24 +07  (total: 00:00:00)
