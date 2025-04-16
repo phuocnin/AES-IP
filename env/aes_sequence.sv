@@ -4,7 +4,7 @@ virtual class aes_base_sequence extends uvm_sequence #(aes_transaction);
         super.new(name);
     endfunction
 endclass : aes_base_sequence
-/// Plan Test for ENCRYPTION 
+/// Plan Test for ENCRYPTION ----------------------------------------------------------------------------------
 // Plan test 3
 class aes_single_en extends aes_base_sequence;
         `uvm_object_utils(aes_single_en)
