@@ -45,7 +45,7 @@ foreach TEST ($TESTS)
     xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE \
          -sv_lib `pwd`/../AES128-C-master/_sv_export.so \
          -coverage all -covwork cov_work -covoverwrite -R +UVM_TESTNAME=$TEST
-    xrun -access +rwc -define  -uvm -sv +incdir+../env +incdir+../AES_CORE \
+    xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE \
          -sv_lib `pwd`/../AES128-C-master/_sv_export.so aes_tb.sv +UVM_TESTNAME=$test\
          -covtest $test -covwork cov_work -input run_wave.tcl
     if ($status != 0) then
