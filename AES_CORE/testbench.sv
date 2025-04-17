@@ -2,6 +2,7 @@
 // or browse Examples
 `timescale 1ns / 1ps
 `include "AES_Config_Parameter.v"
+`include "design.sv"
 module AES_CORE_TB;
 
     // Testbench signals
