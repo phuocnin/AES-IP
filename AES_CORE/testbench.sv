@@ -58,7 +58,7 @@ module AES_CORE_TB;
         wait (finished);
         $display("AES Decryption Completed. Output: %h", data_out);
         // End simulation
-        #20;
+        #20
         $stop;
     end
 endmodule
