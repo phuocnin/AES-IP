@@ -20,14 +20,14 @@ module aes_tb;
         uvm_config_db#(virtual aes_if)::set(null, "*", "vif", vif);
         //run_test();
        //run_test("aes_test_reset_enc"); 
-        run_test("aes_test_reset_dec");  
+       // run_test("aes_test_reset_dec");  
 
         //run_test("aes_test_definetion_enc");
         //run_test("aes_test_continuous_enc"); 
         //run_test("aes_test_special_data_enc");
         
 
-        //run_test("aes_test_definetion_dec");
+        run_test("aes_test_definetion_dec");
         //run_test("aes_test_continuous_dec");
         //run_test("aes_test_special_data_dec");
         
