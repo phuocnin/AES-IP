@@ -1,4 +1,4 @@
-`include "design.sv"
+`include "AES_CIPHER.v"
 `include "aes_if.sv"
 `include "aes_pkg.sv"
 module aes_tb;
@@ -7,19 +7,27 @@ module aes_tb;
     `include "uvm_macros.svh"
 
     aes_if vif();
-    AES_CORE dut(
+    // AES_CORE dut(
+    //     .clk(vif.clk),
+    //     .rst_n(vif.rst_n),
+    //     .data_in(vif.data_input),
+    //     .key(vif.key),
+    //     .data_out(vif.data_output),
+    //     .finished(vif.finished)
+    // );
+    AES_Cipher dut(
         .clk(vif.clk),
         .rst_n(vif.rst_n),
-        .data_in(vif.data_input),
-        .key(vif.key),
-        .data_out(vif.data_output),
-        .finished(vif.finished)
+        .data_in(vif.plain_text),
+        .key(vif.cipher_key),
+        .data_out(vif.cipher_text),
+        .finished(vif.cipher_ready)
     );
-
+    
     initial begin
         uvm_config_db#(virtual aes_if)::set(null, "*", "vif", vif);
-        //run_test();
-        run_test("aes_test_reset_enc"); 
+        run_test("all_tests");
+        //run_test("aes_test_reset_enc"); 
         //run_test("aes_test_reset_dec");  
 
         //run_test("aes_test_definetion_enc");
