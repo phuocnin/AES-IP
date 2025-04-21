@@ -15,13 +15,13 @@ module aes_tb;
     //     .data_out(vif.data_output),
     //     .finished(vif.finished)
     // );
-    AES_Cipher dut(
+     AES_Cipher dut(
         .clk(vif.clk),
         .rst_n(vif.rst_n),
-        .data_in(vif.plain_text),
-        .key(vif.cipher_key),
-        .data_out(vif.cipher_text),
-        .finished(vif.cipher_ready)
+        .plain_text(vif.data_input),
+        .cipher_key(vif.key),
+        .cipher_text(vif.data_output),
+        .cipher_ready(vif.finished)
     );
     
     initial begin
