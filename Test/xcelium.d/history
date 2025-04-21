@@ -1,0 +1,25 @@
+//
+// File created by:  xrun
+// Do not modify this file
+
+s1::(16Apr2025:13:25:36):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -coverage all -covwork cov_work -compile aes_tb.sv )
+s2::(16Apr2025:13:26:46):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -sv_lib /home/DN04/Phuoc/AES-IP/Test/../AES128-C-master/_sv_export.so aes_tb.sv +UVM_TESTNAME=aes_test_definetion_enc )
+s3::(16Apr2025:13:27:09):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -sv_lib /home/DN04/Phuoc/AES-IP/Test/../AES128-C-master/_sv_export.so aes_tb.sv +UVM_TESTNAME=aes_test_definetion_enc )
+s4::(16Apr2025:13:27:30):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -sv_lib /home/DN04/Phuoc/AES-IP/Test/../AES128-C-master/_sv_export.so aes_tb.sv +UVM_TESTNAME=aes_test_continuous_enc )
+s5::(16Apr2025:13:28:20):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -sv_lib /home/DN04/Phuoc/AES-IP/Test/../AES128-C-master/_sv_export.so aes_tb.sv +UVM_TESTNAME=aes_test_special_data_enc )
+s6::(16Apr2025:13:30:16):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -compile aes_tb.sv )
+s7::(16Apr2025:13:30:18):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -sv_lib /home/DN04/Phuoc/AES-IP/Test/../AES128-C-master/_sv_export.so aes_tb.sv -input run_wave.tcl )
+s8::(16Apr2025:13:31:56):( xrun -access +rwc -define DECIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -compile aes_tb.sv )
+s9::(16Apr2025:13:31:58):( xrun -access +rwc -define DECIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -sv_lib /home/DN04/Phuoc/AES-IP/Test/../AES128-C-master/_sv_export.so aes_tb.sv -input run_wave.tcl )
+s10::(21Apr2025:13:44:43):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -compile aes_tb.sv )
+s11::(21Apr2025:13:44:46):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -sv_lib /home/DN04/Phuoc/AES-IP/Test/../AES128-C-master/_sv_export.so aes_tb.sv -input run_wave.tcl )
+s12::(21Apr2025:13:45:40):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -compile aes_tb.sv )
+s13::(21Apr2025:13:45:40):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -sv_lib /home/DN04/Phuoc/AES-IP/Test/../AES128-C-master/_sv_export.so aes_tb.sv -input run_wave.tcl )
+s14::(21Apr2025:13:46:28):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -compile aes_tb.sv )
+s15::(21Apr2025:13:46:29):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -sv_lib /home/DN04/Phuoc/AES-IP/Test/../AES128-C-master/_sv_export.so aes_tb.sv -input run_wave.tcl )
+s16::(21Apr2025:13:49:53):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -compile aes_tb.sv )
+s17::(21Apr2025:13:49:55):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -sv_lib /home/DN04/Phuoc/AES-IP/Test/../AES128-C-master/_sv_export.so aes_tb.sv -input run_wave.tcl )
+s18::(21Apr2025:13:52:06):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -compile aes_tb.sv )
+s19::(21Apr2025:13:52:08):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -sv_lib /home/DN04/Phuoc/AES-IP/Test/../AES128-C-master/_sv_export.so aes_tb.sv -input run_wave.tcl )
+s20::(21Apr2025:13:57:32):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -sv_lib /home/DN04/Phuoc/AES-IP/Test/../AES128-C-master/_sv_export.so aes_tb.sv -coverage all -covtest all -covwork cov_work -input run_wave.tcl )
+s21::(21Apr2025:13:59:17):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -sv_lib /home/DN04/Phuoc/AES-IP/Test/../AES128-C-master/_sv_export.so aes_tb.sv -coverage all -covtest all -covwork cov_work -input run_wave.tcl )

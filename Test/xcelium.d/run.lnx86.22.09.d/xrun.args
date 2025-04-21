@@ -1,0 +1,23 @@
+//
+// File created by:  xrun
+// Do not modify this file
+//
+-access
++rwc
+-define
+CIPHER
+-uvm
+-sv
++incdir+../env
++incdir+../AES_CORE
+-sv_lib
+/home/DN04/Phuoc/AES-IP/Test/../AES128-C-master/_sv_export.so
+aes_tb.sv
+-coverage
+all
+-covtest
+all
+-covwork
+cov_work
+-input
+run_wave.tcl
