@@ -15,7 +15,7 @@ gcc -m32 -shared -fPIC -o ../AES128-C-master/_sv_export.so ../AES128-C-master/ae
 # Compile SystemVerilog testbench
   xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -compile aes_tb.sv
 #  xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -compile aes_tb.sv
-echo "Compiling testbench..."
+echo "Compiling testbench."
 
 #Run simulation with DPI and waveform logging
   xrun -access +rwc  -define CIPHER  -uvm -sv +incdir+../env +incdir+../AES_CORE \
