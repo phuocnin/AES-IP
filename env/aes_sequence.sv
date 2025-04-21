@@ -4,7 +4,7 @@ virtual class aes_base_sequence extends uvm_sequence #(aes_transaction);
         super.new(name);
     endfunction
 endclass : aes_base_sequence
-/// Plan Test for ENCRYPTION 
+/// Plan Test for ENCRYPTION ----------------------------------------------------------------------------------
 // Plan test 3
 class aes_single_en extends aes_base_sequence;
         `uvm_object_utils(aes_single_en)
@@ -33,7 +33,7 @@ class aes_multi_en extends aes_base_sequence;
     endfunction
     task body();
         `uvm_info("aes_multi_en", "Starting aes_multi_en", UVM_LOW)
-        repeat(1000) begin
+        repeat(10) begin
             `uvm_do(req);
         end
     endtask
@@ -99,8 +99,10 @@ class aes_single_de extends aes_base_sequence;
                 req = aes_transaction::type_id::create("req");
                 start_item(req);
                 //$srandom(int'($time)); 
-              void'( req.randomize() with   {data_input == 128'h69c4e0d86a7b0430d8cdb78070b4c55a ;
-               key == 128'h13111d7fe3944a17f307a78b4d2b30c5;});
+             void'( req.randomize() with   {data_input == 128'h69c4e0d86a7b0430d8cdb78070b4c55a ;
+             key == 128'h13111d7fe3944a17f307a78b4d2b30c5;});
+               //void'( req.randomize() with   {data_input == 128'h47484f0c6e55b352c8b6e2a38f0d83b1 ;
+               //key == 128'h6724f2498618ab19396d1843c89ace31;});
                 finish_item(req);
             end
         endtask

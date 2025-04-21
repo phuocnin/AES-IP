@@ -16,7 +16,7 @@ module AES_CORE(
     wire cipher_ready, decipher_ready;
     wire cipher_clk, decipher_clk, cipher_rst_n, decipher_rst_n;
     `ifdef CIPHER
-        assign plain_text=data_in;
+        assign plain_text=data_in;  
         assign cipher_key=key;
         assign data_out=cipher_text_out;
         assign finished=cipher_ready;

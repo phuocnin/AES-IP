@@ -2,6 +2,7 @@
 // or browse Examples
 `timescale 1ns / 1ps
 `include "AES_Config_Parameter.v"
+`include "design.sv"
 module AES_CORE_TB;
 
     // Testbench signals
@@ -57,7 +58,7 @@ module AES_CORE_TB;
         wait (finished);
         $display("AES Decryption Completed. Output: %h", data_out);
         // End simulation
-        #20;
+        #20
         $stop;
     end
 endmodule
