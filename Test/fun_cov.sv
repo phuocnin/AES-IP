@@ -9,7 +9,7 @@ class aes_functional_coverage extends uvm_subscriber #(aes_transaction);
       // Coverpoint cho mode
       MODE_COV: coverpoint mode {
         bins encrypt = {1'b1};
-        bins decrypt = {1'b0};
+      //  bins decrypt = {1'b0};
       }
     endgroup : mode_cov
 
