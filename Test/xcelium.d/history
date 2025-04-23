@@ -54,3 +54,6 @@ s49::(23Apr2025:15:22:38):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+..
 s50::(23Apr2025:15:34:25):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -compile aes_tb.sv )
 s51::(23Apr2025:15:34:26):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -sv_lib /home/DN04/Phuoc/AES-IP/Test/../AES128-C-master/_sv_export.so aes_tb.sv -input run_wave.tcl )
 s52::(23Apr2025:15:34:39):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -sv_lib /home/DN04/Phuoc/AES-IP/Test/../AES128-C-master/_sv_export.so aes_tb.sv -coverage all -covtest all -covwork cov_work -input run_wave.tcl )
+s53::(23Apr2025:15:40:40):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -compile aes_tb.sv )
+s54::(23Apr2025:15:40:41):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -sv_lib /home/DN04/Phuoc/AES-IP/Test/../AES128-C-master/_sv_export.so aes_tb.sv -input run_wave.tcl )
+s55::(23Apr2025:15:40:52):( xrun -access +rwc -define CIPHER -uvm -sv +incdir+../env +incdir+../AES_CORE -sv_lib /home/DN04/Phuoc/AES-IP/Test/../AES128-C-master/_sv_export.so aes_tb.sv -coverage all -covtest all -covwork cov_work -input run_wave.tcl )

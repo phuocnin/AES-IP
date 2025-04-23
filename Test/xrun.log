@@ -1,5 +1,5 @@
 xrun: 22.09-s004: (c) Copyright 1995-2022 Cadence Design Systems, Inc.
-TOOL:	xrun	22.09-s004: Started on Apr 23, 2025 at 15:34:39 +07
+TOOL:	xrun	22.09-s004: Started on Apr 23, 2025 at 15:40:52 +07
 xrun
 	-access +rwc
 	-define CIPHER
@@ -45,11 +45,6 @@ xmelab: *W,DSEMEL: This SystemVerilog design will be simulated as per IEEE 1800-
 	Building instance overlay tables: .................... Done
 	Enabling instrumentation for coverage types: block expression FSM toggle functional
 xmelab: *W,COVDCL: By default expression coverage is scored only for Verilog logical operators (|| and &&) and VHDL logical operators (OR, AND, NOR, and NAND), and is scored only in condition expressions. To score coverage for other operators and for expressions in other statements, use the "set_expr_coverable_operators" and "set_expr_coverable_statements" coverage configuration file commands with suitable options at elaboration.
-	Generating native compiled code:
-		worklib.aes_tb:sv <0x1717baee>
-			streams:  10, words:  4871
-		worklib.aes_pkg:sv <0x2b9e0ae2>
-			streams: 1044, words: 948200
 	Building instance specific data structures.
 xmelab: *W,CGPIDF: Covergroup "per_instance" option , by default, is set as 0.
 xmelab: *N,COVCGN: Coverage configuration file command "set_covergroup -new_instance_reporting" can be specified to improve the scoping and naming of covergroup instances. It may be noted that subsequent merging of a coverage database saved with this command and a coverage database saved without this command is not allowed.
@@ -14308,4 +14303,4 @@ coverage setup:
 coverage files:
   model(design data) :  cov_work/scope/icc_5bb419cb_73c126ce.ucm
   data               :  cov_work/scope/all/icc_5bb419cb_73c126ce.ucd
-TOOL:	xrun	22.09-s004: Exiting on Apr 23, 2025 at 15:34:46 +07  (total: 00:00:07)
+TOOL:	xrun	22.09-s004: Exiting on Apr 23, 2025 at 15:40:58 +07  (total: 00:00:06)
