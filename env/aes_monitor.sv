@@ -13,7 +13,7 @@ class aes_monitor extends uvm_monitor;
     covergroup finish_cov @(posedge vif.clk);
         option.per_instance = 1;
     
-        FINISH_COV: coverpoint finish_flag {
+        FINISH_COV: coverpoint finished_flag {
           bins done = {1'b1};
         }
       endgroup : finish_cov
