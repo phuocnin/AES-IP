@@ -27,7 +27,7 @@ class aes_env extends uvm_env;
         driver.seq_item_port.connect(sequencer.seq_item_export);
         monitor.analysis_port.connect(scoreboard.transaction_analysis_port);
         monitor.rst_port.connect(scoreboard.rst_port);
-        monitor.analysis_port.connect(fun_cov.transaction_analysis_port);
+        monitor.analysis_port.connect(fun_cov.analysis_port);
     endfunction
     
 endclass
