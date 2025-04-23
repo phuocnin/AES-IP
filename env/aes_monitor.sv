@@ -84,7 +84,7 @@ class aes_monitor extends uvm_monitor;
                 else begin
                     this.count = 0;
                     this.finished_flag = 1;
-                    finish_cov.sample()
+                    finish_cov.sample();
                     `uvm_info(get_type_name(), "Finished signal is asserted", UVM_LOW);
                 end
             end
