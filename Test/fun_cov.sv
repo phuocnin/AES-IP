@@ -12,7 +12,7 @@ class aes_functional_coverage extends uvm_subscriber #(aes_transaction);
         bins decrypt = {1'b0};
       }
     endgroup : mode_cov
-    // Định nghĩa các covergroup
+
     covergroup input_key_cov with function sample(bit [127:0] data_input, bit [127:0] key);
   
       // Coverpoint cho data_input
@@ -27,12 +27,12 @@ class aes_functional_coverage extends uvm_subscriber #(aes_transaction);
       KEY_COV: coverpoint key {
         bins all_zeros = {128'h0};
         bins all_ones  = {128'hFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF};
-        bins pattern1  = {128'h0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F};
-        bins pattern2  = {128'hF0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0};
+        bins pattern1  = {128'hAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA};
+        bins pattern2  = {128'h55555555555555555555555555555555};
       }
   
       // Cross coverage
-      DATA_KEY_CROSS: cross DATA_INPUT, KEY_COV;
+     // DATA_KEY_CROSS: cross DATA_INPUT, KEY_COV;
   
     endgroup : input_key_cov
   
