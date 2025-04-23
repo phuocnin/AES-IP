@@ -16,6 +16,7 @@ class aes_env extends uvm_env;
         monitor = aes_monitor::type_id::create("monitor", this);
         scoreboard = aes_scoreboard::type_id::create("scoreboard", this);
         sequencer = uvm_sequencer#(aes_transaction)::type_id::create("sequencer", this);
+        fun_cov = aes_functional_coverage::type_id::create("fun_cov", this);
         if(scoreboard == null)
             `uvm_error("BUILD", "scoreboard is NULL!")
         if (!uvm_config_db#(virtual aes_if)::get(this, "", "vif", vif))
@@ -26,7 +27,7 @@ class aes_env extends uvm_env;
         driver.seq_item_port.connect(sequencer.seq_item_export);
         monitor.analysis_port.connect(scoreboard.transaction_analysis_port);
         monitor.rst_port.connect(scoreboard.rst_port);
-        monitor.analysis_port.connect(aes_functional_coverage.transaction_analysis_port);
+        monitor.analysis_port.connect(fun_cov.transaction_analysis_port);
     endfunction
     
 endclass
