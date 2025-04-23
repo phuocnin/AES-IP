@@ -9,10 +9,19 @@ class aes_monitor extends uvm_monitor;
     bit finished_flag = 0;
     logic rst;
     aes_transaction trans;
+
+    covergroup finish_cov @(posedge vif.clk);
+        option.per_instance = 1;
+    
+        FINISH_COV: coverpoint finish_flag {
+          bins done = {1'b1};
+        }
+      endgroup : finish_cov
     function new(string aes_monitor = "aes_monitor", uvm_component parent = null);
        super.new(aes_monitor, parent);
        analysis_port = new("analysis_port", this);
         rst_port = new("rst_port", this);
+        finish_cov = new();
     endfunction
 
     function void build_phase(uvm_phase phase);
@@ -75,6 +84,7 @@ class aes_monitor extends uvm_monitor;
                 else begin
                     this.count = 0;
                     this.finished_flag = 1;
+                    finish_cov.sample()
                     `uvm_info(get_type_name(), "Finished signal is asserted", UVM_LOW);
                 end
             end

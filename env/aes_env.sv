@@ -4,6 +4,7 @@ class aes_env extends uvm_env;
     aes_monitor monitor;
     aes_scoreboard scoreboard;
     uvm_sequencer#(aes_transaction) sequencer;
+    aes_functional_coverage fun_cov;
     virtual aes_if vif;
     function new(string name = "aes_env", uvm_component parent = null);
         super.new(name, parent);
@@ -25,6 +26,7 @@ class aes_env extends uvm_env;
         driver.seq_item_port.connect(sequencer.seq_item_export);
         monitor.analysis_port.connect(scoreboard.transaction_analysis_port);
         monitor.rst_port.connect(scoreboard.rst_port);
+        monitor.analysis_port.connect(aes_functional_coverage.analysis_port);
     endfunction
     
 endclass

@@ -22,4 +22,5 @@ package aes_pkg;
 
     `include "../Test/reset/aes_test_reset_enc/aes_test_reset_enc.sv"
     `include "../Test/reset/aes_test_reset_dec/aes_test_reset_dec.sv"
+    `include "../Test/fun_cov.sv"
 endpackage: aes_pkg
