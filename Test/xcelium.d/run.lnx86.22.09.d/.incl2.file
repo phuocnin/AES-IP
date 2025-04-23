@@ -68,6 +68,8 @@
 /home/DN04/Phuoc/AES-IP/env/aes_sequencer.sv
 ../env/aes_scoreboard.sv
 /home/DN04/Phuoc/AES-IP/env/aes_scoreboard.sv
+../Test/fun_cov.sv
+/home/DN04/Phuoc/AES-IP/Test/fun_cov.sv
 ../env/aes_env.sv
 /home/DN04/Phuoc/AES-IP/env/aes_env.sv
 ../Test/test.sv

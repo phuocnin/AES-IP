@@ -24,7 +24,7 @@ run_wave.tcl
 +EMGRLOG
 xrun.log
 -XLSTIME
-1745219439
+1745397279
 -XLKEEP
 -XLMODE
 ./xcelium.d/run.lnx86.22.09.d
@@ -38,4 +38,4 @@ xrun
 -XLVERSION
 "TOOL:	xrun	22.09-s004"
 -XLNAME
-./xcelium.d/run.lnx86.22.09.d/training_31287
+./xcelium.d/run.lnx86.22.09.d/training_27863
