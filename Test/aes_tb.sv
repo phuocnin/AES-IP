@@ -1,4 +1,5 @@
 `include "AES_CIPHER.v"
+`include "design.sv"
 `include "aes_if.sv"
 `include "aes_pkg.sv"
 module aes_tb;
