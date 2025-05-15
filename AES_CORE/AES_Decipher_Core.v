@@ -1,5 +1,5 @@
 `include "AES_Decipher_Controller.v"
-// `include "AddRoundKey.v"
+`include "AddRoundKey.v"
 `include "InvSubBytes.v"
 `include "InvShiftRows.v"
 `include "InvMixColumns_top.v"
