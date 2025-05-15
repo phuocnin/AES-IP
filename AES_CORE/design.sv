@@ -1,6 +1,6 @@
 // Code your design here
 `include "AES_CIPHER.v"
-`include "AES_DECIPHER.v"
+//`include "AES_DECIPHER.v"
 `include "AES_Config_Parameter.v" // Define function of IP here
 module AES_CORE(
     input wire [127:0] data_in,
