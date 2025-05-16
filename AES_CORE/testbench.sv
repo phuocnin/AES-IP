@@ -35,8 +35,10 @@ module AES_CORE_TB;
           data_in = 128'h00112233445566778899AABBCCDDEEFF; // Sample input
           key = 128'h000102030405060708090A0B0C0D0E0F;  // Sample key
         `else
-          data_in = 128'h3925841d02dc09fbdc118597196a0b32;
-          key = 128'hd014f9a8c9ee2589e13f0cc8b6630ca6;
+          data_in = 128'h69c4e0d86a7b0430d8cdb78070b4c55a;
+          key = 128'h13111d7fe3944a17f307a78b4d2b30c5;
+         // data_in = 128'h3925841d02dc09fbdc118597196a0b32;
+         // key = 128'hd014f9a8c9ee2589e13f0cc8b6630ca6;
         `endif 
         // Reset sequence
         #10 rst_n = 1;
