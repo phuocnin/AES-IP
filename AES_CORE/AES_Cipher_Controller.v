@@ -1,4 +1,4 @@
-// Code your design here
+// Code cho bo controller dieu khien cac tin hieu 
 module AES_controller(
   input wire clk,
   input wire rst_n,

@@ -210,7 +210,7 @@ static void InvKeyExpansion(void)
   }
   // tai thoi diem nay thi i = 39
   // RoundKey[i * 4 + 0] = RoundKey[(i - Nk) * 4 + 0] ^ tempa[0];
-  for (; i < 44; ++i)
+  for ( ; i < 44; ++i )
   // if (i%4 !=0)
   {
     if (i % 4 != 0)
@@ -221,29 +221,29 @@ static void InvKeyExpansion(void)
       InvRoundKey[(i * 4) + 3] = InvRoundKey[(i - 5) * 4 + 3] ^ InvRoundKey[(i - 4) * 4 + 3];
     }
     if (i == 7 || i == 11 || i == 15 || i == 19 || i == 23 || i == 27 || i == 31 || i == 35 || i == 39 || i == 43)
-    {
+        {
       for (m = 4; m < 43; m += 4)
-      {
+        {
         for (n = 0; n < 4; ++n)
-        {
-          temp[n] = InvRoundKey[(m + 3) * 4 + n];
-        }
+            {
+              temp[n] = InvRoundKey[(m + 3) * 4 + n];
+            }
         // Function RotWord()
-        {
-          k = temp[0];
-          temp[0] = temp[1];
-          temp[1] = temp[2];
-          temp[2] = temp[3];
-          temp[3] = k;
-        }
+            {
+              k = temp[0];
+              temp[0] = temp[1];
+              temp[1] = temp[2];
+              temp[2] = temp[3];
+              temp[3] = k;
+            }
 
         // Function Subword()
-        {
+            {
           temp[0] = getSBoxValue(temp[0]);
           temp[1] = getSBoxValue(temp[1]);
           temp[2] = getSBoxValue(temp[2]);
           temp[3] = getSBoxValue(temp[3]);
-        }
+            }
 
         temp[0] = temp[0] ^ Rcon[(44 - m) / Nk];
 
@@ -251,7 +251,7 @@ static void InvKeyExpansion(void)
         InvRoundKey[4 * m + 1] = InvRoundKey[(m - 4) * 4 + 1] ^ temp[1];
         InvRoundKey[4 * m + 2] = InvRoundKey[(m - 4) * 4 + 2] ^ temp[2];
         InvRoundKey[4 * m + 3] = InvRoundKey[(m - 4) * 4 + 3] ^ temp[3];
-      }
+       }
     }
   }
 }

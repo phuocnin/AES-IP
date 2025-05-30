@@ -1,4 +1,4 @@
-// Code your design here
+// Code cho thiet ke chuc nang tao khoa vong ma hoa 
 `include"rotWord.v"
 `include "subWord.v"
 `include "Rcon.v"
