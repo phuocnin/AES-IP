@@ -4,5 +4,5 @@
 
 package AES_Parameter;
 //`define CIPHER
-`define DECIPHER
+//`define DECIPHER
 endpackage: AES_Parameter
