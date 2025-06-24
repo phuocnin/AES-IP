@@ -33,7 +33,7 @@ class aes_multi_en extends aes_base_sequence;
     endfunction
     task body();
         `uvm_info("aes_multi_en", "Starting aes_multi_en", UVM_LOW)
-        repeat(10) begin
+        repeat(1000) begin
             `uvm_do(req);
         end
     endtask
